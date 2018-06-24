@@ -1,0 +1,21 @@
+﻿@model EmployeeView
+
+@{
+    ViewData["Title"] = @Model.SecondName;
+}
+
+<div>
+    @Html.ActionLink(
+            "Вернуться к списку", "EmployeeList", "Employees",
+            null,
+            new { @class = "btn btn-dark" })
+</div>
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FIO</h5>
+        <p class="card-text">@Model.Info</p>
+        <a href="#" class="btn btn-primary">Написать сообщение</a>
+    </div>
+</div>

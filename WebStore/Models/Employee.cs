@@ -1,0 +1,19 @@
+﻿using System;
+
+namespace WebStore.Models
+{
+    /// <summary>
+    /// Employee database class
+    /// </summary>
+    public class Employee
+    {
+        public int Id { get; set; }
+        public bool IsMan { get; set; } // Женщины не поймут :)
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string Patronymic { get; set; }
+        public int Age { get; set; }
+        public string SecretName { get; set; }
+        public DateTime WorkBeginning { get; set; }
+    }
+}

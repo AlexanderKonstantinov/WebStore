@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EmployeeView>
+
+@{
+    ViewData["Title"] = "Работники";
+}
+
+<div>
+    @Html.ActionLink(
+        "На главную", "Index", "Home",
+        null,
+        new {@class = "btn btn-dark"})
+</div>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Возраст</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.FirstName</td>
+                <td>@item.SecondName</td>
+                <td>@item.Patronymic</td>
+                <td>@item.Age</td>
+                <td>
+                    <a asp-controller="Employees" 
+                       asp-action="EmployeeCard"
+                       asp-route-id=@item.Id>Подробнее</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
