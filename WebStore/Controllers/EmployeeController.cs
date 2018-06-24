@@ -16,8 +16,10 @@ namespace WebStore.Controllers
             _employeeService = new EmployeeService();
         }
 
-        public IActionResult EmployeeList() => View(_employeeService.GetEmployees());
+        public IActionResult Index() => View();
 
+        public IActionResult EmployeeList() => View(_employeeService.GetEmployees());
+        
         public IActionResult EmployeeCard(int Id)
         {
             var selectedEmployee = _employeeService.GetEmployee(Id);
