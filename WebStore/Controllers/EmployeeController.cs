@@ -7,11 +7,11 @@ namespace WebStore.Controllers
     /// <summary>
     /// this controller for working with employee data
     /// </summary>
-    public class EmployeesController : Controller
+    public class EmployeeController : Controller
     {
         private IEmployeeService _employeeService;
 
-        public EmployeesController()
+        public EmployeeController()
         {
             _employeeService = new EmployeeService();
         }

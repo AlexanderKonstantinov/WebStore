@@ -1,19 +1,24 @@
 ﻿@{
     ViewData["Title"] = "About";
+    Layout = "_SideBarLayout";
 }
-<div class="jumbotron">
-    <h1 class="display-4">Привет, пользователь!</h1>
-    <p class="lead">
-        Ты попал на страницу учебного проекта
-        <a href="https://geekbrains.ru" role="button">GeekBrains</a>
-    </p>
-    <a></a>
-    <hr class="my-4">
-    <p>Для тестирования функции просмотра работников перейди по ссылке</p>
-    <p class="lead">
-        @Html.ActionLink("Просмотреть список работников", "EmployeeList", "Employees", null, new { @class = "btn btn-primary btn-lg" })
-    </p>
-</div>
 
-@*</body>*@
-@*</html>*@
+@section top{
+    @await Html.PartialAsync("Partial/_Slider")
+}
+
+
+
+@await Html.PartialAsync("Partial/_Features")
+
+@await Html.PartialAsync("Partial/_Category")
+
+@await Html.PartialAsync("Partial/_Recommended")
+
+@section scripts{
+    <script>
+        $(function () {
+            alert("Страница загрузилась");
+        })
+    </script>
+}
