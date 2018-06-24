@@ -31,13 +31,11 @@
     @await Html.PartialAsync("Partial/_Header")
     
     @await RenderSectionAsync("top", false)
-
+    
     @RenderBody();
 
     @await Html.PartialAsync("Partial/_Footer")
-
-
-
+    
     <script src="~/js/jquery.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.scrollUp.min.js"></script>
