@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "e531c305d00baddce899010831a73f4f436ee99a"
+    "signature": "66bc48cf3c19977411a8b6dfd7026e59e6351d5c"
   },
   "compilationOptions": {
     "defines": [
@@ -25,7 +25,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.All": "2.0.5",
           "Microsoft.NETCore.App": "2.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2",
+          "NLog": "4.5.6"
         },
         "runtime": {
           "WebStore.dll": {}
@@ -2489,6 +2490,14 @@
         },
         "compile": {
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
+        }
+      },
+      "NLog/4.5.6": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/NLog.dll": {}
         }
       },
       "NuGet.Frameworks/4.0.0": {
@@ -5454,6 +5463,13 @@
       "sha512": "sha512-5PYT/IqQ+UK31AmZiSS102R6EsTo+LGTSI8bp7WAUqDKaF4wHXD8U9u4WxTI1vc64tYi++8p3dk3WWNqPFgldw==",
       "path": "newtonsoft.json.bson/1.0.1",
       "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512"
+    },
+    "NLog/4.5.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FZIdeH92NTu6ePm+QbLT9pyd5vY9B+GYX8S2bh6ZxJC+XSTZDhZ6EHWxDzyBIEjtIb+nSBJfIgdMuQNQEYMqbQ==",
+      "path": "nlog/4.5.6",
+      "hashPath": "nlog.4.5.6.nupkg.sha512"
     },
     "NuGet.Frameworks/4.0.0": {
       "type": "package",

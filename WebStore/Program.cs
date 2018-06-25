@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using WebStore.Helpers;
+using WebStore.Models;
+
+using static WebStore.Helpers.Logger;
 
 namespace WebStore
 {
@@ -7,6 +11,9 @@ namespace WebStore
     {
         public static void Main(string[] args)
         {
+
+            Logging(1, DatabaseObjectError.NotFound);
+
             BuildWebHost(args).Run();
         }
 

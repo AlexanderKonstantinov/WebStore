@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using WebStore.Helpers;
 using WebStore.Models;
 using WebStore.Repositories.Base;
+
+using static WebStore.Helpers.Logger;
 
 namespace WebStore.Repositories
 {
@@ -64,5 +70,42 @@ namespace WebStore.Repositories
         /// All employees contained into database
         /// </summary>
         public IEnumerable<Employee> Employees => employees ?? new List<Employee>();
+
+        public void Add(Employee employee)
+        {
+            if (employees.FirstOrDefault(e => e.Id == employee.Id) == null)
+                employees.Add(employee);
+            else
+                Logging(employee, DatabaseObjectError.AlreadyExist);
+        } 
+
+        public void Delete(int id)
+        {
+            var employee = employees.FirstOrDefault();
+
+            if (employee != null)
+                employees.Remove(employee);
+            else
+                // Нужно мнение насколько это плохо со стороны)
+                Logging(new Employee {Id = id}, DatabaseObjectError.NotFound); 
+        }
+
+        public void Edit(Employee newEmployee)
+        {
+            var employee = employees.FirstOrDefault(e => e.Id == newEmployee.Id);
+
+            if (employee != null)
+            {
+                employee.IsMan = newEmployee.IsMan;
+                employee.FirstName = newEmployee.FirstName;
+                employee.SecondName = newEmployee.SecondName;
+                employee.Patronymic = newEmployee.Patronymic;
+                employee.Age = newEmployee.Age;
+                employee.SecretName = newEmployee.SecretName;
+                employee.WorkBeginning = newEmployee.WorkBeginning;
+            }
+            else
+                Logging(new Employee { Id = newEmployee.Id }, DatabaseObjectError.NotFound);
+        }
     }
 }
