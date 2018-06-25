@@ -12,7 +12,6 @@ namespace WebStore.Repositories.Base
 
         void Add(Employee employee);
         void Delete(int id);
-        void Edit(int id);
-
+        void Edit(Employee employee);
     }
 }

@@ -9,24 +9,17 @@ using WebStore.Services.Base;
 namespace WebStore.Services
 {
     /// <summary>
-    /// Layer that generates employee data for display to the user
+    /// Layer between EmployeeController and EmployeeRepository
     /// </summary>
     public class EmployeeService : IEmployeeService
     {
-        // Нужно ли делать экземпляр сервиса readonly? 
-        // Пока не разобрался как это сделать с внедрением зависимостей.
-        // Если правильно понимаю, то при правильной реализации за количеством
-        // экземпляров будет следить встроенный механизм внедрения зависимостей?
-        private IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public EmployeeService()
         {
             _employeeRepository = new EmployeeRepository();
         }
-        
-        // Лучше ведь будет такие коллекции для представления на лету формировать или эффективнее будет 
-        // в отдельном поле данные хранить? 
-        // Просто у меня для примера добавлено поле WorkDuration, которое по смыслу часто изменяется.
+
         public IEnumerable<EmployeeView> GetEmployees()
         {
             List<EmployeeView> employeeViewList = new List<EmployeeView>(_employeeRepository.Employees.Count());
@@ -40,7 +33,11 @@ namespace WebStore.Services
         public EmployeeView GetEmployee(int Id)
             => new EmployeeView(_employeeRepository.Employees.FirstOrDefault(e => e.Id == Id))
             ?? throw new Exception("Работник не найден");
-        // Здесь не знаю как лучше будет сделать. 
-        // Возвращать bool об успешности получения работника?
+
+        public void Add(Employee newEmployee) => _employeeRepository.Add(newEmployee);
+
+        public void Delete(int id) => _employeeRepository.Delete(id);
+
+        public void Edit(Employee newEmployee) => _employeeRepository.Edit(newEmployee);
     }
 }

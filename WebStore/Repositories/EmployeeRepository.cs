@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using WebStore.Helpers;
 using WebStore.Models;
@@ -71,12 +69,12 @@ namespace WebStore.Repositories
         /// </summary>
         public IEnumerable<Employee> Employees => employees ?? new List<Employee>();
 
-        public void Add(Employee employee)
+        public void Add(Employee newEmployee)
         {
-            if (employees.FirstOrDefault(e => e.Id == employee.Id) == null)
-                employees.Add(employee);
+            if (employees.FirstOrDefault(e => e.Id == newEmployee.Id) == null)
+                employees.Add(newEmployee);
             else
-                Logging(employee, DatabaseObjectError.AlreadyExist);
+                Logging(newEmployee, DatabaseObjectError.AlreadyExist);
         } 
 
         public void Delete(int id)

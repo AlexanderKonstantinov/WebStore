@@ -6,10 +6,9 @@
 }
 
 <div>
-    @Html.ActionLink(
-        "Вернуться к списку", "EmployeeList", "Employee",
-        null,
-        new { @class = "btn btn-dark" })
+    <a class="btn btn-dark"
+       asp-controller="Employee"
+       asp-action="EmployeeList">Вернуться к списку</a>
 </div>
 
 <div class="card" style="width: 18rem;">

@@ -12,6 +12,8 @@
     <hr class="my-4">
     <p>Для тестирования функции просмотра работников перейди по ссылке</p>
     <p class="lead">
-        @Html.ActionLink("Просмотреть список работников", "EmployeeList", "Employee", null, new { @class = "btn btn-primary btn-lg" })
+        <a class="btn btn-primary btn-lg"
+           asp-controller="Employee"
+           asp-action="EmployeeList">Просмотреть список работников</a>
     </p>
 </div>
