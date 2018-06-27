@@ -2,6 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebStore.Infrastructure.Base;
+using WebStore.Infrastructure.Implementations;
+using WebStore.Repositories.Implementations;
+using WebStore.Repositories.Interfaces;
 
 namespace WebStore
 {
@@ -17,6 +21,11 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSingleton<IEmployeeData, InMemoryEmployeeData>();
+
+            // нормально ли, что у этого класса есть доступ к этим пространствам имён?
+            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
