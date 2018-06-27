@@ -2,11 +2,11 @@
 using System.Linq;
 using WebStore.Helpers;
 using WebStore.Models;
-using WebStore.Repositories.Base;
+using WebStore.Repositories.Interfaces;
 
 using static WebStore.Helpers.Logger;
 
-namespace WebStore.Repositories
+namespace WebStore.Repositories.Implementations
 {
     /// <summary>
     /// This repository to interact with the database and retrieve data about employees

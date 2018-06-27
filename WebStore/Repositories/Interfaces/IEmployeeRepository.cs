@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebStore.Models;
 
-namespace WebStore.Repositories.Base
+namespace WebStore.Repositories.Interfaces
 {
     /// <summary>
     /// Get, add, delete and edit employee data

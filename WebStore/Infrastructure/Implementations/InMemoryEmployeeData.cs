@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using WebStore.Infrastructure.Base;
 using WebStore.Models;
-using WebStore.Repositories;
-using WebStore.Repositories.Base;
-using WebStore.Services.Base;
+using WebStore.Repositories.Implementations;
+using WebStore.Repositories.Interfaces;
 
-namespace WebStore.Services
+namespace WebStore.Infrastructure.Implementations
 {
     /// <summary>
     /// Layer between EmployeeController and EmployeeRepository

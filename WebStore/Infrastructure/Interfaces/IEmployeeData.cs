@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebStore.Models;
 
-namespace WebStore.Services.Base
+namespace WebStore.Infrastructure.Base
 {
     /// <summary>
     /// Service connecting EmployeeController with EmployeeRepository
