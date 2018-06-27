@@ -14,8 +14,7 @@ namespace WebStore.Models
         public string Patronymic { get; set; }
         public int Age { get; set; }
         public string SecretName { get; set; }
-        public DateTime WorkBeginning { get; set; }
-
+        public string Position { get; set; }
 
         public override string ToString() => $"{Id}\t{FirstName}\t{SecondName}\t{Patronymic}";
     }

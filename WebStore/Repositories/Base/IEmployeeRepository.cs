@@ -10,8 +10,8 @@ namespace WebStore.Repositories.Base
     {
         IEnumerable<Employee> Employees { get; }
 
-        void Add(Employee employee);
-        void Delete(int id);
-        void Edit(Employee employee);
+        bool Add(Employee employee);
+        bool Delete(int id);
+        bool Edit(Employee employee);
     }
 }

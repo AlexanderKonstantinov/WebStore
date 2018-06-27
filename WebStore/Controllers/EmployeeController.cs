@@ -7,22 +7,26 @@ namespace WebStore.Controllers
     /// <summary>
     /// this controller for working with employee data
     /// </summary>
+    
     public class EmployeeController : Controller
     {
-        private IEmployeeService _employeeService;
+        private IEmployeeData _employeeData;
 
         public EmployeeController()
         {
-            _employeeService = new EmployeeService();
+            _employeeData = new InMemoryEmployeeData();
         }
 
+        [Route("users/index")]
         public IActionResult Index() => View();
 
-        public IActionResult EmployeeList() => View(_employeeService.GetEmployees());
+        [Route("users")]
+        public IActionResult EmployeeList() => View(_employeeData.GetAll());
         
-        public IActionResult EmployeeCard(int Id)
+        [Route("users/{id}")]
+        public IActionResult EmployeeCard(int id)
         {
-            var selectedEmployee = _employeeService.GetEmployee(Id);
+            var selectedEmployee = _employeeData.GetEmployee(id);
             return View(selectedEmployee);
         } 
     }

@@ -1,9 +1,12 @@
-﻿using System;
-using NLog;
+﻿using NLog;
 using NLog.Targets;
+
+using static System.Environment;
 
 namespace WebStore.Helpers
 {
+
+    // Попробовал использовать логирование
     public enum DatabaseObjectError
     {
         NotFound,
@@ -46,9 +49,9 @@ namespace WebStore.Helpers
                 : errorType == DatabaseObjectError.AlreadyExist ? "Уже существует"
                 : "Неизвестная ошибка";
 
-            //Потом добавлю рефлексию, если такое логирование вообще одобрят
+            //Потом добавлю рефлексию, если такое логирование вообще одобрите
             //не очень нравится как всё это выглядит
-            logger.Debug($"{Environment.NewLine}***{Environment.NewLine}Type: {obj.GetType()}\tObject: {obj}\tError: {error}{Environment.NewLine}***{Environment.NewLine}{Environment.NewLine}");
+            logger.Debug($"{NewLine}***{NewLine}Type: {obj.GetType()}\tObject: {obj}\tError: {error}{NewLine}***{NewLine}{NewLine}");
         }
     }
 }
