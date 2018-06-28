@@ -16,7 +16,7 @@
 <hr />
 
 <table class="table">
-    <thead class="thead-dark">
+    <thead>
         <tr>
             <th scope="col"></th>
             <th scope="col">Фамилия</th>
@@ -31,11 +31,10 @@
         @foreach (var item in Model)
         {
         <tr>
-            @* Не подгружаются иконка почему-то *@
             <td>
                 <a asp-action="Edit"
                    asp-route-id="@item.Id">
-                    <i class="fa fa-refresh">Редактировать</i>
+                    <i class="fa fa-refresh"></i>
                 </a>
             </td>
             <td>@item.SecondName</td>
@@ -45,13 +44,13 @@
             <td>
                 <a asp-action="EmployeeCard"
                    asp-route-id=@item.Id>
-                    <i class="fa fa-edit">Подробнее</i>
+                    <i class="fa fa-edit"></i>
                 </a>
             </td>
             <td>
                 <a asp-action="Delete"
                    asp-route-id="@item.Id">
-                    <i class="fa fa-cut">Удалить</i>
+                    <i class="fa fa-cut"></i>
                 </a>
             </td>
         </tr>
