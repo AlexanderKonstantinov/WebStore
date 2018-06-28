@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using WebStore.Infrastructure.Base;
+using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
-using WebStore.Repositories.Implementations;
 using WebStore.Repositories.Interfaces;
 
 namespace WebStore.Infrastructure.Implementations
@@ -21,17 +20,16 @@ namespace WebStore.Infrastructure.Implementations
         // Имеет ли это смысл или я усложнил код?
         private List<EmployeeView> Employees { get; set; }
 
-
-        public InMemoryEmployeeData()
+        public InMemoryEmployeeData(IEmployeeRepository employeeRepository)
         {
-            _employeeRepository = new EmployeeRepository();
+            _employeeRepository = employeeRepository;
 
             UpdateEmployees();
         }
         
         public IEnumerable<EmployeeView> GetAll() => Employees;
 
-        public EmployeeView GetEmployee(int id) => Employees.FirstOrDefault(e => e.Id == id);
+        public EmployeeView GetById(int id) => Employees.FirstOrDefault(e => e.Id == id);
 
         public void AddNew(EmployeeView model)
         {
@@ -42,7 +40,7 @@ namespace WebStore.Infrastructure.Implementations
                 FirstName = model.FirstName,
                 SecondName = model.SecondName,
                 Patronymic = model.Patronymic,
-                IsMan = model.IsMan,
+                Sex = model.Sex,
                 SecretName = model.SecretName
             }))
                 UpdateEmployees();
@@ -59,12 +57,13 @@ namespace WebStore.Infrastructure.Implementations
             if (_employeeRepository.Edit(
                     new Employee
                     {
+                        Id = model.Id,
                         Position = model.Position,
                         Age = model.Age,
                         FirstName = model.FirstName,
                         SecondName = model.SecondName,
                         Patronymic = model.Patronymic,
-                        IsMan = model.IsMan,
+                        Sex = model.Sex,
                         SecretName = model.SecretName
                     }))
                 UpdateEmployees();
@@ -72,8 +71,7 @@ namespace WebStore.Infrastructure.Implementations
 
 
         #region Supporting methods this class
-
-        //Проверить работу при отсутствии элементов
+        
         /// <summary>
         /// Updating Employees property
         /// </summary>
@@ -87,7 +85,7 @@ namespace WebStore.Infrastructure.Implementations
                 FirstName = e.FirstName,
                 SecondName = e.SecondName,
                 Patronymic = e.Patronymic,
-                IsMan = e.IsMan,
+                Sex = e.Sex,
                 SecretName = e.SecretName
             }).ToList(); 
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebStore.Models;
 
-namespace WebStore.Infrastructure.Base
+namespace WebStore.Infrastructure.Interfaces
 {
     /// <summary>
     /// Service connecting EmployeeController with EmployeeRepository
@@ -19,7 +19,7 @@ namespace WebStore.Infrastructure.Base
         /// </summary>
         /// <param name="id">identifier</param>
         /// <returns>required employee or null if employee with such Id does not exist</returns>
-        EmployeeView GetEmployee(int id);
+        EmployeeView GetById(int id);
 
         /// <summary>
         /// Adding new employee

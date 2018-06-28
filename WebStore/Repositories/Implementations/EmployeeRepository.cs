@@ -28,7 +28,7 @@ namespace WebStore.Repositories.Implementations
                 new Employee
                 {
                     Id = 1,
-                    IsMan = true,
+                    Sex = Sex.Man,
                     FirstName = "Иван",
                     SecondName = "Иванов",
                     Patronymic = "Иванович",
@@ -39,18 +39,18 @@ namespace WebStore.Repositories.Implementations
                 new Employee
                 {
                     Id = 2,
-                    IsMan = true,
-                    FirstName = "Пётр",
-                    SecondName = "Петров",
-                    Patronymic = "Петрович",
+                    Sex = Sex.Woman,
+                    FirstName = "Наталья",
+                    SecondName = "Сидорова",
+                    Patronymic = "Владимировна",
                     Age = 23,
-                    SecretName = "Тёмная лошадка",
+                    SecretName = "Девушка с большой буквы \"С\"",
                     Position = "Системный администратор"
                 },
                 new Employee
                 {
                     Id = 3,
-                    IsMan = true,
+                    Sex = Sex.Man,
                     FirstName = "Семён",
                     SecondName = "Семёнов",
                     Patronymic = "Семёнович",
@@ -70,7 +70,7 @@ namespace WebStore.Repositories.Implementations
 
         public bool Add(Employee newEmployee)
         {
-            if (_employees.FirstOrDefault(e => e.Id == newEmployee.Id) != null)
+            if (_employees?.FirstOrDefault(e => e.Id == newEmployee.Id) == null)
             {
                 newEmployee.Id = ++_maxId;
                 _employees.Add(newEmployee);

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<EmployeeView>
 
 @{
-    ViewData["Title"] = "Работники";
+    ViewData["Title"] = "Сотрудники";
     Layout = "_EmployeeLayout";
 }
 
@@ -11,32 +11,50 @@
        asp-action="Index">Вернуться</a>
 </div>
 
+<hr />
+<a asp-action="Edit" class="btn btn-success">Добавить</a>
+<hr />
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
+            <th scope="col"></th>
             <th scope="col">Фамилия</th>
             <th scope="col">Имя</th>
             <th scope="col">Отчество</th>
             <th scope="col">Возраст</th>
+            <th scope="col"></th>
             <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <th scope="row">@item.Id</th>
-                <td>@item.FirstName</td>
-                <td>@item.SecondName</td>
-                <td>@item.Patronymic</td>
-                <td>@item.Age</td>
-                <td>
-                    <a asp-controller="Employee" 
-                       asp-action="EmployeeCard"
-                       asp-route-id=@item.Id>Подробнее</a>
-                </td>
-            </tr>
+        <tr>
+            @* Не подгружаются иконка почему-то *@
+            <td>
+                <a asp-action="Edit"
+                   asp-route-id="@item.Id">
+                    <i class="fa fa-refresh">Редактировать</i>
+                </a>
+            </td>
+            <td>@item.SecondName</td>
+            <td>@item.FirstName</td>
+            <td>@item.Patronymic</td>
+            <td>@item.Age</td>
+            <td>
+                <a asp-action="EmployeeCard"
+                   asp-route-id=@item.Id>
+                    <i class="fa fa-edit">Подробнее</i>
+                </a>
+            </td>
+            <td>
+                <a asp-action="Delete"
+                   asp-route-id="@item.Id">
+                    <i class="fa fa-cut">Удалить</i>
+                </a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

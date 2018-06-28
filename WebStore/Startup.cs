@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebStore.Infrastructure.Base;
+using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Implementations;
 using WebStore.Repositories.Implementations;
 using WebStore.Repositories.Interfaces;

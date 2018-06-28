@@ -1,7 +1,7 @@
 ﻿@model EmployeeView
 
 @{
-    ViewData["Title"] = @Model.SecondName;
+    ViewData["Title"] = $"{Model.SecondName} {Model.FirstName}";
     Layout = "_EmployeeLayout";
 }
 

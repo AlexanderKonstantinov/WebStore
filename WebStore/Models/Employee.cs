@@ -8,7 +8,7 @@ namespace WebStore.Models
     public class Employee
     {
         public int Id { get; set; }
-        public bool IsMan { get; set; } // Женщины не поймут :)
+        public Sex Sex { get; set; } // Женщины не поймут :)
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Patronymic { get; set; }
