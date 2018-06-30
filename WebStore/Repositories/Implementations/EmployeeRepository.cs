@@ -4,8 +4,6 @@ using WebStore.Helpers;
 using WebStore.Models;
 using WebStore.Repositories.Interfaces;
 
-using static WebStore.Helpers.Logger;
-
 namespace WebStore.Repositories.Implementations
 {
     /// <summary>
@@ -77,8 +75,7 @@ namespace WebStore.Repositories.Implementations
                 return true;
             }
 
-            Logging(newEmployee, DatabaseObjectError.AlreadyExist);
-            return false;
+            throw new AlreadyExistException();
         } 
 
         public bool Delete(int id)
@@ -91,8 +88,7 @@ namespace WebStore.Repositories.Implementations
                 return true;
             }
 
-            Logging(new Employee { Id = id }, DatabaseObjectError.NotFound);
-            return false;
+            throw new NotFoundException();
         }
 
         public bool Edit(Employee newEmployee)
@@ -105,8 +101,7 @@ namespace WebStore.Repositories.Implementations
                 return true;
             }
 
-            Logging(new Employee { Id = newEmployee.Id }, DatabaseObjectError.NotFound);
-            return false;
+            throw new NotFoundException();
         }
     }
 }
