@@ -22,10 +22,11 @@ namespace WebStore
         {
             services.AddMvc();
 
-            services.AddSingleton<IEmployeeData, InMemoryEmployeeData>();
+            services.AddSingleton<IEmployeeData, EmployeeDataService>();
+            services.AddSingleton<IProductData, ProductDataService>();
 
-            // нормально ли, что у этого класса есть доступ к этим пространствам имён?
             services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IProductDataRepository, ProductDataRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

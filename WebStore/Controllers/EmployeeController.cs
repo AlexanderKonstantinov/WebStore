@@ -16,13 +16,7 @@ namespace WebStore.Controllers
         {
             _employeeData = employeeData;
         }
-
-        /// <summary>
-        /// Displaying hello page
-        /// </summary>
-        /// <returns>Index html page</returns>
-        [Route("users/index")]
-        public IActionResult Index() => View();
+        
 
         /// <summary>
         /// Displaying employee list

@@ -10,17 +10,14 @@ namespace WebStore.Infrastructure.Implementations
     /// Layer between EmployeeController and EmployeeRepository
     /// Responsible for getting, updating for controller and view data transfer to the repository 
     /// </summary>
-    public class InMemoryEmployeeData : IEmployeeData
+    public class EmployeeDataService : IEmployeeData
     {
         private readonly IEmployeeRepository _employeeRepository;
 
-        // Решил сделать через приватное свойство, а не readonly-поле,
-        // чтобы можно было изменять данные, хранящиеся в нём, методом UpdateEmployees
-        // после редактирования
-        // Имеет ли это смысл или я усложнил код?
+
         private List<EmployeeView> Employees { get; set; }
 
-        public InMemoryEmployeeData(IEmployeeRepository employeeRepository)
+        public EmployeeDataService(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
 

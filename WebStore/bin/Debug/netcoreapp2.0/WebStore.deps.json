@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "66bc48cf3c19977411a8b6dfd7026e59e6351d5c"
+    "signature": "e531c305d00baddce899010831a73f4f436ee99a"
   },
   "compilationOptions": {
     "defines": [
@@ -26,7 +26,7 @@
           "Microsoft.AspNetCore.All": "2.0.5",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2",
-          "NLog": "4.5.6"
+          "WebStore.Domain": "1.0.0"
         },
         "runtime": {
           "WebStore.dll": {}
@@ -2492,14 +2492,6 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
-      "NLog/4.5.6": {
-        "runtime": {
-          "lib/netstandard2.0/NLog.dll": {}
-        },
-        "compile": {
-          "lib/netstandard2.0/NLog.dll": {}
-        }
-      },
       "NuGet.Frameworks/4.0.0": {
         "dependencies": {
           "NETStandard.Library": "2.0.0"
@@ -4062,6 +4054,14 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "WebStore.Domain/1.0.0": {
+        "runtime": {
+          "WebStore.Domain.dll": {}
+        },
+        "compile": {
+          "WebStore.Domain.dll": {}
+        }
+      },
       "Microsoft.NETCore.App/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.DotNetHostPolicy": "2.0.0",
@@ -5464,13 +5464,6 @@
       "path": "newtonsoft.json.bson/1.0.1",
       "hashPath": "newtonsoft.json.bson.1.0.1.nupkg.sha512"
     },
-    "NLog/4.5.6": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-FZIdeH92NTu6ePm+QbLT9pyd5vY9B+GYX8S2bh6ZxJC+XSTZDhZ6EHWxDzyBIEjtIb+nSBJfIgdMuQNQEYMqbQ==",
-      "path": "nlog/4.5.6",
-      "hashPath": "nlog.4.5.6.nupkg.sha512"
-    },
     "NuGet.Frameworks/4.0.0": {
       "type": "package",
       "serviceable": true,
@@ -6380,6 +6373,11 @@
       "sha512": "sha512-W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
+    },
+    "WebStore.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.NETCore.App/2.0.0": {
       "type": "package",

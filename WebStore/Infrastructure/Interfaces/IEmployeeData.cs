@@ -4,7 +4,7 @@ using WebStore.Models;
 namespace WebStore.Infrastructure.Interfaces
 {
     /// <summary>
-    /// Service connecting EmployeeController with EmployeeRepository
+    /// Interface describe connecting EmployeeController with EmployeeRepository
     /// </summary>
     public interface IEmployeeData
     {
