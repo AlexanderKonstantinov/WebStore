@@ -18,21 +18,26 @@ namespace WebStore.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var brands = GetBrands();
-            return View(brands);
+            var model = GetBrands();
+            return View(model);
         }
 
         private IEnumerable<BrandViewModel> GetBrands()
         {
-            var dbBrands = _productData.GetBrands();
+            // Может как-то одним выражением это можно записать?
+            var brands = _productData.GetBrands()
+                .Select(b => new BrandViewModel
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    Order = b.Order,
+                    ProductsCount = 0
+                }).ToList();
 
-            return dbBrands.Select(b => new BrandViewModel
-            {
-                Id = b.Id,
-                Name = b.Name,
-                Order = b.Order,
-                ProductsCount = 0
-            }).OrderBy(b => b.Order).ToList();
+            for (int i = 0; i < brands.Count; i++)
+                brands[i].ProductsCount = _productData.GetBrandProductCount(brands[i].Id);
+
+            return brands;
         }
     }
 }

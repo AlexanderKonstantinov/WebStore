@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@model IEnumerable<ProductViewModel>
+@{
     ViewData["Title"] = "About";
     Layout = "_SideBarLayout";
 }
@@ -8,8 +10,7 @@
 }
 
 
-
-        @await Html.PartialAsync("Partial/_Features")
+@await Html.PartialAsync("Partial/_Features", Model)
 
 
 @await Html.PartialAsync("Partial/_Category")

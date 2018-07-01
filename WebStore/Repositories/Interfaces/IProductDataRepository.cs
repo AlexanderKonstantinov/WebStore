@@ -7,5 +7,6 @@ namespace WebStore.Repositories.Interfaces
     {
         IEnumerable<Section> Sections { get; }
         IEnumerable<Brand> Brands { get; }
+        IEnumerable<Product> Products { get; }
     }
 }

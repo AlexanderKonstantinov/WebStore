@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebStore.Infrastructure.Interfaces;
+using System.Linq;
+using WebStore.Models;
+using WebStore.Domain.Entities;
 
 namespace WebStore.Controllers
 {
@@ -8,8 +12,30 @@ namespace WebStore.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        public IActionResult Index() => View();
-        
+        private const int IndexProductCount = 6;
+
+        private readonly IProductData _productData;
+
+        public HomeController(IProductData productData)
+        {
+            _productData = productData;
+        }
+
+        public IActionResult Index()
+        {
+            var model = from p in _productData.GetProducts().Take(IndexProductCount)
+                        select new ProductViewModel
+                        {
+                            Id = p.Id,
+                            ImageUrl = p.ImageUrl,
+                            Name = p.Name,
+                            Order = p.Order,
+                            Price = p.Price
+                        };
+
+            return View(model);
+        }
+
         public IActionResult Login() => View();
 
         public IActionResult Cart() => View();
