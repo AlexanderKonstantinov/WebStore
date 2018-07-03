@@ -1,4 +1,5 @@
-﻿using WebStore.Domain.Entities.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using WebStore.Domain.Entities.Base;
 
 namespace WebStore.Domain.Entities
 {
@@ -9,14 +10,20 @@ namespace WebStore.Domain.Entities
     {
         /// <summary>
         /// Section Id of product
-        /// </summary>
+        /// </summary>        
         public int SectionId { get; set; }
+
+        [ForeignKey(nameof(SectionId))]
+        public virtual Section Section { get; set; }
 
         /// <summary>
         /// Brand Id of product
         /// </summary>
         public int? BrandId { get; set; }
 
+        [ForeignKey(nameof(BrandId))]
+        public virtual Brand Brand { get; set; }
+        
         /// <summary>
         /// Product image link
         /// </summary>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 
@@ -38,6 +37,7 @@ namespace WebStore.ViewComponents
                 brands[i].ProductsCount = _productData.GetBrandProductCount(brands[i].Id);
 
             return brands;
-        }
+        }
+
     }
 }
