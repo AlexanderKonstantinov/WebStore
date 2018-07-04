@@ -11,7 +11,7 @@ namespace WebStore.Infrastructure.Implementations
     /// Layer between CatalogController and CatalogRepository
     /// Responsible for getting, updating for controller and view data transfer to the repository 
     /// </summary>
-    public class ProductDataService : IProductData
+    public class ProductDataService 
     {
         private readonly IProductDataRepository _productDataRepository;
 

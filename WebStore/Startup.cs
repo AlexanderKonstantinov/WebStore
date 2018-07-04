@@ -25,12 +25,14 @@ namespace WebStore
             services.AddMvc();            
 
             services.AddSingleton<IEmployeeData, EmployeeDataService>();
-            services.AddSingleton<IProductData, ProductDataService>();
+
+            services.AddTransient<IProductData, SqlProductData>();
 
             services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            services.AddSingleton<IProductDataRepository, ProductDataRepository>();
+            //services.AddSingleton<IProductDataRepository, ProductDataRepository>();
 
-            services.AddDbContext<WebStoreContext>(options => options.UseSqlServer("Data Source=DESKTOP-G14CHN2\\SQLEXPRESS;Initial Catalog=WebStoreDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+            services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(
+                _configuration.GetConnectionString("DefaultConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

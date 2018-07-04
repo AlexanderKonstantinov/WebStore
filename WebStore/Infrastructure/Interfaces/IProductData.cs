@@ -39,6 +39,6 @@ namespace WebStore.Infrastructure.Interfaces
         /// </summary>
         /// <param name="id">Brand identifier</param>
         /// <returns>Brand product count</returns>
-        int GetBrandProductCount(int id);
+        int GetBrandProductCount(int? id);
     }
 }
