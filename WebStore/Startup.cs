@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using WebStore.DAL.Context;
 using WebStore.Infrastructure.Implementations;
 using WebStore.Infrastructure.Interfaces;
-using WebStore.Repositories.Implementations;
-using WebStore.Repositories.Interfaces;
 
 namespace WebStore
 {
@@ -24,11 +22,12 @@ namespace WebStore
         {
             services.AddMvc();            
 
-            services.AddSingleton<IEmployeeData, EmployeeDataService>();
+            //services.AddSingleton<IUserData, UserDataService>();
 
+            services.AddTransient<IUserData, UserDataService>();
             services.AddTransient<IProductData, SqlProductData>();
 
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            //services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
             //services.AddSingleton<IProductDataRepository, ProductDataRepository>();
 
             services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(

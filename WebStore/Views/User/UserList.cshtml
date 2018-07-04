@@ -1,7 +1,7 @@
-﻿@model IEnumerable<EmployeeView>
+﻿@model IEnumerable<UserView>
 
 @{
-    ViewData["Title"] = "Сотрудники";
+    ViewData["Title"] = "Пользователи";
     Layout = "_Layout";
 }
 
@@ -14,10 +14,7 @@
         <thead>
             <tr>
                 <th scope="col"></th>
-                <th scope="col">Фамилия</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Отчество</th>
-                <th scope="col">Возраст</th>
+                <th scope="col">Логин</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -29,18 +26,13 @@
                     <td>
                         <a asp-action="Edit"
                            asp-route-id="@item.Id">
-                            <i class="fa fa-refresh"></i>
-                        </a>
-                    </td>
-                    <td>@item.SecondName</td>
-                    <td>@item.FirstName</td>
-                    <td>@item.Patronymic</td>
-                    <td>@item.Age</td>
-                    <td>
-                        <a asp-action="EmployeeCard"
-                           asp-route-id=@item.Id>
                             <i class="fa fa-edit"></i>
                         </a>
+                    </td>
+                    <td>@item.Login</td>
+                    <td>
+                        <a asp-action="UserCard"
+                           asp-route-id=@item.Id>Детали</a>
                     </td>
                     <td>
                         <a asp-action="Delete"

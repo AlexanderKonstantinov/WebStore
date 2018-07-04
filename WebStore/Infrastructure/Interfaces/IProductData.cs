@@ -5,7 +5,7 @@ using WebStore.Helpers;
 namespace WebStore.Infrastructure.Interfaces
 {
     /// <summary>
-    /// Interface describe connecting CatalogController with CatalogRepository
+    /// Interface describe connecting CatalogController with Database
     /// </summary>
     public interface IProductData
     {

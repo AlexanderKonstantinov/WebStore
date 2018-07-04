@@ -117,29 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DisplayAge" xml:space="preserve">
-    <value>Возраст</value>
+  <data name="DisplayEmail" xml:space="preserve">
+    <value>Электронная почта</value>
   </data>
-  <data name="DisplayFirstName" xml:space="preserve">
-    <value>Имя</value>
+  <data name="DisplayLogin" xml:space="preserve">
+    <value>Логин</value>
   </data>
-  <data name="DisplayPatronomyc" xml:space="preserve">
-    <value>Отчество</value>
+  <data name="DisplayPassword" xml:space="preserve">
+    <value>Пароль</value>
   </data>
-  <data name="DisplayPosition" xml:space="preserve">
-    <value>Должность</value>
-  </data>
-  <data name="DisplaySecondName" xml:space="preserve">
-    <value>Фамилия</value>
-  </data>
-  <data name="DisplaySecretName" xml:space="preserve">
-    <value>Корпоративное прозвище</value>
-  </data>
-  <data name="DisplaySex" xml:space="preserve">
-    <value>Пол</value>
-  </data>
-  <data name="RangeErrorMessage" xml:space="preserve">
-    <value>"{0}" должен находиться в пределах от {1} до {2} лет</value>
+  <data name="EmailErrorMessage" xml:space="preserve">
+    <value>Некорректный адрес электронной почты</value>
   </data>
   <data name="RequiredErrorMessage" xml:space="preserve">
     <value>Поле "{0}" является обязательным</value>

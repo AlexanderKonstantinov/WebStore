@@ -7,6 +7,10 @@ using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Infrastructure.Implementations
 {
+    /// <summary>
+    /// Layer between CatalogController and Database
+    /// Responsible for getting, updating for controller and view data transfer to the database 
+    /// </summary>
     public class SqlProductData : IProductData
     {
         private readonly WebStoreContext _context;
