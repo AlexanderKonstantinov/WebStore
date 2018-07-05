@@ -2,7 +2,6 @@
 using WebStore.Infrastructure.Interfaces;
 using System.Linq;
 using WebStore.Models;
-using WebStore.Domain.Entities;
 
 namespace WebStore.Controllers
 {
@@ -20,7 +19,7 @@ namespace WebStore.Controllers
         {
             _productData = productData;
         }
-
+        
         public IActionResult Index()
         {
             var model = from p in _productData.GetProducts().Take(IndexProductCount)

@@ -34,6 +34,7 @@ namespace WebStore.Models
             MinimumLength = 6,
             ErrorMessageResourceType = typeof(Resources.Resource),
             ErrorMessageResourceName = "StringLengthErrorMessage")]
+        [DataType(DataType.Password)]
         [Display(Name = "DisplayPassword",
             ResourceType = typeof(Resources.Resource))]
         public string Password { get; set; }

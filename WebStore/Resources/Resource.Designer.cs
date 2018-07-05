@@ -97,6 +97,15 @@ namespace WebStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} введён неверно.
+        /// </summary>
+        public static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поле &quot;{0}&quot; является обязательным.
         /// </summary>
         public static string RequiredErrorMessage {

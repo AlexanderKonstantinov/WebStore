@@ -4,13 +4,15 @@ using WebStore.Models;
 using WebStore.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebStore.Controllers
 {
     /// <summary>
     /// this controller for working with user data
     /// </summary>
-    
+
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserData _userData;
@@ -142,6 +144,7 @@ namespace WebStore.Controllers
         {
             _userData.Delete(id);
             return RedirectToAction(nameof(UserList));
-        }
+        }
+
     }
 }

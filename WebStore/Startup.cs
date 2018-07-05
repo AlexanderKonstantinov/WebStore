@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,17 +22,18 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();            
-
-            //services.AddSingleton<IUserData, UserDataService>();
-
+            
             services.AddTransient<IUserData, UserDataService>();
             services.AddTransient<IProductData, SqlProductData>();
 
-            //services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
-            //services.AddSingleton<IProductDataRepository, ProductDataRepository>();
-
             services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(
                 _configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -42,6 +44,8 @@ namespace WebStore
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

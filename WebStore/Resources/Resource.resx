@@ -129,6 +129,9 @@
   <data name="EmailErrorMessage" xml:space="preserve">
     <value>Некорректный адрес электронной почты</value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>{0} введён неверно</value>
+  </data>
   <data name="RequiredErrorMessage" xml:space="preserve">
     <value>Поле "{0}" является обязательным</value>
   </data>

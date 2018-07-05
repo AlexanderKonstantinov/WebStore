@@ -6,6 +6,7 @@ namespace WebStore.Models
     {
         public int? BrandId { get; set; }
         public int? SectionId { get; set; }
-        public IEnumerable<ProductViewModel> Products { get; set; }
+        public IEnumerable<ProductViewModel> Products { get; set; }
+
     }
 }
