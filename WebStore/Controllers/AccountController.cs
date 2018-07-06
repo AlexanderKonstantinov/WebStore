@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
+using WebStore.Models.Account;
 
 namespace WebStore.Controllers
 {
@@ -26,22 +27,11 @@ namespace WebStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginView model)
+        public IActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
             {
-                User user = _userData.GetAll()
-                    .FirstOrDefault(u 
-                    => u.Email == model.Email 
-                    && u.Password == model.Password);
-
-                if (user != null)
-                {
-                    Authenticate(model.Email);
-
-                    return RedirectToAction(actionName:"Index", controllerName:"Home");
-                }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+               
             }
             return View(model);
         }
@@ -53,26 +43,12 @@ namespace WebStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(RegisterView model)
+        public IActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
                 User user = _userData.GetAll().FirstOrDefault(u => u.Email == model.Email);
 
-                if (user == null)
-                {
-                    _userData.AddNew(new User
-                    {
-                        Email = model.Email,
-                        Password = model.Password
-                    });                   
-
-                    Authenticate(model.Email);
-
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
             return View(model);
         }

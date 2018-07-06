@@ -2,6 +2,7 @@
 using WebStore.Infrastructure.Interfaces;
 using System.Linq;
 using WebStore.Models;
+using WebStore.Models.Product;
 
 namespace WebStore.Controllers
 {
@@ -23,7 +24,7 @@ namespace WebStore.Controllers
         public IActionResult Index()
         {
             var model = from p in _productData.GetProducts().Take(IndexProductCount)
-                        select new ProductViewModel
+                        select new ProductModel
                         {
                             Id = p.Id,
                             ImageUrl = p.ImageUrl,

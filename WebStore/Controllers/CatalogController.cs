@@ -3,6 +3,7 @@ using System.Linq;
 using WebStore.Helpers;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
+using WebStore.Models.Product;
 
 namespace WebStore.Controllers
 {
@@ -23,11 +24,11 @@ namespace WebStore.Controllers
                 SectionId = sectionId
             });
 
-            var model = new CatalogViewModel()
+            var model = new CatalogModel()
             {
                 BrandId = brandId,
                 SectionId = sectionId,
-                Products = products.Select(p => new ProductViewModel()
+                Products = products.Select(p => new ProductModel()
                 {
                     Id = p.Id,
                     ImageUrl = p.ImageUrl,

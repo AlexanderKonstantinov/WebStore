@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WebStore.Infrastructure.Interfaces;
-using WebStore.Models;
+using WebStore.Models.Product;
 
 namespace WebStore.ViewComponents
 {
@@ -21,11 +21,11 @@ namespace WebStore.ViewComponents
             return View(model);
         }
 
-        private IEnumerable<BrandViewModel> GetBrands()
+        private IEnumerable<BrandModel> GetBrands()
         {
             // Может как-то одним выражением это можно записать?
             var brands = _productData.GetBrands()
-                .Select(b => new BrandViewModel
+                .Select(b => new BrandModel
                 {
                     Id = b.Id,
                     Name = b.Name,

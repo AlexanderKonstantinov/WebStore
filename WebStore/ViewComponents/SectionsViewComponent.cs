@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
+using WebStore.Models.Product;
 
 namespace WebStore.ViewComponents
 {
@@ -21,16 +22,16 @@ namespace WebStore.ViewComponents
             return View(sections);
         }
 
-        private List<SectionViewModel> GetSections()
+        private List<SectionModel> GetSections()
         {
             var categories = _productData.GetSections();
 
             var parentCategories = categories.Where(p => !p.ParentId.HasValue).ToList();
 
-            var parentSections = new List<SectionViewModel>();
+            var parentSections = new List<SectionModel>();
             foreach (var parentCategory in parentCategories)
             {
-                parentSections.Add(new SectionViewModel()
+                parentSections.Add(new SectionModel()
                 {
                     Id = parentCategory.Id,
                     Name = parentCategory.Name,
@@ -43,7 +44,7 @@ namespace WebStore.ViewComponents
                 var childCategories = categories.Where(c => c.ParentId.Equals(sectionViewModel.Id));
                 foreach (var childCategory in childCategories)
                 {
-                    sectionViewModel.ChildSections.Add(new SectionViewModel()
+                    sectionViewModel.ChildSections.Add(new SectionModel()
                     {
                         Id = childCategory.Id,
                         Name = childCategory.Name,
@@ -56,6 +57,7 @@ namespace WebStore.ViewComponents
             }
             parentSections = parentSections.OrderBy(c => c.Order).ToList();
             return parentSections;
-        }
+        }
+
     }
 }

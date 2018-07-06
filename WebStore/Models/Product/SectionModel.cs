@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.Models
+namespace WebStore.Models.Product
 {
-    public class SectionViewModel : IOrderedEntity
+    public class SectionModel : IOrderedEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,16 +12,16 @@ namespace WebStore.Models
         /// <summary>
         /// Child sections
         /// </summary>
-        public List<SectionViewModel> ChildSections { get; set; }
+        public List<SectionModel> ChildSections { get; set; }
 
         /// <summary>
         /// Parent section
         /// </summary>
-        public SectionViewModel ParentSection { get; set; }
+        public SectionModel ParentSection { get; set; }
 
-        public SectionViewModel()
+        public SectionModel()
         {
-            ChildSections = new List<SectionViewModel>();
+            ChildSections = new List<SectionModel>();
         }
     }
 }

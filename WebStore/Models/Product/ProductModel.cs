@@ -1,8 +1,8 @@
 ﻿using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.Models
+namespace WebStore.Models.Product
 {
-    public class ProductViewModel : IOrderedEntity
+    public class ProductModel : IOrderedEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

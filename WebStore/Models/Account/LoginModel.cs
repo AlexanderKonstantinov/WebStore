@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebStore.Models
+namespace WebStore.Models.Account
 {
-    public class RegisterView
+    public class LoginModel
     {
         [Required(AllowEmptyStrings = false,
             ErrorMessageResourceType = typeof(Resources.Resource),
@@ -16,11 +16,5 @@ namespace WebStore.Models
             ErrorMessageResourceName = "RequiredErrorMessage")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Compare("Password", 
-            ErrorMessageResourceType = typeof(Resources.Resource),
-            ErrorMessageResourceName = "IncorrectPassword")]
-        public string ConfirmPassword { get; set; }
     }
 }
