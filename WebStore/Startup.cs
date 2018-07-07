@@ -39,6 +39,10 @@ namespace WebStore
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+
+                // Почему-то не сработало
+                options.User.AllowedUserNameCharacters = options.User.AllowedUserNameCharacters.Replace("@", String.Empty);
 
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                 options.Lockout.MaxFailedAccessAttempts = 10;

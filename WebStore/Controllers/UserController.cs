@@ -32,7 +32,7 @@ namespace WebStore.Controllers
         {
             var users = _userData.GetAll();
 
-            List<UserView> model = new List<UserView>(users.Count());
+            List<UserViewModel> model = new List<UserViewModel>(users.Count());
 
 
 
@@ -57,7 +57,7 @@ namespace WebStore.Controllers
         [Route("edit/{id?}")]
         public IActionResult Edit(int? id)
         {
-            UserView model = null;
+            UserViewModel model = null;
            
 
             return View(model);
@@ -70,7 +70,7 @@ namespace WebStore.Controllers
         /// <returns>UserList html page</returns>
         [HttpPost]
         [Route("edit/{id?}")]
-        public IActionResult Edit(UserView model)
+        public IActionResult Edit(UserViewModel model)
         {
             
 

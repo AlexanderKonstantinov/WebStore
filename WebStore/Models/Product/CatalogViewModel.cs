@@ -2,11 +2,11 @@
 
 namespace WebStore.Models.Product
 {
-    public class CatalogModel
+    public class CatalogViewModel
     {
         public int? BrandId { get; set; }
         public int? SectionId { get; set; }
-        public IEnumerable<ProductModel> Products { get; set; }
+        public IEnumerable<ProductViewModel> Products { get; set; }
 
     }
 }

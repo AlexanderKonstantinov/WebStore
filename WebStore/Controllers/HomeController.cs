@@ -24,7 +24,7 @@ namespace WebStore.Controllers
         public IActionResult Index()
         {
             var model = from p in _productData.GetProducts().Take(IndexProductCount)
-                        select new ProductModel
+                        select new ProductViewModel
                         {
                             Id = p.Id,
                             ImageUrl = p.ImageUrl,
@@ -35,9 +35,7 @@ namespace WebStore.Controllers
 
             return View(model);
         }
-
-        public IActionResult Login() => View();
-
+        
         public IActionResult Cart() => View();
 
         public IActionResult Checkout() => View();

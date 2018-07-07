@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebStore.Models
 {    
-    public class UserView
+    public class UserViewModel
     {
         public int Id { get; set; }
 

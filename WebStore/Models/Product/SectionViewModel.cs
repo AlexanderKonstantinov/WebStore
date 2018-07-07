@@ -3,7 +3,7 @@ using WebStore.Domain.Entities.Base.Interfaces;
 
 namespace WebStore.Models.Product
 {
-    public class SectionModel : IOrderedEntity
+    public class SectionViewModel : IOrderedEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,16 +12,16 @@ namespace WebStore.Models.Product
         /// <summary>
         /// Child sections
         /// </summary>
-        public List<SectionModel> ChildSections { get; set; }
+        public List<SectionViewModel> ChildSections { get; set; }
 
         /// <summary>
         /// Parent section
         /// </summary>
-        public SectionModel ParentSection { get; set; }
+        public SectionViewModel ParentSectionView { get; set; }
 
-        public SectionModel()
+        public SectionViewModel()
         {
-            ChildSections = new List<SectionModel>();
+            ChildSections = new List<SectionViewModel>();
         }
     }
 }

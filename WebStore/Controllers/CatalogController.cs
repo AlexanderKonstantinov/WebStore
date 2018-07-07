@@ -24,11 +24,11 @@ namespace WebStore.Controllers
                 SectionId = sectionId
             });
 
-            var model = new CatalogModel()
+            var model = new CatalogViewModel()
             {
                 BrandId = brandId,
                 SectionId = sectionId,
-                Products = products.Select(p => new ProductModel()
+                Products = products.Select(p => new ProductViewModel()
                 {
                     Id = p.Id,
                     ImageUrl = p.ImageUrl,

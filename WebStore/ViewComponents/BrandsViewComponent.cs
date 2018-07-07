@@ -21,11 +21,11 @@ namespace WebStore.ViewComponents
             return View(model);
         }
 
-        private IEnumerable<BrandModel> GetBrands()
+        private IEnumerable<BrandViewModel> GetBrands()
         {
             // Может как-то одним выражением это можно записать?
             var brands = _productData.GetBrands()
-                .Select(b => new BrandModel
+                .Select(b => new BrandViewModel
                 {
                     Id = b.Id,
                     Name = b.Name,

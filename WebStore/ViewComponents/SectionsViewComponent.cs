@@ -22,21 +22,21 @@ namespace WebStore.ViewComponents
             return View(sections);
         }
 
-        private List<SectionModel> GetSections()
+        private List<SectionViewModel> GetSections()
         {
             var categories = _productData.GetSections();
 
             var parentCategories = categories.Where(p => !p.ParentId.HasValue).ToList();
 
-            var parentSections = new List<SectionModel>();
+            var parentSections = new List<SectionViewModel>();
             foreach (var parentCategory in parentCategories)
             {
-                parentSections.Add(new SectionModel()
+                parentSections.Add(new SectionViewModel()
                 {
                     Id = parentCategory.Id,
                     Name = parentCategory.Name,
                     Order = parentCategory.Order,
-                    ParentSection = null
+                    ParentSectionView = null
                 });
             }
             foreach (var sectionViewModel in parentSections)
@@ -44,12 +44,12 @@ namespace WebStore.ViewComponents
                 var childCategories = categories.Where(c => c.ParentId.Equals(sectionViewModel.Id));
                 foreach (var childCategory in childCategories)
                 {
-                    sectionViewModel.ChildSections.Add(new SectionModel()
+                    sectionViewModel.ChildSections.Add(new SectionViewModel()
                     {
                         Id = childCategory.Id,
                         Name = childCategory.Name,
                         Order = childCategory.Order,
-                        ParentSection = sectionViewModel
+                        ParentSectionView = sectionViewModel
                     });
                 }
                 sectionViewModel.ChildSections = sectionViewModel.ChildSections.OrderBy(c =>
