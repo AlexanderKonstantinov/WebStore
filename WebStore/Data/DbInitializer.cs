@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebStore.DAL.Context;
@@ -16,7 +15,7 @@ namespace WebStore.Data
             if (context.Products.Any())
                 return;
 
-            var sections = new List<Section>()
+            var sections = new List<Section>
             {
                 new Section()
                 {
@@ -241,7 +240,7 @@ namespace WebStore.Data
                 trans.Commit();
             }
 
-            var brands = new List<Brand>()
+            var brands = new List<Brand>
             {
                 new Brand()
                 {
@@ -298,7 +297,7 @@ namespace WebStore.Data
                 trans.Commit();
             }
 
-            var products = new List<Product>()
+            var products = new List<Product>
             {
                 new Product()
                 {
@@ -429,6 +428,53 @@ namespace WebStore.Data
                 context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Products] ON");
                 context.SaveChanges();
                 context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Products] OFF");
+                trans.Commit();
+            }
+
+            var employees = new List<Employee>
+            {
+                new Employee
+                {
+                    Id = 1,
+                    IsMan = true,
+                    FirstName = "Иван",
+                    SecondName = "Иванов",
+                    Patronymic = "Иванович",
+                    Age = 20,
+                    SecretName = "Корпоративный герой",
+                    Position = "Продавец"
+                },
+                new Employee
+                {
+                    Id = 2,
+                    IsMan = false,
+                    FirstName = "Наталья",
+                    SecondName = "Сидорова",
+                    Patronymic = "Владимировна",
+                    Age = 23,
+                    SecretName = "Девушка с большой буквы \"С\"",
+                    Position = "Системный администратор"
+                },
+                new Employee
+                {
+                    Id = 3,
+                    IsMan = true,
+                    FirstName = "Семён",
+                    SecondName = "Семёнов",
+                    Patronymic = "Семёнович",
+                    Age = 40,
+                    SecretName = "Любитель перерывов",
+                    Position = "Бухгалтер"
+                }
+            };
+
+            using (var trans = context.Database.BeginTransaction())
+            {
+                foreach (var employee in employees)
+                    context.Employees.Add(employee);
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Employees] ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [dbo].[Employees] OFF");
                 trans.Commit();
             }
         }

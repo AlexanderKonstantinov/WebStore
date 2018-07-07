@@ -26,7 +26,7 @@ namespace WebStore
         {
             services.AddMvc();            
             
-            services.AddTransient<IUserData, UserDataService>();
+            services.AddTransient<IEmployeeData, EmployeeData>();
             services.AddTransient<IProductData, SqlProductData>();
 
             services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(

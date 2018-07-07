@@ -61,11 +61,29 @@ namespace WebStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Возраст.
+        /// </summary>
+        public static string DisplayAge {
+            get {
+                return ResourceManager.GetString("DisplayAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Электронная почта.
         /// </summary>
         public static string DisplayEmail {
             get {
                 return ResourceManager.GetString("DisplayEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Имя.
+        /// </summary>
+        public static string DisplayFirstName {
+            get {
+                return ResourceManager.GetString("DisplayFirstName", resourceCulture);
             }
         }
         
@@ -88,6 +106,51 @@ namespace WebStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отчество.
+        /// </summary>
+        public static string DisplayPatronomyc {
+            get {
+                return ResourceManager.GetString("DisplayPatronomyc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должность.
+        /// </summary>
+        public static string DisplayPosition {
+            get {
+                return ResourceManager.GetString("DisplayPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фамилия.
+        /// </summary>
+        public static string DisplaySecondName {
+            get {
+                return ResourceManager.GetString("DisplaySecondName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Корпоративное прозвище.
+        /// </summary>
+        public static string DisplaySecretName {
+            get {
+                return ResourceManager.GetString("DisplaySecretName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пол.
+        /// </summary>
+        public static string DisplaySex {
+            get {
+                return ResourceManager.GetString("DisplaySex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Некорректный адрес электронной почты.
         /// </summary>
         public static string EmailErrorMessage {
@@ -102,6 +165,15 @@ namespace WebStore.Resources {
         public static string IncorrectPassword {
             get {
                 return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поле {0} должно быть не менее {1} и не более {2}.
+        /// </summary>
+        public static string RangeErrorMessage {
+            get {
+                return ResourceManager.GetString("RangeErrorMessage", resourceCulture);
             }
         }
         

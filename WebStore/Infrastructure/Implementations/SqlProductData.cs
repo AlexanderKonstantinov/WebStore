@@ -42,11 +42,8 @@ namespace WebStore.Infrastructure.Implementations
 
         public IEnumerable<Section> GetSections()
             => _context.Sections.ToList();
-
-        // Здесь не знаю, будет ли когда нибудь параметр равен null или такое невозможно
-        public int GetBrandProductCount(int? id)
-            => id.HasValue 
-            ? _context.Products.Count(p => p.BrandId.HasValue && p.BrandId.Value == id)
-            : 0;
+        
+        public int GetBrandProductCount(int id)
+            => _context.Products.Count(p => p.BrandId.HasValue && p.BrandId.Value == id);
     }
 }
