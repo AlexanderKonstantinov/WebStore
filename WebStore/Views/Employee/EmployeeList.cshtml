@@ -29,7 +29,7 @@
                 <td>
                     <a asp-action="Edit"
                        asp-route-id="@item.Id">
-                        <i class="fa fa-refresh"></i>
+                        <i class="fa fa-edit" title="Редактировать"></i>
                     </a>
                 </td>
                 <td>@item.SecondName</td>
@@ -37,15 +37,15 @@
                 <td>@item.Patronymic</td>
                 <td>@item.Age</td>
                 <td>
-                    <a asp-action="EmployeeCard"
+                    <a asp-action="EmployeeDetails"
                        asp-route-id=@item.Id>
-                        <i class="fa fa-edit"></i>
+                        <i>Подробнее</i>
                     </a>
                 </td>
                 <td>
                     <a asp-action="Delete"
                        asp-route-id="@item.Id">
-                        <i class="fa fa-cut"></i>
+                        <i class="fa fa-cut" title="Удалить"></i>
                     </a>
                 </td>
             </tr>

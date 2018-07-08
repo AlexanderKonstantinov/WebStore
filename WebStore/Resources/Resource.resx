@@ -120,8 +120,14 @@
   <data name="DisplayAge" xml:space="preserve">
     <value>Возраст</value>
   </data>
+  <data name="DisplayConfirmPassword" xml:space="preserve">
+    <value>Повтор пароля</value>
+  </data>
   <data name="DisplayEmail" xml:space="preserve">
     <value>Электронная почта</value>
+  </data>
+  <data name="DisplayEmailOrUserName" xml:space="preserve">
+    <value>Email/Логин</value>
   </data>
   <data name="DisplayFirstName" xml:space="preserve">
     <value>Имя</value>
@@ -137,6 +143,9 @@
   </data>
   <data name="DisplayPosition" xml:space="preserve">
     <value>Должность</value>
+  </data>
+  <data name="DisplayRememberMe" xml:space="preserve">
+    <value>Запомнить меня</value>
   </data>
   <data name="DisplaySecondName" xml:space="preserve">
     <value>Фамилия</value>

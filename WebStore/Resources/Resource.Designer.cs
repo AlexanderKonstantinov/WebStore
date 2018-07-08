@@ -70,11 +70,29 @@ namespace WebStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Повтор пароля.
+        /// </summary>
+        public static string DisplayConfirmPassword {
+            get {
+                return ResourceManager.GetString("DisplayConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Электронная почта.
         /// </summary>
         public static string DisplayEmail {
             get {
                 return ResourceManager.GetString("DisplayEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email/Логин.
+        /// </summary>
+        public static string DisplayEmailOrUserName {
+            get {
+                return ResourceManager.GetString("DisplayEmailOrUserName", resourceCulture);
             }
         }
         
@@ -120,6 +138,15 @@ namespace WebStore.Resources {
         public static string DisplayPosition {
             get {
                 return ResourceManager.GetString("DisplayPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Запомнить меня.
+        /// </summary>
+        public static string DisplayRememberMe {
+            get {
+                return ResourceManager.GetString("DisplayRememberMe", resourceCulture);
             }
         }
         

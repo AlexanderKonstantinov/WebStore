@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -38,7 +37,6 @@ namespace WebStore
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
 
                 // Почему-то не сработало

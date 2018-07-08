@@ -1,4 +1,5 @@
 ﻿﻿using System.Linq;
+ using Microsoft.AspNetCore.Authorization;
  using Microsoft.AspNetCore.Mvc;
  using WebStore.Domain.Entities;
  using WebStore.Infrastructure.Interfaces;
@@ -9,7 +10,7 @@ namespace WebStore.Controllers
     /// <summary>
     /// this controller for working with employee data
     /// </summary>
-
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeData _employeeData;
@@ -33,7 +34,7 @@ namespace WebStore.Controllers
                 e => new EmployeeViewModel
                 {
                     Id = e.Id,
-                    Sex = e.IsMan == true ? Sex.Man : Sex.Woman,
+                    Gender = e.IsMan == true ? Gender.Man : Gender.Woman,
                     FirstName = e.FirstName,
                     SecondName = e.SecondName,
                     Patronymic = e.Patronymic,
@@ -49,9 +50,9 @@ namespace WebStore.Controllers
         /// <summary>
         /// Displaying employeeDetails
         /// </summary>
-        /// <returns>EmployeeCard html page</returns>
+        /// <returns>EmployeeDetails html page</returns>
         [Route("employees/{id}")]
-        public IActionResult EmployeeCard(int id)
+        public IActionResult EmployeeDetails(int id)
         {
             var selectedEmployee = _employeeData.GetById(id);
 
@@ -62,7 +63,7 @@ namespace WebStore.Controllers
             var employeeModel = new EmployeeViewModel
             {
                 Id = selectedEmployee.Id,
-                Sex = selectedEmployee.IsMan == true ? Sex.Man : Sex.Woman,
+                Gender = selectedEmployee.IsMan == true ? Gender.Man : Gender.Woman,
                 FirstName = selectedEmployee.FirstName,
                 SecondName = selectedEmployee.SecondName,
                 Patronymic = selectedEmployee.Patronymic,
@@ -82,21 +83,19 @@ namespace WebStore.Controllers
         [Route("employee_edit/{id?}")]
         public IActionResult Edit(int? id)
         {
-            Employee employee = new Employee();
-            EmployeeViewModel model = new EmployeeViewModel();
+            EmployeeViewModel model;
 
             if (id.HasValue)
             {
-                employee = _employeeData.GetById(id.Value);
+                var employee = _employeeData.GetById(id.Value);
 
                 if (employee is null)
                     return NotFound();
-            }
-            else
+
                 model = new EmployeeViewModel
                 {
                     Id = employee.Id,
-                    Sex = employee.IsMan ? Sex.Man : Sex.Woman,
+                    Gender = employee.IsMan ? Gender.Man : Gender.Woman,
                     FirstName = employee.FirstName,
                     SecondName = employee.SecondName,
                     Patronymic = employee.Patronymic,
@@ -104,6 +103,9 @@ namespace WebStore.Controllers
                     SecretName = employee.SecretName,
                     Position = employee.Position
                 };
+            }
+            else
+                model = new EmployeeViewModel();
 
             return View(model);
         }
@@ -117,18 +119,33 @@ namespace WebStore.Controllers
         [Route("employee_edit/{id?}")]
         public IActionResult Edit(EmployeeViewModel model)
         {
-            if (model.Id > 0)
+            if (ModelState.IsValid)
             {
-                var employee = _employeeData.GetById(model.Id);
+                if (model.Id > 0)
+                {
+                    var employee = _employeeData.GetById(model.Id);
 
-                if (employee is null)
-                    return NotFound();
+                    if (employee is null)
+                        return NotFound();
 
-                _employeeData.Edit(
-                    new Employee
+                    _employeeData.Edit(
+                        new Employee
+                        {
+                            Id = model.Id,
+                            IsMan = model.Gender == Gender.Man,
+                            FirstName = model.FirstName,
+                            SecondName = model.SecondName,
+                            Patronymic = model.Patronymic,
+                            Age = model.Age,
+                            SecretName = model.SecretName,
+                            Position = model.Position
+                        });
+                }
+                else
+                    _employeeData.AddNew(new Employee
                     {
                         Id = model.Id,
-                        IsMan = model.Sex == Sex.Man,
+                        IsMan = model.Gender == Gender.Man,
                         FirstName = model.FirstName,
                         SecondName = model.SecondName,
                         Patronymic = model.Patronymic,
@@ -137,20 +154,8 @@ namespace WebStore.Controllers
                         Position = model.Position
                     });
             }
-            else
-                _employeeData.AddNew(new Employee
-                {
-                    Id = model.Id,
-                    IsMan = model.Sex == Sex.Man,
-                    FirstName = model.FirstName,
-                    SecondName = model.SecondName,
-                    Patronymic = model.Patronymic,
-                    Age = model.Age,
-                    SecretName = model.SecretName,
-                    Position = model.Position
-                });
 
-            return RedirectToAction(nameof(EmployeeList));
+            return View(model);
         }
 
         /// <summary>

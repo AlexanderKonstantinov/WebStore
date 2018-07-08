@@ -2,7 +2,7 @@
 
 namespace WebStore.Models
 {
-    public enum Sex
+    public enum Gender
     {
         [Display(Name = "мужской")]
         Man,

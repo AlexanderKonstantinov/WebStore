@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities;
-using WebStore.Infrastructure.Interfaces;
 using WebStore.Models.Account;
 
 namespace WebStore.Controllers
@@ -68,27 +63,27 @@ namespace WebStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register() => View(new RegisterUserViewModel());
-
+        public IActionResult Register() => View(new RegisterViewModel());
+        
         [HttpPost,ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterUserViewModel userModel)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new User
                 {
-                    Email = userModel.Email,
-                    UserName = userModel.UserName
+                    Email = model.Email,
+                    UserName = model.UserName
                 };
 
                 if (user.UserName is null || user.UserName == String.Empty)
                     user.UserName = new string(user.Email.TakeWhile(s => s != '@').ToArray());
 
-                var createResult = await _userManager.CreateAsync(user, userModel.Password);
+                var createResult = await _userManager.CreateAsync(user, model.Password);
 
                 if (createResult.Succeeded)
                 {
-                    // Что может быть во втором параметре (методе аутентификации)
+                    // Что может быть во втором параметре (методе аутентификации)? 
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction(controllerName: "Home", actionName: "Index");
                 }
@@ -98,10 +93,10 @@ namespace WebStore.Controllers
 
             }
 
-            return View(userModel);
+            return View(model);
         }
 
-        // Вопрос по 2-му атрибуту
+        // Что означает второй атрибут? Почитал про него, но до конца не понял.
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {

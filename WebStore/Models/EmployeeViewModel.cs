@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using WebStore.Helpers;
 
 namespace WebStore.Models
 {
@@ -31,7 +31,9 @@ namespace WebStore.Models
 
         [Display(Name = "DisplaySex",
             ResourceType = typeof(Resources.Resource))]
-        public Sex Sex { get; set; }
+        public Gender Gender { get; set; }
+
+        public string DisplayGenderEnumItem => Gender.GetEnumAttribute<DisplayAttribute>().Name;
 
         [Range(16,
             78,
@@ -51,17 +53,5 @@ namespace WebStore.Models
             ErrorMessageResourceType = typeof(Resources.Resource),
             ErrorMessageResourceName = "RequiredErrorMessage")]
         public string Position { get; set; }
-
-
-
-        public string Info => String.Format(
-                "{0} {1} состоит в должности {2}. На данный момент {3} {4} {5}. Кодовое прозвище: \"{6}\".",
-                FirstName,
-                Patronymic,
-                Position,
-                Sex == Sex.Man ? "ему" : "ей",
-                Age,
-                Age % 10 > 0 && Age % 10 < 5 ? "года" : "лет",
-                SecretName);
     }
 }
