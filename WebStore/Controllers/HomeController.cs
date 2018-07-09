@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore.Infrastructure.Interfaces;
 using System.Linq;
-using WebStore.Models;
 using WebStore.Models.Product;
 
 namespace WebStore.Controllers

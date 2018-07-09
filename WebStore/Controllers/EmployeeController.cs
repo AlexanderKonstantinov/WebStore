@@ -1,9 +1,10 @@
-﻿﻿using System.Linq;
- using Microsoft.AspNetCore.Authorization;
- using Microsoft.AspNetCore.Mvc;
- using WebStore.Domain.Entities;
- using WebStore.Infrastructure.Interfaces;
+﻿﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using WebStore.Domain.Entities;
+using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
+using AutoMapper;
 
 namespace WebStore.Controllers
 {
@@ -13,11 +14,28 @@ namespace WebStore.Controllers
     [Authorize]
     public class EmployeeController : Controller
     {
+        private readonly IMapper _mapperEmployeeToEmployeeView;
+        private readonly IMapper _mapperEmployeeViewToEmployee;
+
+
         private readonly IEmployeeData _employeeData;
 
         public EmployeeController(IEmployeeData employeeData)
         {
             _employeeData = employeeData;
+
+            _mapperEmployeeToEmployeeView =
+                new Mapper(new MapperConfiguration(
+                    config => config.CreateMap<Employee, EmployeeViewModel>()
+                        .ForMember(nameof(EmployeeViewModel.Gender),
+                            opt => opt.MapFrom(e => e.IsMan ? Gender.Man : Gender.Woman))));
+
+            _mapperEmployeeViewToEmployee =
+                new Mapper(new MapperConfiguration(
+                    config => config.CreateMap<EmployeeViewModel, Employee>()
+                    .ForMember(nameof(Employee.IsMan),
+                            opt => opt.MapFrom(ev => Gender.Man == ev.Gender))));
+
         }
 
 
@@ -28,23 +46,10 @@ namespace WebStore.Controllers
         [Route("employees")]
         public IActionResult EmployeeList()
         {
-            var employees = _employeeData.GetAll();
+            var employees = _mapperEmployeeToEmployeeView
+                .Map<IEnumerable<Employee>, List<EmployeeViewModel>>(_employeeData.GetAll());
 
-            var employeesModel = employees.Select(
-                e => new EmployeeViewModel
-                {
-                    Id = e.Id,
-                    Gender = e.IsMan == true ? Gender.Man : Gender.Woman,
-                    FirstName = e.FirstName,
-                    SecondName = e.SecondName,
-                    Patronymic = e.Patronymic,
-                    Age = e.Age,
-                    SecretName = e.SecretName,
-                    Position = e.Position
-                }
-            );
-
-            return View(employeesModel);
+            return View(employees);
         } 
 
         /// <summary>
@@ -54,23 +59,8 @@ namespace WebStore.Controllers
         [Route("employees/{id}")]
         public IActionResult EmployeeDetails(int id)
         {
-            var selectedEmployee = _employeeData.GetById(id);
-
-            if (selectedEmployee == null)
-                return new ContentResult { Content = "Такой сотрудник отсутствует" };
-
-            // Можно ли здесь взять данные из локальных?
-            var employeeModel = new EmployeeViewModel
-            {
-                Id = selectedEmployee.Id,
-                Gender = selectedEmployee.IsMan == true ? Gender.Man : Gender.Woman,
-                FirstName = selectedEmployee.FirstName,
-                SecondName = selectedEmployee.SecondName,
-                Patronymic = selectedEmployee.Patronymic,
-                Age = selectedEmployee.Age,
-                SecretName = selectedEmployee.SecretName,
-                Position = selectedEmployee.Position
-            };
+            var employeeModel = _mapperEmployeeToEmployeeView
+                .Map<Employee, EmployeeViewModel>(_employeeData.GetById(id));
 
             return View(employeeModel);
         }
@@ -83,7 +73,7 @@ namespace WebStore.Controllers
         [Route("employee_edit/{id?}")]
         public IActionResult Edit(int? id)
         {
-            EmployeeViewModel model;
+            EmployeeViewModel employeeModel;
 
             if (id.HasValue)
             {
@@ -92,22 +82,14 @@ namespace WebStore.Controllers
                 if (employee is null)
                     return NotFound();
 
-                model = new EmployeeViewModel
-                {
-                    Id = employee.Id,
-                    Gender = employee.IsMan ? Gender.Man : Gender.Woman,
-                    FirstName = employee.FirstName,
-                    SecondName = employee.SecondName,
-                    Patronymic = employee.Patronymic,
-                    Age = employee.Age,
-                    SecretName = employee.SecretName,
-                    Position = employee.Position
-                };
+                employeeModel = _mapperEmployeeToEmployeeView
+                    .Map<Employee, EmployeeViewModel>(employee);
+
             }
             else
-                model = new EmployeeViewModel();
+                employeeModel = new EmployeeViewModel();
 
-            return View(model);
+            return View(employeeModel);
         }
 
         /// <summary>
@@ -117,45 +99,33 @@ namespace WebStore.Controllers
         /// <returns>EmployeeList html page</returns>
         [HttpPost]
         [Route("employee_edit/{id?}")]
-        public IActionResult Edit(EmployeeViewModel model)
+        public IActionResult Edit(EmployeeViewModel employeeModel)
         {
             if (ModelState.IsValid)
             {
-                if (model.Id > 0)
+                if (employeeModel.Id > 0)
                 {
-                    var employee = _employeeData.GetById(model.Id);
+                    var employee = _employeeData.GetById(employeeModel.Id);
 
                     if (employee is null)
                         return NotFound();
 
-                    _employeeData.Edit(
-                        new Employee
-                        {
-                            Id = model.Id,
-                            IsMan = model.Gender == Gender.Man,
-                            FirstName = model.FirstName,
-                            SecondName = model.SecondName,
-                            Patronymic = model.Patronymic,
-                            Age = model.Age,
-                            SecretName = model.SecretName,
-                            Position = model.Position
-                        });
+                    var  employeeEdit = _mapperEmployeeViewToEmployee
+                        .Map<EmployeeViewModel, Employee>(employeeModel);
+
+                    _employeeData.Edit(employeeEdit);
                 }
                 else
-                    _employeeData.AddNew(new Employee
-                    {
-                        Id = model.Id,
-                        IsMan = model.Gender == Gender.Man,
-                        FirstName = model.FirstName,
-                        SecondName = model.SecondName,
-                        Patronymic = model.Patronymic,
-                        Age = model.Age,
-                        SecretName = model.SecretName,
-                        Position = model.Position
-                    });
+                {
+                    var employeeNew = _mapperEmployeeViewToEmployee
+                        .Map<EmployeeViewModel, Employee>(employeeModel);
+
+                    _employeeData.AddNew(employeeNew);
+                }
+                
             }
 
-            return View(model);
+            return View(employeeModel);
         }
 
         /// <summary>
