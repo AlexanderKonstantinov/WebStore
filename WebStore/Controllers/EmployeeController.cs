@@ -14,28 +14,13 @@ namespace WebStore.Controllers
     [Authorize]
     public class EmployeeController : Controller
     {
-        private readonly IMapper _mapperEmployeeToEmployeeView;
-        private readonly IMapper _mapperEmployeeViewToEmployee;
-
-
+        private readonly IMapper _mapper;
         private readonly IEmployeeData _employeeData;
 
-        public EmployeeController(IEmployeeData employeeData)
+        public EmployeeController(IEmployeeData employeeData, IMapper mapper)
         {
+            _mapper = mapper;
             _employeeData = employeeData;
-
-            _mapperEmployeeToEmployeeView =
-                new Mapper(new MapperConfiguration(
-                    config => config.CreateMap<Employee, EmployeeViewModel>()
-                        .ForMember(nameof(EmployeeViewModel.Gender),
-                            opt => opt.MapFrom(e => e.IsMan ? Gender.Man : Gender.Woman))));
-
-            _mapperEmployeeViewToEmployee =
-                new Mapper(new MapperConfiguration(
-                    config => config.CreateMap<EmployeeViewModel, Employee>()
-                    .ForMember(nameof(Employee.IsMan),
-                            opt => opt.MapFrom(ev => Gender.Man == ev.Gender))));
-
         }
 
 
@@ -46,8 +31,7 @@ namespace WebStore.Controllers
         [Route("employees")]
         public IActionResult EmployeeList()
         {
-            var employees = _mapperEmployeeToEmployeeView
-                .Map<IEnumerable<Employee>, List<EmployeeViewModel>>(_employeeData.GetAll());
+            var employees = _mapper.Map<IEnumerable<EmployeeViewModel>>(_employeeData.GetAll());
 
             return View(employees);
         } 
@@ -59,8 +43,7 @@ namespace WebStore.Controllers
         [Route("employees/{id}")]
         public IActionResult EmployeeDetails(int id)
         {
-            var employeeModel = _mapperEmployeeToEmployeeView
-                .Map<Employee, EmployeeViewModel>(_employeeData.GetById(id));
+            var employeeModel = _mapper.Map<EmployeeViewModel>(_employeeData.GetById(id));
 
             return View(employeeModel);
         }
@@ -82,8 +65,7 @@ namespace WebStore.Controllers
                 if (employee is null)
                     return NotFound();
 
-                employeeModel = _mapperEmployeeToEmployeeView
-                    .Map<Employee, EmployeeViewModel>(employee);
+                employeeModel = _mapper.Map<EmployeeViewModel>(employee);
 
             }
             else
@@ -110,19 +92,17 @@ namespace WebStore.Controllers
                     if (employee is null)
                         return NotFound();
 
-                    var  employeeEdit = _mapperEmployeeViewToEmployee
-                        .Map<EmployeeViewModel, Employee>(employeeModel);
+                    var  employeeEdit = _mapper.Map<Employee>(employeeModel);
 
                     _employeeData.Edit(employeeEdit);
                 }
                 else
                 {
-                    var employeeNew = _mapperEmployeeViewToEmployee
-                        .Map<EmployeeViewModel, Employee>(employeeModel);
+                    var employeeNew = _mapper.Map<EmployeeViewModel, Employee>(employeeModel);
 
                     _employeeData.AddNew(employeeNew);
                 }
-                
+                return RedirectToAction(nameof(EmployeeList));
             }
 
             return View(employeeModel);

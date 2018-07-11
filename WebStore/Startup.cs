@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +26,7 @@ namespace WebStore
         {
             services.AddMvc();            
             
-            services.AddTransient<IEmployeeData, EmployeeData>();
+            services.AddTransient<IEmployeeData, SqlEmployeeData>();
             services.AddTransient<IProductData, SqlProductData>();
 
             services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(
@@ -38,9 +39,6 @@ namespace WebStore
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
-
-                // Почему-то не сработало
-                options.User.AllowedUserNameCharacters = options.User.AllowedUserNameCharacters.Replace("@", String.Empty);
 
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                 options.Lockout.MaxFailedAccessAttempts = 10;
@@ -57,6 +55,8 @@ namespace WebStore
                 options.AccessDeniedPath = "/Account/AccessDenied"; 
                 options.SlidingExpiration = true;
             });
+
+            services.AddAutoMapper();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

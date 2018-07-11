@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
 
-namespace WebStore.Helpers
+namespace WebStore.Helpers.Exceptions
 {
     public sealed class AlreadyExistException : Exception
     {
