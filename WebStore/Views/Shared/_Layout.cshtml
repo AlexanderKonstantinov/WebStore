@@ -3,7 +3,8 @@
 <head>
     <!--/head-->
     <title>@ViewBag.Title | E-Shopper</title>
-    @await Html.PartialAsync("Partial/_HeadAttributes")
+    @await Html.PartialAsync("Partial/_HeadLinks")
+    @RenderSection("styles", false)
 </head><!--/head-->
 
 <body>

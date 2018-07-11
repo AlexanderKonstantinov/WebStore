@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "6e8789b895f85c30a1c30ab915a692b625499d71"
+    "signature": "3a2348b80c404e9d7f5819d786cb6a804b55f4b9"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
       "WebStore/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "4.0.1",
+          "BuildBundlerMinifier": "2.8.391",
           "Microsoft.AspNetCore.All": "2.0.5",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2",
@@ -60,6 +61,7 @@
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "BuildBundlerMinifier/2.8.391": {},
       "Libuv/1.10.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
@@ -4302,6 +4304,13 @@
       "sha512": "sha512-Fhl+XDdcR2ogcqyHIeTB5fGCB58wTXOdpiqDI4sh/durRx8LJw+QJw2ZGLO3DIXTPvvnHM/t0DZy0vf0cdIGEg==",
       "path": "automapper.extensions.microsoft.dependencyinjection/4.0.1",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512"
+    },
+    "BuildBundlerMinifier/2.8.391": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JvnXAF6e55QKR9t+UcG/kVcWap22fHeKjkUcrJwl2N3vF/NpohuvZlBceqYF9S8aL8xOx6h+PX2plnymc23kiQ==",
+      "path": "buildbundlerminifier/2.8.391",
+      "hashPath": "buildbundlerminifier.2.8.391.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",

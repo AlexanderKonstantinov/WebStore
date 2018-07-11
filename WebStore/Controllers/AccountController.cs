@@ -83,7 +83,6 @@ namespace WebStore.Controllers
 
                 if (createResult.Succeeded)
                 {
-                    // Что может быть во втором параметре (методе аутентификации)? 
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction(controllerName: "Home", actionName: "Index");
                 }
@@ -96,7 +95,6 @@ namespace WebStore.Controllers
             return View(model);
         }
 
-        // Что означает второй атрибут? Почитал про него, но до конца не понял.
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
