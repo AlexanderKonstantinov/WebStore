@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace WebStore.Helpers
 {
     /// <summary>
@@ -15,5 +17,8 @@ namespace WebStore.Helpers
         /// Product brand Id
         /// </summary>
         public int? BrandId { get; set; }
-    }
+
+        public IList<int> Ids { get; set; }
+    }
+
 }

@@ -41,6 +41,9 @@ namespace WebStore.Infrastructure.Implementations
             if (filter.SectionId.HasValue)
                 query = query.Where(p => p.SectionId.Equals(filter.SectionId));
 
+            if (filter.Ids != null && filter.Ids.Count > 0)
+                query = query.Where(p => filter.Ids.Contains(p.Id));
+
             return query.ToList();
         }
 

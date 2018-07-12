@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,9 @@ namespace WebStore
             
             services.AddTransient<IEmployeeData, SqlEmployeeData>();
             services.AddTransient<IProductData, SqlProductData>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ICartService, CookieCartService>();
 
             services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(
                 _configuration.GetConnectionString("DefaultConnection")));
