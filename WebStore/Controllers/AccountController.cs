@@ -84,12 +84,12 @@ namespace WebStore.Controllers
                 if (createResult.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
+                    await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction(controllerName: "Home", actionName: "Index");
                 }
-                else
-                    foreach (var identityError in createResult.Errors)
-                        ModelState.AddModelError("", identityError.Description);
 
+                foreach (var identityError in createResult.Errors)
+                    ModelState.AddModelError("", identityError.Description);
             }
 
             return View(model);

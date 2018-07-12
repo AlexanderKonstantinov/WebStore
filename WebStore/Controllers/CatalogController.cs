@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using AutoMapper;
 using WebStore.Helpers;
 using WebStore.Infrastructure.Interfaces;
-using WebStore.Models;
 using WebStore.Models.Product;
 
 namespace WebStore.Controllers
 {
     public class CatalogController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IProductData _productData;
 
-        public CatalogController(IProductData productData)
+        public CatalogController(IProductData productData, IMapper mapper)
         {
             _productData = productData;
+            _mapper = mapper;
         }
 
         public IActionResult Shop(int? sectionId, int? brandId)
@@ -28,19 +31,24 @@ namespace WebStore.Controllers
             {
                 BrandId = brandId,
                 SectionId = sectionId,
-                Products = products.Select(p => new ProductViewModel()
-                {
-                    Id = p.Id,
-                    ImageUrl = p.ImageUrl,
-                    Name = p.Name,
-                    Order = p.Order,
-                    Price = p.Price
-                }).OrderBy(p => p.Order).ToList()
+                Products = _mapper.Map<IEnumerable<ProductViewModel>>(products)
+                    .OrderBy(p => p.Order)
+                    .ToList()
             };
 
             return View(model);
         }
 
-    public IActionResult ProductDetails() => View();
+        public IActionResult ProductDetails(int id)
+        {
+            var product = _productData.GetProductById(id);
+
+            if (product == null)
+                return NotFound();
+
+            var model = _mapper.Map<ProductViewModel>(product);
+
+            return View(model);
+        }
     }
 }

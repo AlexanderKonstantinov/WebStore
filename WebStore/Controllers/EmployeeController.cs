@@ -54,6 +54,7 @@ namespace WebStore.Controllers
         /// <param name="id">Id</param>
         /// <returns>Edit html page</returns>
         [Route("employee_edit/{id?}")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(int? id)
         {
             EmployeeViewModel employeeModel;
@@ -81,6 +82,7 @@ namespace WebStore.Controllers
         /// <returns>EmployeeList html page</returns>
         [HttpPost]
         [Route("employee_edit/{id?}")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Edit(EmployeeViewModel employeeModel)
         {
             if (ModelState.IsValid)
@@ -114,6 +116,7 @@ namespace WebStore.Controllers
         /// <param name="id">Id</param>
         /// <returns>EmployeeList html page</returns>
         [Route("employee_delete/{id}")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Delete(int id)
         {
             _employeeData.Delete(id);

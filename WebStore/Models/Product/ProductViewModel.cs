@@ -1,4 +1,5 @@
-﻿using WebStore.Domain.Entities.Base.Interfaces;
+﻿using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Base.Interfaces;
 
 namespace WebStore.Models.Product
 {
@@ -8,6 +9,7 @@ namespace WebStore.Models.Product
         public string Name { get; set; }
         public int Order { get; set; }
         public string ImageUrl { get; set; }
+        public string Brand { get; set; }
         public decimal Price { get; set; }
     }
 }

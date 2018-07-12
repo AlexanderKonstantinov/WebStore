@@ -6,32 +6,44 @@
 }
 
 <div class="container">
-<hr />
-<a asp-action="Edit" class="btn btn-success">Добавить</a>
-<hr />
+    @if (User.IsInRole("Administrator"))
+    {
+        <hr/>
+        <a asp-action="Edit" class="btn btn-success">Добавить</a>
+        <hr/>
+    }
 
     <table class="table">
         <thead>
         <tr>
-            <th scope="col"></th>
+            @if (User.IsInRole("Administrator"))
+            {
+                <th scope="col"></th>
+            }
             <th scope="col">Фамилия</th>
             <th scope="col">Имя</th>
             <th scope="col">Отчество</th>
             <th scope="col">Возраст</th>
             <th scope="col"></th>
-            <th scope="col"></th>
+            @if (User.IsInRole("Administrator"))
+            {
+                <th scope="col"></th>
+            }
         </tr>
         </thead>
         <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    <a asp-action="Edit"
-                       asp-route-id="@item.Id">
-                        <i class="fa fa-edit" title="Редактировать"></i>
-                    </a>
-                </td>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id">
+                            <i class="fa fa-edit" title="Редактировать"></i>
+                        </a>
+                    </td>
+                }
                 <td>@item.SecondName</td>
                 <td>@item.FirstName</td>
                 <td>@item.Patronymic</td>
@@ -42,12 +54,15 @@
                         <i>Подробнее</i>
                     </a>
                 </td>
-                <td>
-                    <a asp-action="Delete"
-                       asp-route-id="@item.Id">
-                        <i class="fa fa-cut" title="Удалить"></i>
-                    </a>
-                </td>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id">
+                            <i class="fa fa-cut" title="Удалить"></i>
+                        </a>
+                    </td>
+                }
             </tr>
         }
         </tbody>

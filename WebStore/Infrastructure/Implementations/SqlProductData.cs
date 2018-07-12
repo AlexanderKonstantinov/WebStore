@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 using WebStore.Helpers;
@@ -28,7 +29,10 @@ namespace WebStore.Infrastructure.Implementations
 
         public IEnumerable<Product> GetProducts(ProductFilter filter)
         {
-            var query = _context.Products.AsQueryable();
+            var query = _context.Products
+                .Include(nameof(Brand))
+                .Include(nameof(Section))
+                .AsQueryable();
 
             if (filter.BrandId.HasValue)
                 query = query.Where(p => p.BrandId.HasValue
@@ -45,5 +49,12 @@ namespace WebStore.Infrastructure.Implementations
         
         public int GetBrandProductCount(int id)
             => _context.Products.Count(p => p.BrandId.HasValue && p.BrandId.Value == id);
+
+        public Product GetProductById(int id)
+            => _context.Products
+                .Include(nameof(Brand))
+                .Include(nameof(Section))
+                .AsQueryable()
+                .FirstOrDefault(p => p.Id == id);
     }
 }
