@@ -14,26 +14,9 @@
                 <li class="active">Shopping Cart</li>
             </ol>
         </div>
-
-        <div class="table-responsive cart_info">
-            <table class="table table-condensed">
-                <thead>
-                    <tr class="cart_menu">
-                        <td class="image">Товар</td>
-                        <td class="description"></td>
-                        <td class="price">Цена</td>
-                        <td class="quantity">Количество</td>
-                        <td class="total">Итого</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @await Html.PartialAsync("Partial/_CartInfo", Model.Items)
-
-                </tbody>
-            </table>
-        </div>
+        
+        @await Html.PartialAsync("Partial/_CartInfo", Model.Items)
+    
     </div>
 </section> <!--/#cart_items-->
 

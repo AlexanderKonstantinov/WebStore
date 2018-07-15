@@ -34,8 +34,6 @@ namespace WebStore.Controllers
 
             return View(model);
         }
-        
-        public IActionResult Checkout() => View();
 
         public IActionResult Blog() => View();
 

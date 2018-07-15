@@ -38,5 +38,7 @@ namespace WebStore.Controllers
             _cartService.AddToCart(id);
             return Redirect(returnUrl);
         }
+
+        public IActionResult Checkout() => View("Checkout", _cartService.TransformCart());
     }
 }

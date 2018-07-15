@@ -6,19 +6,20 @@
 
 
 <environment include="Development">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/typography.css" rel="stylesheet" />
     <link href="~/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/css/price-range.css" rel="stylesheet">
     <link href="~/css/animate.css" rel="stylesheet">
     <link href="~/css/main.css" rel="stylesheet">
     <link href="~/css/responsive.css" rel="stylesheet">
-    </environment>
+</environment>
 <environment exclude="Development">
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
-    <link href="~/css/font-awesome.min.css" rel="stylesheet" asp-append-version="true">
-    <link href="~/css/typography.css" rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/typography.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/bundled/site.min.css" asp-append-version="true"/>
 </environment>
 
 <!--[if lt IE 9]>

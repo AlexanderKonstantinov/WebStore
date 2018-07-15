@@ -1,0 +1,11 @@
+﻿
+@model WebStore.Models.Cart.CartViewModel
+
+
+<div>
+    В <a asp-controller="Cart"
+            asp-action="Details">
+        <i class="fa fa-shopping-cart"></i>&nbsp;корзине
+    </a>
+</div>
+<div>@Model.ItemsCount товаров.</div>

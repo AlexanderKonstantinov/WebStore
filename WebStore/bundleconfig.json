@@ -1,6 +1,6 @@
 ﻿[
   {
-    "outputFileName": "wwwroot/css/site.min.css",
+    "outputFileName": "wwwroot/bundled/site.min.css",
     "inputFiles": [
       "wwwroot/css/prettyPhoto.css",
       "wwwroot/css/price-range.css",
@@ -9,8 +9,9 @@
       "wwwroot/css/responsive.css"
     ]
   },
+
   {
-    "outputFileName": "wwwroot/js/site.min.js",
+    "outputFileName": "wwwroot/bundled/site.min.js",
     "inputFiles": [
       "wwwroot/js/price-range.js",
       "wwwroot/js/jquery.prettyPhoto.js",
