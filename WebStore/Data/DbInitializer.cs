@@ -307,7 +307,9 @@ namespace WebStore.Data
                     ImageUrl = "product1.jpg",
                     Order = 0,
                     SectionId = 2,
-                    BrandId = 1
+                    BrandId = 1,
+                    Quantity = 5,
+                    Condition = "New"
                 },
                 new Product()
                 {
@@ -317,7 +319,9 @@ namespace WebStore.Data
                     ImageUrl = "product2.jpg",
                     Order = 1,
                     SectionId = 2,
-                    BrandId = 1
+                    BrandId = 1,
+                    Quantity = 7,
+                    Condition = "New"
                 },
                 new Product()
                 {
@@ -327,7 +331,9 @@ namespace WebStore.Data
                     ImageUrl = "product3.jpg",
                     Order = 2,
                     SectionId = 2,
-                    BrandId = 1
+                    BrandId = 1,
+                    Quantity = 10,
+                    Condition = "Used"
                 },
                 new Product()
                 {
@@ -337,7 +343,9 @@ namespace WebStore.Data
                     ImageUrl = "product4.jpg",
                     Order = 3,
                     SectionId = 2,
-                    BrandId = 1
+                    BrandId = 1,
+                    Quantity = 2,
+                    Condition = "New"
                 },
                 new Product()
                 {
@@ -347,7 +355,9 @@ namespace WebStore.Data
                     ImageUrl = "product5.jpg",
                     Order = 4,
                     SectionId = 2,
-                    BrandId = 2
+                    BrandId = 2,
+                    Quantity = 4,
+                    Condition = "New"
                 },
                 new Product()
                 {
@@ -357,7 +367,9 @@ namespace WebStore.Data
                     ImageUrl = "product6.jpg",
                     Order = 5,
                     SectionId = 2,
-                    BrandId = 2
+                    BrandId = 2,
+                    Quantity = 5,
+                    Condition = "Used"
                 },
                 new Product()
                 {
@@ -367,7 +379,9 @@ namespace WebStore.Data
                     ImageUrl = "product7.jpg",
                     Order = 6,
                     SectionId = 2,
-                    BrandId = 2
+                    BrandId = 2,
+                    Quantity = 2,
+                    Condition = "New"
                 },
                 new Product()
                 {
@@ -377,7 +391,9 @@ namespace WebStore.Data
                     ImageUrl = "product8.jpg",
                     Order = 7,
                     SectionId = 25,
-                    BrandId = 2
+                    BrandId = 2,
+                    Quantity = 1,
+                    Condition = "New"
                 },
                 new Product()
                 {
@@ -387,7 +403,9 @@ namespace WebStore.Data
                     ImageUrl = "product9.jpg",
                     Order = 8,
                     SectionId = 25,
-                    BrandId = 2
+                    BrandId = 2,
+                    Quantity = 3,
+                    Condition = "New"
                 },
                 new Product()
                 {
@@ -397,7 +415,9 @@ namespace WebStore.Data
                     ImageUrl = "product10.jpg",
                     Order = 9,
                     SectionId = 25,
-                    BrandId = 3
+                    BrandId = 3,
+                    Quantity = 15,
+                    Condition = "Used"
                 },
                 new Product()
                 {
@@ -407,7 +427,9 @@ namespace WebStore.Data
                     ImageUrl = "product11.jpg",
                     Order = 10,
                     SectionId = 25,
-                    BrandId = 3
+                    BrandId = 3,
+                    Quantity = 7,
+                    Condition = "Used"
                 },
                 new Product()
                 {
@@ -417,7 +439,9 @@ namespace WebStore.Data
                     ImageUrl = "product12.jpg",
                     Order = 11,
                     SectionId = 25,
-                    BrandId = 3
+                    BrandId = 3,
+                    Quantity = 0,
+                    Condition = "New"
                 },
             };
 

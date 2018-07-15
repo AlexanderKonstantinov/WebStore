@@ -34,5 +34,15 @@ namespace WebStore.Domain.Entities
         /// Product price
         /// </summary>
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Quantity in stock
+        /// </summary>
+        public int Quantity { get; set; }
+
+        /// <summary>
+        /// Product state
+        /// </summary>
+        public string Condition { get; set; }
     }
 }
