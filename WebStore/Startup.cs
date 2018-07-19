@@ -27,8 +27,9 @@ namespace WebStore
         {
             services.AddMvc();            
             
-            services.AddTransient<IEmployeeData, SqlEmployeeData>();
+            services.AddTransient<IEmployeesData, SqlEmployeesData>();
             services.AddTransient<IProductData, SqlProductData>();
+            services.AddTransient<IOrdersService, SqlOrdersService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICartService, CookieCartService>();
@@ -76,6 +77,9 @@ namespace WebStore
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=index}/{id?}");

@@ -6,7 +6,7 @@ namespace WebStore.Infrastructure.Interfaces
     /// <summary>
     /// Interface describe connecting EmployeeController with Database
     /// </summary>
-    public interface IEmployeeData
+    public interface IEmployeesData
     {
         /// <summary>
         /// Get employee list

@@ -13,10 +13,12 @@
     
     @await RenderSectionAsync("top", false)
     
-    @RenderBody()
+    <div class="container">
+        @RenderBody()
+    </div>
 
     @await Html.PartialAsync("Partial/_Footer")
-    
+
     @await Html.PartialAsync("Partial/_Scripts")
     @RenderSection("scripts", false)
 </body>
