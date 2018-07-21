@@ -37,7 +37,10 @@ namespace WebStore.Infrastructure.Implementations
             CartViewModel transformCart,
             string userName)
         {
-            var user = _userManager.FindByNameAsync(userName).Result;
+            User user = null;
+
+            if (!string.IsNullOrEmpty(userName))
+                user = _userManager.FindByNameAsync(userName).Result;
 
             using (var transaction = _context.Database.BeginTransaction())
             {

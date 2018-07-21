@@ -132,6 +132,9 @@
   <data name="DisplayFirstName" xml:space="preserve">
     <value>Имя</value>
   </data>
+  <data name="DisplayGender" xml:space="preserve">
+    <value>Пол</value>
+  </data>
   <data name="DisplayLogin" xml:space="preserve">
     <value>Логин</value>
   </data>
@@ -152,9 +155,6 @@
   </data>
   <data name="DisplaySecretName" xml:space="preserve">
     <value>Корпоративное прозвище</value>
-  </data>
-  <data name="DisplaySex" xml:space="preserve">
-    <value>Пол</value>
   </data>
   <data name="EmailErrorMessage" xml:space="preserve">
     <value>Некорректный адрес электронной почты</value>

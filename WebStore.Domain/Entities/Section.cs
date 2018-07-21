@@ -1,5 +1,4 @@
-﻿
-using WebStore.Domain.Entities.Base;
+﻿using WebStore.Domain.Entities.Base;
 
 namespace WebStore.Domain.Entities
 {

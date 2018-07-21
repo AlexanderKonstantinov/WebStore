@@ -1,5 +1,5 @@
-﻿@using WebStore.Models.Product
-@model IEnumerable<WebStore.Models.Product.SectionViewModel>
+﻿
+@model IEnumerable<SectionViewModel>
 <h2>Категории</h2>
 <div class="panel-group category-products" id="accordian">
     <!--category-products-->
@@ -44,9 +44,7 @@
                            asp-action="Shop"
                            asp-route-sectionId="@parentSection.Id">@parentSection.Name</a>
                     </h4>
-
-
-                    @*<h4 class="panel-title"><a href="#">@parentSection.Name</a></h4>*@
+                    
                 </div>
             </div>
         }

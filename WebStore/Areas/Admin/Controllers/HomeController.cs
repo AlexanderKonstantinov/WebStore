@@ -22,6 +22,7 @@ namespace WebStore.Areas.Admin.Controllers
             return View();
         }
 
+        [Route("admin/products")]
         public IActionResult ProductList()
         {
             var products = _productData.GetProducts(new ProductFilter());

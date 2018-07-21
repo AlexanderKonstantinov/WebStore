@@ -29,7 +29,7 @@ namespace WebStore.Models
             ResourceType = typeof(Resources.Resource))]
         public string Patronymic { get; set; }
 
-        [Display(Name = "DisplaySex",
+        [Display(Name = "DisplayGender",
             ResourceType = typeof(Resources.Resource))]
         public Gender Gender { get; set; }
 

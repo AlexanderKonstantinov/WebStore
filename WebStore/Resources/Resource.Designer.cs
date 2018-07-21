@@ -106,6 +106,15 @@ namespace WebStore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пол.
+        /// </summary>
+        public static string DisplayGender {
+            get {
+                return ResourceManager.GetString("DisplayGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Логин.
         /// </summary>
         public static string DisplayLogin {
@@ -165,15 +174,6 @@ namespace WebStore.Resources {
         public static string DisplaySecretName {
             get {
                 return ResourceManager.GetString("DisplaySecretName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Пол.
-        /// </summary>
-        public static string DisplaySex {
-            get {
-                return ResourceManager.GetString("DisplaySex", resourceCulture);
             }
         }
         
