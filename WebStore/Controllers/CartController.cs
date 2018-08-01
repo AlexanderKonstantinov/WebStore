@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Models.Cart;
-using WebStore.Models.Order;
+using WebStore.Domain.Models.Cart;
+using WebStore.Domain.Models.Order;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {

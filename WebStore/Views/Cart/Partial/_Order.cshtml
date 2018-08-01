@@ -1,4 +1,5 @@
-﻿@model OrderViewModel
+﻿@using WebStore.Domain.Models.Order
+@model WebStore.Domain.Models.Order.OrderViewModel
 
 <form method="post" asp-antiforgery="true" asp-action="Checkout" asp-controller="Cart" >
     <div class="col-sm-6">

@@ -1,0 +1,13 @@
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.ServicesHosting.deps.json
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.ServicesHosting.runtimeconfig.json
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.ServicesHosting.runtimeconfig.dev.json
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.ServicesHosting.dll
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.ServicesHosting.pdb
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.csproj.CoreCompileInputs.cache
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.RazorAssemblyInfo.cache
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.RazorAssemblyInfo.cs
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.AssemblyInfoInputs.cache
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.AssemblyInfo.cs
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.RazorTargetAssemblyInfo.cache
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.dll
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.pdb

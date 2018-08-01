@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using AutoMapper;
-using WebStore.Helpers;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Models.Product;
+using WebStore.Domain.Filters;
+using WebStore.Domain.Models.Product;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {

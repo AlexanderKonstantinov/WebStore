@@ -6,7 +6,7 @@ namespace WebStore.Domain.Entities.Base
     public abstract class NamedEntity : BaseEntity, INamedEntity
     {
         [Display(Name = "DisplayName",
-            ResourceType = typeof(Resources.Resource))]
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public string Name { get; set; }
     }
 }

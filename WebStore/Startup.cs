@@ -9,8 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
-using WebStore.Infrastructure.Implementations;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
+using WebStore.Services;
+using WebStore.Services.Sql;
 
 namespace WebStore
 {

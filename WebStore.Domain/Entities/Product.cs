@@ -13,7 +13,7 @@ namespace WebStore.Domain.Entities
         /// Section Id of product
         /// </summary>        
         [Display(Name = "DisplaySection",
-            ResourceType = typeof(Resources.Resource))]
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public int SectionId { get; set; }
 
         [ForeignKey(nameof(SectionId))]
@@ -23,7 +23,7 @@ namespace WebStore.Domain.Entities
         /// Brand Id of product
         /// </summary>
         [Display(Name = "DisplayBrand",
-            ResourceType = typeof(Resources.Resource))]
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public int? BrandId { get; set; }
 
         [ForeignKey(nameof(BrandId))]
@@ -33,7 +33,7 @@ namespace WebStore.Domain.Entities
         /// Product image link
         /// </summary>
         [Display(Name = "DisplayImageUrl",
-            ResourceType = typeof(Resources.Resource))]
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public string ImageUrl { get; set; }
 
 
@@ -41,21 +41,21 @@ namespace WebStore.Domain.Entities
         /// Product price
         /// </summary>
         [Display(Name = "DisplayPrice",
-            ResourceType = typeof(Resources.Resource))]
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public decimal Price { get; set; }
 
         /// <summary>
         /// Quantity in stock
         /// </summary>
         [Display(Name = "DisplayQuantity",
-            ResourceType = typeof(Resources.Resource))]
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public int Quantity { get; set; }
 
         /// <summary>
         /// Product state
         /// </summary>
         [Display(Name = "DisplayCondition",
-            ResourceType = typeof(Resources.Resource))]
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public string Condition { get; set; }
     }
 }

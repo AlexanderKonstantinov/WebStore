@@ -1,0 +1,12 @@
+D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.csprojAssemblyReference.cache
+D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.csproj.CoreCompileInputs.cache
+D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.AssemblyInfoInputs.cache
+D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.AssemblyInfo.cs
+D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\WebStore.Interfaces.deps.json
+D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\WebStore.Interfaces.dll
+D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\WebStore.Interfaces.pdb
+D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\WebStore.Domain.dll
+D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\WebStore.Domain.pdb
+D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.csproj.CopyComplete
+D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.dll
+D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.pdb

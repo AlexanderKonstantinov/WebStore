@@ -1,8 +1,8 @@
 ﻿using System;
 using AutoMapper;
 using WebStore.Domain.Entities;
-using WebStore.Models;
-using WebStore.Models.Product;
+using WebStore.Domain.Models;
+using WebStore.Domain.Models.Product;
 
 namespace WebStore.Helpers
 {

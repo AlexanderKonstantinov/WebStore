@@ -6,6 +6,6 @@ D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.Assembl
 D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.AssemblyInfo.cs
 D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.dll
 D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.pdb
-D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.csprojAssemblyReference.cache
-D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.Resources.Resource.resources
 D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.csproj.GenerateResource.cache
+D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.Resources.ResourcesEntities.Resource.resources
+D:\Git\WebStore\WebStore.Domain\obj\Debug\netstandard2.0\WebStore.Domain.Resources.ResourcesModels.Resource.resources
