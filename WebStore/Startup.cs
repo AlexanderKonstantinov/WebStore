@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebStore.Clients;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
+using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 using WebStore.Services;
 using WebStore.Services.Sql;
@@ -63,6 +65,8 @@ namespace WebStore
             });
 
             services.AddAutoMapper();
+
+            services.AddTransient<IValuesService, ValuesClient>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

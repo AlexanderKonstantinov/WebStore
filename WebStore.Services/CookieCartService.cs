@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using WebStore.Domain.Filters;
@@ -14,6 +15,7 @@ namespace WebStore.Services
     {
         private readonly IProductData _productData;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IMapper _mapper;
         private readonly string _cartName;
 
         private Cart Cart
@@ -66,8 +68,9 @@ namespace WebStore.Services
             }
         }
 
-        public CookieCartService(IProductData productData, IHttpContextAccessor httpContextAccessor)
+        public CookieCartService(IProductData productData, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
+            _mapper = mapper;
             _productData = productData;
             _httpContextAccessor = httpContextAccessor;
             _cartName = "cart" + (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated
@@ -123,36 +126,16 @@ namespace WebStore.Services
 
         public CartViewModel TransformCart()
         {
-            // Не знаю как тут лучше маппинг использовать. Получать экземпляр IMapper В конструкторе?
-
-            //var products = _mapper.Map<IEnumerable<ProductViewModel>>(
-            //    _productData.GetProducts(new ProductFilter
-            //    {
-            //        Ids = Cart.Items.Select(i => i.ProductId).ToList()
-            //    }));
-
-            var products = _productData.GetProducts(new ProductFilter
-            {
-                Ids = Cart.Items.Select(i => i.ProductId).ToList()
-            });
-
-            var productViewModelList = products.Select(p => new ProductViewModel
+            var products = _mapper.Map<IEnumerable<ProductViewModel>>(
+                _productData.GetProducts(new ProductFilter
                 {
-                    Price = p.Price,
-                    Quantity = p.Quantity,
-                    Id = p.Id,
-                    Brand = p.Brand is null ? String.Empty : p.Brand.Name,
-                    Condition = p.Condition,
-                    ImageUrl = p.ImageUrl,
-                    Name = p.Name,
-                    Order = p.Order
-                }
-            );
-
+                    Ids = Cart.Items.Select(i => i.ProductId).ToList()
+                }));
+            
             var cartViewModel = new CartViewModel
             {
                 Items = Cart.Items.ToDictionary(
-                    x => productViewModelList.First(y => y.Id == x.ProductId),
+                    x => products.First(y => y.Id == x.ProductId),
                     x => x.Quantity)
             };
 

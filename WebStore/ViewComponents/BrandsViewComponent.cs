@@ -23,7 +23,6 @@ namespace WebStore.ViewComponents
 
         private IEnumerable<BrandViewModel> GetBrands()
         {
-            // Может как-то одним выражением это можно записать?
             var brands = _productData.GetBrands()
                 .Select(b => new BrandViewModel
                 {

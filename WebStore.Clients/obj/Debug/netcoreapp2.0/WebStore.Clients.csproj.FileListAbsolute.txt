@@ -1,0 +1,14 @@
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\WebStore.Clients.deps.json
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\WebStore.Clients.dll
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\WebStore.Clients.pdb
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\WebStore.Domain.dll
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\WebStore.Interfaces.dll
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\WebStore.Interfaces.pdb
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\WebStore.Domain.pdb
+D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.csprojAssemblyReference.cache
+D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.csproj.CoreCompileInputs.cache
+D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.AssemblyInfoInputs.cache
+D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.AssemblyInfo.cs
+D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.csproj.CopyComplete
+D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.dll
+D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.pdb

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<ProductViewModel>
+﻿@*@model IEnumerable<ProductViewModel>*@
+
+@model IEnumerable<string>
+
 
 @{
     ViewData["Title"] = "About";
@@ -9,8 +12,13 @@
     @await Html.PartialAsync("Partial/_Slider")
 }
 
+@foreach (var item in Model)
+{
+    <p>@item</p>
+}
 
-@await Html.PartialAsync("Partial/_Features", Model)
+
+@*@await Html.PartialAsync("Partial/_Features", Model)*@
 
 
 @await Html.PartialAsync("Partial/_Category")

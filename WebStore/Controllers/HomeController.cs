@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using WebStore.Domain.Models.Product;
+using System.Threading.Tasks;
+using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
@@ -15,25 +15,34 @@ namespace WebStore.Controllers
 
         private readonly IProductData _productData;
 
-        public HomeController(IProductData productData)
+        private IValuesService _valuesService;
+
+        public HomeController(IProductData productData, IValuesService valuesService)
         {
             _productData = productData;
+            _valuesService = valuesService;
         }
-        
-        public IActionResult Index()
-        {
-            var model = from p in _productData.GetProducts().Take(IndexProductCount)
-                        select new ProductViewModel
-                        {
-                            Id = p.Id,
-                            ImageUrl = p.ImageUrl,
-                            Name = p.Name,
-                            Order = p.Order,
-                            Price = p.Price
-                        };
 
-            return View(model);
+        public async Task<IActionResult>Index()
+        {
+            var values = await _valuesService.GetAsync();
+            return View(values);
         }
+
+        //public IActionResult Index()
+        //{
+        //    var model = from p in _productData.GetProducts().Take(IndexProductCount)
+        //                select new ProductViewModel
+        //                {
+        //                    Id = p.Id,
+        //                    ImageUrl = p.ImageUrl,
+        //                    Name = p.Name,
+        //                    Order = p.Order,
+        //                    Price = p.Price
+        //                };
+
+        //    return View(model);
+        //}
 
         public IActionResult Blog() => View();
 

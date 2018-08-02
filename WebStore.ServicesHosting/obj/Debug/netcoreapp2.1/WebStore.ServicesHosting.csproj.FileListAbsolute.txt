@@ -11,3 +11,4 @@ D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.Servic
 D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.RazorTargetAssemblyInfo.cache
 D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.dll
 D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.pdb
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.csprojAssemblyReference.cache
