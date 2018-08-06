@@ -1,15 +1,17 @@
 ﻿@using WebStore.Domain.Models.Account
-@model WebStore.Domain.Models.Account.LoginViewModel
+@model LoginViewModel
 
 @{
     ViewData["Title"] = "Аутентификация";
     Layout = "_Layout";
 }
 
-<section id="form"><!--form-->
+<section id="form">
+    <!--form-->
     <div class="row">
         <div class="col-sm-4 col-sm-offset-1">
-            <div class="login-form"><!--login form-->
+            <div class="login-form">
+                <!--login form-->
                 <h2>Учётная запись</h2>
                 <form method="post" asp-antiforgery="true" asp-action="Login">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>

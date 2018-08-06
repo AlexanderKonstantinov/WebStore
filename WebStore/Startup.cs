@@ -8,12 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.Clients;
+using WebStore.Clients.Services.Employees;
+using WebStore.Clients.Services.Orders;
+using WebStore.Clients.Services.Products;
+using WebStore.Clients.Services.Users;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 using WebStore.Services;
 using WebStore.Services.Sql;
+using WebStore.Services.CustomIdentity;
 
 namespace WebStore
 {
@@ -30,19 +35,32 @@ namespace WebStore
         {
             services.AddMvc();            
             
-            services.AddTransient<IEmployeesData, SqlEmployeesData>();
-            services.AddTransient<IProductData, SqlProductData>();
-            services.AddTransient<IOrdersService, SqlOrdersService>();
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICartService, CookieCartService>();
 
             services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(
                 _configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IValuesService, ValuesClient>();
+            services.AddTransient<IEmployeesData, EmployeesClient>();
+            services.AddTransient<IProductData, ProductsClient>();
+            services.AddTransient<IOrdersData, OrdersClient>();
+            services.AddTransient<IUsersClient, UsersClient>();
+
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<WebStoreContext>()
                 .AddDefaultTokenProviders();
+
+            //services.AddTransient<IUserStore<User>, CustomUserStore>();
+            //services.AddTransient<IUserRoleStore<User>, CustomUserStore>();
+            //services.AddTransient<IUserClaimStore<User>, CustomUserStore>();
+            //services.AddTransient<IUserPasswordStore<User>, CustomUserStore>();
+            //services.AddTransient<IUserTwoFactorStore<User>, CustomUserStore>();
+            //services.AddTransient<IUserEmailStore<User>, CustomUserStore>();
+            //services.AddTransient<IUserPhoneNumberStore<User>,CustomUserStore>();
+            //services.AddTransient<IUserLoginStore<User>, CustomUserStore>();
+            //services.AddTransient<IUserLockoutStore<User>, CustomUserStore>();
+            //services.AddTransient<IRoleStore<IdentityRole>, RolesClient>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -65,8 +83,6 @@ namespace WebStore
             });
 
             services.AddAutoMapper();
-
-            services.AddTransient<IValuesService, ValuesClient>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -87,7 +103,7 @@ namespace WebStore
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

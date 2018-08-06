@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
+using WebStore.Domain.Dto.Order;
+using WebStore.Domain.Dto.Product;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models;
+using WebStore.Domain.Models.Order;
 using WebStore.Domain.Models.Product;
 
 namespace WebStore.Helpers
@@ -23,6 +27,30 @@ namespace WebStore.Helpers
                 .ForMember(nameof(ProductViewModel.Brand),
                     opt => opt.MapFrom(p => p.Brand != null 
                         ? p.Brand.Name : String.Empty));
+            
+
+            CreateMap<ProductDto, ProductViewModel>();
+
+            CreateMap<BrandDto, BrandViewModel >()
+                .ForMember(nameof(BrandViewModel.ProductsCount),
+                    opt => opt.MapFrom(p => 0));
+
+            CreateMap<SectionDto, SectionViewModel>();
+
+            CreateMap<OrderDto, UserOrderViewModel>()
+                .ForMember(nameof(UserOrderViewModel.TotalSum),
+                    opt => opt.MapFrom(p => p.OrderItems.Sum(i => i.Price)));
+
+
+            CreateMap<Brand, BrandDto>();
+
+            CreateMap<Section, SectionDto>();
+
+            CreateMap<Product, ProductDto>();
+
+            CreateMap<Order, OrderDto>();
+
+            CreateMap<CreateOrderModel, Order>();
         }
     }
 }

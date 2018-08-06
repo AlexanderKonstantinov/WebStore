@@ -1,7 +1,6 @@
 *.vs
 /WebStore/obj
 /WebStore/bower_components
-/WebStore/wwwroot/lib
 /visual studio 2017Templates
 /Eshopper
 /WebStore/bin/Debug/netcoreapp2.0/publish

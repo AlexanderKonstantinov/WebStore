@@ -1,14 +1,17 @@
-﻿@model RegisterViewModel
+﻿@using WebStore.Domain.Models.Account
+@model RegisterViewModel
 
 @{
     ViewData["Title"] = "Регистрация";
     Layout = "_Layout";
 }
 
-<section id="form"><!--form-->
+<section id="form">
+    <!--form-->
     <div class="row">
         <div class="col-sm-4 col-sm-offset-1">
-            <div class="signup-form"><!--sign up form-->
+            <div class="signup-form">
+                <!--sign up form-->
                 <h2>Регистрация пользователя</h2>
                 <form asp-action="Register" asp-antiforgery="true">
 

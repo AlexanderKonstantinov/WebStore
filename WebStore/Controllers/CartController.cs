@@ -1,19 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using WebStore.Domain.Dto.Order;
+using WebStore.Domain.Entities;
 using WebStore.Domain.Models.Cart;
 using WebStore.Domain.Models.Order;
+using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {
     public class CartController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly ICartService _cartService;
-        private readonly IOrdersService _ordersService;
+        private readonly IOrdersData _ordersData;
 
-        public CartController(ICartService cartService, IOrdersService ordersService)
+        public CartController(ICartService cartService, IOrdersData ordersData, IMapper mapper)
         {
+            _mapper = mapper;
             _cartService = cartService;
-            _ordersService = ordersService;
+            _ordersData = ordersData;
         }
 
         public IActionResult Details()
@@ -51,15 +60,37 @@ namespace WebStore.Controllers
             return Redirect(returnUrl);
         }
 
-        [HttpPost/*,
-         ValidateAntiForgeryToken*/]
+        [HttpPost,
+         ValidateAntiForgeryToken]
         public IActionResult Checkout(OrderViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var orderResult = _ordersService.CreateOrder(model, _cartService.TransformCart(),
+                var createOrder = new CreateOrderModel
+                {
+                    Address = model.Address,
+                    Name = model.Name,
+                    Phone = model.Phone,
+                    Date = DateTime.Now
+                };
+
+                var cartViewModel = _cartService.TransformCart();
+
+                var products = new List<ProductViewModel>(cartViewModel.ItemsCount);
+
+                foreach (var item in cartViewModel.Items)
+                {
+                    for (int i = item.Value; i > 0; i--)
+                        products.Add(item.Key);
+                }
+
+                //createOrder.OrderItems = _mapper.Map<OrderItem>(products)
+
+                var orderResult = _ordersData.CreateOrder(createOrder,
                     User.Identity.Name);
-                _cartService.RemoveAll();
+
+                //_cartService.RemoveAll();
+
                 return RedirectToAction("OrderConfirmed", new { id = orderResult.Id });
             }
             var detailsModel = new DetailsViewModel()

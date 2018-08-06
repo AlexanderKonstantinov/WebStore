@@ -46,13 +46,13 @@ namespace WebStore
                     }
 
                     var userStore = new UserStore<User>(context);
-                    var userManager = new UserManager<User>(userStore, 
+                    var userManager = new UserManager<User>(userStore,
                         new OptionsManager<IdentityOptions>(
                             new OptionsFactory<IdentityOptions>(
                                 new IConfigureOptions<IdentityOptions>[] { },
                                 new IPostConfigureOptions<IdentityOptions>[] { })),
                         new PasswordHasher<User>(),
-                        new IUserValidator<User>[] { }, 
+                        new IUserValidator<User>[] { },
                         new IPasswordValidator<User>[] { },
                         new UpperInvariantLookupNormalizer(),
                         new IdentityErrorDescriber(), null, null);

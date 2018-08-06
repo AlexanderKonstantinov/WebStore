@@ -12,3 +12,14 @@ D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.Servic
 D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.dll
 D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.pdb
 D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.csprojAssemblyReference.cache
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.DAL.dll
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Domain.dll
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Interfaces.dll
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Services.dll
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.DAL.pdb
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Domain.pdb
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Interfaces.pdb
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Services.pdb
+D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.csproj.CopyComplete
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Clients.dll
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Clients.pdb

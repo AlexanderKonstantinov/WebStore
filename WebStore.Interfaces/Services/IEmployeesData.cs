@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using WebStore.Domain.Entities;
+using WebStore.Domain.Models;
 
 namespace WebStore.Interfaces.Services
 {
@@ -34,9 +35,11 @@ namespace WebStore.Interfaces.Services
         void Delete(int id);
 
         /// <summary>
-        /// Editing employee
+        /// Update employee
         /// </summary>
-        /// <param name="employee">correct model of employee</param>
-        void Edit(Employee employee);
+        /// <param name="id">emloyee Id</param>
+        /// <param name="newEmployee">new employee</param>
+        /// <returns>updated employee</returns>
+        Employee Edit(int id, Employee newEmployee);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Services;
 
@@ -8,10 +9,12 @@ namespace WebStore.ViewComponents
 {
     public class SectionsViewComponent : ViewComponent
     {
+        private readonly IMapper _mapper;
         private IProductData _productData;
 
-        public SectionsViewComponent(IProductData productData)
+        public SectionsViewComponent(IProductData productData, IMapper mapper)
         {
+            _mapper = mapper;
             _productData = productData;
         }
 

@@ -46,22 +46,24 @@ namespace WebStore.Services.Sql
             _context.SaveChanges();
         }
 
-        public void Edit(Employee employee)
+        public Employee Edit(int id, Employee newEmployee)
         {
-            var oldEmployee = GetById(employee.Id);
+            var employee = GetById(newEmployee.Id);
 
-            if (oldEmployee is null)
+            if (employee is null)
                 throw new Exception("Пользователь не найден");
 
-            oldEmployee.Age = employee.Age;
-            oldEmployee.FirstName = employee.FirstName;
-            oldEmployee.SecondName = employee.SecondName;
-            oldEmployee.Patronymic = employee.Patronymic;
-            oldEmployee.IsMan = employee.IsMan;
-            oldEmployee.Position = employee.Position;
-            oldEmployee.SecretName = employee.SecretName;
+            employee.Age = newEmployee.Age;
+            employee.FirstName = newEmployee.FirstName;
+            employee.SecondName = newEmployee.SecondName;
+            employee.Patronymic = newEmployee.Patronymic;
+            employee.IsMan = newEmployee.IsMan;
+            employee.Position = newEmployee.Position;
+            employee.SecretName = newEmployee.SecretName;
 
             _context.SaveChanges();
+
+            return employee;
         }
     }
 }

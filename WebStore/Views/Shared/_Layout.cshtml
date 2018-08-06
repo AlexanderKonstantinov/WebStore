@@ -11,9 +11,9 @@
 
     @await Html.PartialAsync("Partial/_Header")
     
-    @await RenderSectionAsync("top", false)
-    
     <div class="container">
+        @await RenderSectionAsync("top", false)
+
         @RenderBody()
     </div>
 

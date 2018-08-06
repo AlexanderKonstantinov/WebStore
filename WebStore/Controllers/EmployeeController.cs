@@ -67,7 +67,6 @@ namespace WebStore.Controllers
                     return NotFound();
 
                 employeeModel = _mapper.Map<EmployeeViewModel>(employee);
-
             }
             else
                 employeeModel = new EmployeeViewModel();
@@ -78,7 +77,7 @@ namespace WebStore.Controllers
         /// <summary>
         /// Redirecting EmployeeList View after additing or editing employee
         /// </summary>
-        /// <param name="model">employee model</param>
+        /// <param name="employeeModel">employee model</param>
         /// <returns>EmployeeList html page</returns>
         [HttpPost]
         [Route("employee_edit/{id?}")]
@@ -96,7 +95,7 @@ namespace WebStore.Controllers
 
                     var  employeeEdit = _mapper.Map<Employee>(employeeModel);
 
-                    _employeesData.Edit(employeeEdit);
+                    _employeesData.Edit(employeeEdit.Id, employeeEdit);
                 }
                 else
                 {

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
-using WebStore.Domain.Entities;
+using WebStore.Domain.Dto.Product;
 using WebStore.Domain.Filters;
 using WebStore.Interfaces.Services;
 
@@ -14,24 +15,27 @@ namespace WebStore.Services.Sql
     /// </summary>
     public class SqlProductData : IProductData
     {
+        private readonly IMapper _mapper;
         private readonly WebStoreContext _context;
 
-        public SqlProductData(WebStoreContext context)
+        public SqlProductData(WebStoreContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Brand> GetBrands()
-            => _context.Brands.ToList();
+        public IEnumerable<BrandDto> GetBrands()
+        {
+            var brands = _mapper.Map<IEnumerable<BrandDto>>(_context.Brands.ToList());
 
-        public IEnumerable<Product> GetProducts()
-            => _context.Products.ToList();
+            return brands;
+        }
 
-        public IEnumerable<Product> GetProducts(ProductFilter filter)
+        public IEnumerable<ProductDto> GetProducts(ProductFilter filter)
         {
             var query = _context.Products
-                .Include(nameof(Brand))
-                .Include(nameof(Section))
+                .Include("Brand")
+                .Include("Section")
                 .AsQueryable();
 
             if (filter.BrandId.HasValue)
@@ -44,20 +48,29 @@ namespace WebStore.Services.Sql
             if (filter.Ids != null && filter.Ids.Count > 0)
                 query = query.Where(p => filter.Ids.Contains(p.Id));
 
-            return query.ToList();
+            var products = _mapper.Map<IEnumerable<ProductDto>>(_context.Products.ToList());
+
+            return products;
         }
 
-        public IEnumerable<Section> GetSections()
-            => _context.Sections.ToList();
-        
+        public IEnumerable<SectionDto> GetSections()
+        {
+            var sections = _mapper.Map<IEnumerable<SectionDto>>(_context.Sections.ToList());
+
+            return sections;
+        }
+
         public int GetBrandProductCount(int id)
             => _context.Products.Count(p => p.BrandId.HasValue && p.BrandId.Value == id);
 
-        public Product GetProductById(int id)
-            => _context.Products
-                .Include(nameof(Brand))
-                .Include(nameof(Section))
-                .AsQueryable()
-                .FirstOrDefault(p => p.Id == id);
+        public ProductDto GetProductById(int id)
+        {
+            var product = _mapper.Map<ProductDto>(_context.Products
+                .Include("Brand")
+                .Include("Section")
+                .FirstOrDefault(p => p.Id == id));
+
+            return product;
+        }
     }
 }

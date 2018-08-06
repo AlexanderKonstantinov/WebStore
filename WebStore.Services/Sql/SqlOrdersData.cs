@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
+using WebStore.Domain.Dto.Order;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Models.Cart;
 using WebStore.Domain.Models.Order;
@@ -11,31 +13,34 @@ using WebStore.Interfaces.Services;
 
 namespace WebStore.Services.Sql
 {
-    public class SqlOrdersService : IOrdersService
+    public class SqlOrdersData : IOrdersData
     {
+        private readonly IMapper _mapper;
         private readonly WebStoreContext _context;
         private readonly UserManager<User> _userManager;
 
-        public SqlOrdersService(WebStoreContext context, UserManager<User> userManager)
+        public SqlOrdersData(WebStoreContext context, UserManager<User> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Order> GetUserOrders(string userName)
+        public IEnumerable<OrderDto> GetUserOrders(string userName)
         {
-            return _context.Orders.Include("User").Include("OrderItems").Where(o =>
-                o.User.UserName.Equals(userName)).ToList();
+            return _mapper.Map<IEnumerable<OrderDto>>(
+                _context.Orders.Include("User").Include("OrderItems")
+                    .Where(o => o.User.UserName.Equals(userName)));
         }
 
-        public Order GetOrderById(int id)
+        public OrderDto GetOrderById(int id)
         {
-            return _context.Orders.Include("OrderItems").FirstOrDefault(o => o.Id.Equals(id));
+            return _mapper.Map<OrderDto>(
+                _context.Orders.Include("OrderItems")
+                    .FirstOrDefault(o => o.Id.Equals(id)));
         }
 
-        public Order CreateOrder(OrderViewModel orderModel,
-            CartViewModel transformCart,
-            string userName)
+        public OrderDto CreateOrder(CreateOrderModel orderModel, string userName)
         {
             User user = null;
 
@@ -44,20 +49,13 @@ namespace WebStore.Services.Sql
 
             using (var transaction = _context.Database.BeginTransaction())
             {
-                var order = new Order()
-                {
-                    Address = orderModel.Address,
-                    Name = orderModel.Name,
-                    Date = DateTime.Now,
-                    Phone = orderModel.Phone,
-                    User = user
-                };
+                var order = _mapper.Map<Order>(orderModel);
+
                 _context.Orders.Add(order);
 
-                foreach (var item in transformCart.Items)
+                foreach (var item in orderModel.OrderItems)
                 {
-                    var productVm = item.Key;
-                    var product = _context.Products.FirstOrDefault(p => p.Id.Equals(productVm.Id));
+                    var product = _context.Products.FirstOrDefault(p => p.Id.Equals(item.Id));
 
                     if (product == null)
                         throw new InvalidOperationException("Продукт не найден в базе");
@@ -66,7 +64,7 @@ namespace WebStore.Services.Sql
                     {
                         Order = order,
                         Price = product.Price,
-                        Quantity = item.Value,
+                        Quantity = item.Quantity,
                         Product = product
                     };
                     _context.OrderItems.Add(orderItem);
@@ -74,7 +72,8 @@ namespace WebStore.Services.Sql
 
                 _context.SaveChanges();
                 transaction.Commit();
-                return order;
+
+                return GetOrderById(order.Id);
             }
         }
     }
