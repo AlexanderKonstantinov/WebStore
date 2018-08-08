@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
 using WebStore.Domain.Dto.Order;
 using WebStore.Domain.Entities;
-using WebStore.Domain.Models.Cart;
-using WebStore.Domain.Models.Order;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Services.Sql
@@ -49,7 +47,14 @@ namespace WebStore.Services.Sql
 
             using (var transaction = _context.Database.BeginTransaction())
             {
-                var order = _mapper.Map<Order>(orderModel);
+                var order = new Order()
+                {
+                    Address = orderModel.OrderViewModel.Address,
+                    Name = orderModel.OrderViewModel.Name,
+                    Date = DateTime.Now,
+                    Phone = orderModel.OrderViewModel.Phone,
+                    User = user
+                };
 
                 _context.Orders.Add(order);
 

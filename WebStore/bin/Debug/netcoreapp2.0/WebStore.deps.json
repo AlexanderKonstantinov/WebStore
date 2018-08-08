@@ -30,7 +30,6 @@
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2",
           "WebStore.Clients": "1.0.0",
-          "WebStore.DAL": "1.0.0",
           "WebStore.Domain": "1.0.0",
           "WebStore.Interfaces": "1.0.0",
           "WebStore.Services": "1.0.0"

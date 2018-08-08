@@ -68,28 +68,24 @@ namespace WebStore.Controllers
             {
                 var createOrder = new CreateOrderModel
                 {
-                    Address = model.Address,
-                    Name = model.Name,
-                    Phone = model.Phone,
-                    Date = DateTime.Now
+                    OrderViewModel = model,
+                    OrderItems = new List<OrderItemDto>()
                 };
 
-                var cartViewModel = _cartService.TransformCart();
-
-                var products = new List<ProductViewModel>(cartViewModel.ItemsCount);
-
-                foreach (var item in cartViewModel.Items)
+                foreach (var orderItem in _cartService.TransformCart().Items)
                 {
-                    for (int i = item.Value; i > 0; i--)
-                        products.Add(item.Key);
+                    createOrder.OrderItems.Add(new OrderItemDto()
+                    {
+                        Id = orderItem.Key.Id,
+                        Price = orderItem.Key.Price,
+                        Quantity = orderItem.Value
+                    });
                 }
-
-                //createOrder.OrderItems = _mapper.Map<OrderItem>(products)
 
                 var orderResult = _ordersData.CreateOrder(createOrder,
                     User.Identity.Name);
 
-                //_cartService.RemoveAll();
+                _cartService.RemoveAll();
 
                 return RedirectToAction("OrderConfirmed", new { id = orderResult.Id });
             }

@@ -9,13 +9,16 @@ namespace WebStore.ServicesHosting.Controllers
 {
     [Route("api/roles"),
     Produces("application/json")]
-    public class RolesController : Controller
+    public class RolesApiController : Controller
     {
         private readonly RoleStore<IdentityRole> _roleStore;
 
-        public RolesController(WebStoreContext context)
+        public RolesApiController(WebStoreContext context)
         {
-            _roleStore = new RoleStore<IdentityRole>(context);
+            _roleStore = new RoleStore<IdentityRole>(context)
+            {
+                AutoSaveChanges = true
+            };
         }
 
         [HttpPost]

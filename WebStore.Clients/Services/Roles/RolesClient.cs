@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using WebStore.Clients.Base;
 
-namespace WebStore.Clients.Services.Users
+namespace WebStore.Clients.Services.Roles
 {
     public class RolesClient : BaseClient, IRoleStore<IdentityRole>
     {

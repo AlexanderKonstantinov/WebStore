@@ -4,7 +4,7 @@ using System.Linq;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 
-namespace WebStore.Data
+namespace WebStore.ServicesHosting.Data
 {
     public static class DbInitializer
     {

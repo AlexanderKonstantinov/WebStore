@@ -48,7 +48,7 @@ namespace WebStore.Services.Sql
             if (filter.Ids != null && filter.Ids.Count > 0)
                 query = query.Where(p => filter.Ids.Contains(p.Id));
 
-            var products = _mapper.Map<IEnumerable<ProductDto>>(_context.Products.ToList());
+            var products = _mapper.Map<IEnumerable<ProductDto>>(query);
 
             return products;
         }

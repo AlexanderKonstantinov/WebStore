@@ -31,7 +31,7 @@ namespace WebStore.Helpers
 
             CreateMap<ProductDto, ProductViewModel>();
 
-            CreateMap<BrandDto, BrandViewModel >()
+            CreateMap<BrandDto, BrandViewModel>()
                 .ForMember(nameof(BrandViewModel.ProductsCount),
                     opt => opt.MapFrom(p => 0));
 
@@ -40,7 +40,6 @@ namespace WebStore.Helpers
             CreateMap<OrderDto, UserOrderViewModel>()
                 .ForMember(nameof(UserOrderViewModel.TotalSum),
                     opt => opt.MapFrom(p => p.OrderItems.Sum(i => i.Price)));
-
 
             CreateMap<Brand, BrandDto>();
 

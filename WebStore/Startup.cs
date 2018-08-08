@@ -4,21 +4,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebStore.Clients;
 using WebStore.Clients.Services.Employees;
 using WebStore.Clients.Services.Orders;
 using WebStore.Clients.Services.Products;
+using WebStore.Clients.Services.Roles;
 using WebStore.Clients.Services.Users;
-using WebStore.DAL.Context;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 using WebStore.Services;
-using WebStore.Services.Sql;
-using WebStore.Services.CustomIdentity;
 
 namespace WebStore
 {
@@ -33,47 +30,76 @@ namespace WebStore
         
         public void ConfigureServices(IServiceCollection services)
         {
+            // Добавляем сервисы, необходимые для mvc
             services.AddMvc();            
             
+            // Настройка корзины
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICartService, CookieCartService>();
 
-            services.AddDbContext<WebStoreContext>(options => options.UseSqlServer(
-                _configuration.GetConnectionString("DefaultConnection")));
-
+            // Добавляем реализацию клиента
             services.AddTransient<IValuesService, ValuesClient>();
             services.AddTransient<IEmployeesData, EmployeesClient>();
             services.AddTransient<IProductData, ProductsClient>();
             services.AddTransient<IOrdersData, OrdersClient>();
-            services.AddTransient<IUsersClient, UsersClient>();
+            
 
+            
+            // Настройка Identity
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<WebStoreContext>()
                 .AddDefaultTokenProviders();
 
-            //services.AddTransient<IUserStore<User>, CustomUserStore>();
-            //services.AddTransient<IUserRoleStore<User>, CustomUserStore>();
-            //services.AddTransient<IUserClaimStore<User>, CustomUserStore>();
-            //services.AddTransient<IUserPasswordStore<User>, CustomUserStore>();
-            //services.AddTransient<IUserTwoFactorStore<User>, CustomUserStore>();
-            //services.AddTransient<IUserEmailStore<User>, CustomUserStore>();
-            //services.AddTransient<IUserPhoneNumberStore<User>,CustomUserStore>();
-            //services.AddTransient<IUserLoginStore<User>, CustomUserStore>();
-            //services.AddTransient<IUserLockoutStore<User>, CustomUserStore>();
+            #region original
+
+            services.AddTransient<IUsersClient, UsersClient>();
+
+            services.AddTransient<IUserStore<User>, UsersClient>();
+            services.AddTransient<IUserRoleStore<User>, UsersClient>();
+            services.AddTransient<IUserClaimStore<User>, UsersClient>();
+            services.AddTransient<IUserPasswordStore<User>, UsersClient>();
+            services.AddTransient<IUserTwoFactorStore<User>, UsersClient>();
+            services.AddTransient<IUserEmailStore<User>, UsersClient>();
+            services.AddTransient<IUserPhoneNumberStore<User>, UsersClient>();
+            services.AddTransient<IUserLoginStore<User>, UsersClient>();
+            services.AddTransient<IUserLockoutStore<User>, UsersClient>();
+            services.AddTransient<IRoleStore<IdentityRole>, RolesClient>();
+
+            #endregion
+
+
+            #region alternative
+
+            //services.AddSingleton<IUserStore<User>, BaseUserStoreClient>();
+            //services.AddTransient<IUserRoleStore<User>, UserRoleClient>();
+            //services.AddTransient<IUserClaimStore<User>, UserClaimClient>();
+            //services.AddSingleton<IUserPasswordStore<User>, UserPasswordClient>();
+            //services.AddTransient<IUserTwoFactorStore<User>, UserTwoFactorClient>();
+            //services.AddTransient<IUserEmailStore<User>, UserEmailClient>();
+            //services.AddTransient<IUserPhoneNumberStore<User>, UserPhoneNumberClient>();
+            //services.AddTransient<IUserLoginStore<User>, UserLoginClient>();
+            //services.AddTransient<IUserLockoutStore<User>, UserLockoutClient>();
             //services.AddTransient<IRoleStore<IdentityRole>, RolesClient>();
+
+            #endregion
+
 
             services.Configure<IdentityOptions>(options =>
             {
+                // Password settings
                 options.Password.RequireNonAlphanumeric = false;
 
+                // Lockout settings
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                 options.Lockout.MaxFailedAccessAttempts = 10;
                 options.Lockout.AllowedForNewUsers = true;
 
+                // User settings
                 options.User.RequireUniqueEmail = true;
             });
+
             services.ConfigureApplicationCookie(options =>
             {
+                // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Expiration = TimeSpan.FromDays(150);
                 options.LoginPath = "/Account/Login";
