@@ -3,25 +3,17 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using WebStore.Domain.Dto.User;
 using WebStore.Domain.Entities;
 
 namespace WebStore.Clients.Services.Users
 {
-    public class UserLockoutClient : BaseUserStoreClient, IUserLockoutStore<User>
+    public partial class UsersClient : IUserLockoutStore<User>
     {
-        protected sealed override string ServiceAddress { get; set; }
-
-        public UserLockoutClient(IConfiguration configuration) : base(configuration)
-        {
-            ServiceAddress = "api/users/lockout";
-        }
-
         public async Task<DateTimeOffset?> GetLockoutEndDateAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/getLockoutEndDate";
+            var url = $"{ServiceAddress}/lockout/getLockoutEndDate";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<DateTimeOffset?>();
         }
@@ -30,7 +22,7 @@ namespace WebStore.Clients.Services.Users
             lockoutEnd, CancellationToken cancellationToken)
         {
             user.LockoutEnd = lockoutEnd;
-            var url = $"{ServiceAddress}/setLockoutEndDate";
+            var url = $"{ServiceAddress}/lockout/setLockoutEndDate";
             return PostAsync(url, new SetLockoutDto()
             {
                 User = user,
@@ -42,7 +34,7 @@ namespace WebStore.Clients.Services.Users
         public async Task<int> IncrementAccessFailedCountAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/IncrementAccessFailedCount";
+            var url = $"{ServiceAddress}/lockout/IncrementAccessFailedCount";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<int>();
         }
@@ -50,14 +42,14 @@ namespace WebStore.Clients.Services.Users
         public Task ResetAccessFailedCountAsync(User user, CancellationToken
             cancellationToken)
         {
-            var url = $"{ServiceAddress}/ResetAccessFailedCount";
+            var url = $"{ServiceAddress}/lockout/ResetAccessFailedCount";
             return PostAsync(url, user);
         }
 
         public async Task<int> GetAccessFailedCountAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/GetAccessFailedCount";
+            var url = $"{ServiceAddress}/lockout/GetAccessFailedCount";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<int>();
         }
@@ -65,7 +57,7 @@ namespace WebStore.Clients.Services.Users
         public async Task<bool> GetLockoutEnabledAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/GetLockoutEnabled";
+            var url = $"{ServiceAddress}/lockout/GetLockoutEnabled";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<bool>();
         }
@@ -74,7 +66,7 @@ namespace WebStore.Clients.Services.Users
             CancellationToken cancellationToken)
         {
             user.LockoutEnabled = enabled;
-            var url = $"{ServiceAddress}/SetLockoutEnabled/{enabled}";
+            var url = $"{ServiceAddress}/lockout/SetLockoutEnabled/{enabled}";
             await PostAsync(url, user);
         }
     }

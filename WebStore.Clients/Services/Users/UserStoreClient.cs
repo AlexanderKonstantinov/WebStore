@@ -8,25 +8,25 @@ using WebStore.Domain.Entities;
 
 namespace WebStore.Clients.Services.Users
 {
-    public class BaseUserStoreClient : BaseClient, IUserStore<User>
+    public partial class UsersClient : BaseClient, IUserStore<User>
     {
-        protected override string ServiceAddress { get; set; }
+        protected sealed override string ServiceAddress { get; set; }
         
-        public BaseUserStoreClient(IConfiguration configuration) : base(configuration)
+        public UsersClient(IConfiguration configuration) : base(configuration)
         {
-            ServiceAddress = "api/users/user";
+            ServiceAddress = "api/users";
         }
 
         public async Task<string> GetUserIdAsync(User user, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/userId";
+            var url = $"{ServiceAddress}/user/userId";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<string>();
         }
 
         public async Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/userName";
+            var url = $"{ServiceAddress}/user/userName";
             var result = await PostAsync(url, user);
             var ret = await result.Content.ReadAsAsync<string>();
             return ret;
@@ -35,13 +35,13 @@ namespace WebStore.Clients.Services.Users
         public Task SetUserNameAsync(User user, string userName, CancellationToken cancellationToken)
         {
             user.UserName = userName;
-            var url = $"{ServiceAddress}/userName/{userName}";
+            var url = $"{ServiceAddress}/user/userName/{userName}";
             return PostAsync(url, user);
         }
 
         public async Task<string> GetNormalizedUserNameAsync(User user, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/normalUserName";
+            var url = $"{ServiceAddress}/user/normalUserName";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<string>();
         }
@@ -49,13 +49,13 @@ namespace WebStore.Clients.Services.Users
         public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
         {
             user.NormalizedUserName = normalizedName;
-            var url = $"{ServiceAddress}/normal/{normalizedName}";
+            var url = $"{ServiceAddress}/user/normal/{normalizedName}";
             return PostAsync(url, user);
         }
 
         public async Task<IdentityResult> CreateAsync(User user, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}";
+            var url = $"{ServiceAddress}/user";
             var result = await PostAsync(url, user);
             var ret = await result.Content.ReadAsAsync<bool>();
             return ret ? IdentityResult.Success : IdentityResult.Failed();
@@ -64,7 +64,7 @@ namespace WebStore.Clients.Services.Users
 
         public async Task<IdentityResult> UpdateAsync(User user, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}";
+            var url = $"{ServiceAddress}/user";
             var result = await PutAsync(url, user);
             var ret = await result.Content.ReadAsAsync<bool>();
             return ret ? IdentityResult.Success : IdentityResult.Failed();
@@ -72,7 +72,7 @@ namespace WebStore.Clients.Services.Users
 
         public async Task<IdentityResult> DeleteAsync(User user, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/{user.Id}";
+            var url = $"{ServiceAddress}/user/{user.Id}";
             var result = await DeleteAsync(url);
             var ret = await result.Content.ReadAsAsync<bool>();
             return ret ? IdentityResult.Success : IdentityResult.Failed();
@@ -80,13 +80,13 @@ namespace WebStore.Clients.Services.Users
 
         public Task<User> FindByIdAsync(string userId, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/{userId}";
+            var url = $"{ServiceAddress}/user/{userId}";
             return GetAsync<User>(url);
         }
 
         public async Task<User> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/normal/{normalizedUserName}";
+            var url = $"{ServiceAddress}/user/normal/{normalizedUserName}";
             var result = await GetAsync<User>(url);
             return result;
         }

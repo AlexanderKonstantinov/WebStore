@@ -4,38 +4,30 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using WebStore.Domain.Entities;
 
 namespace WebStore.Clients.Services.Users
 {
-    public class UserRoleClient : BaseUserStoreClient, IUserRoleStore<User>
+    public partial class UsersClient : IUserRoleStore<User>
     {
-        protected sealed override string ServiceAddress { get; set; }
-
-        public UserRoleClient(IConfiguration configuration) : base(configuration)
-        {
-            ServiceAddress = "api/users/role";
-        }
-
         public Task AddToRoleAsync(User user, string roleName, CancellationToken
             cancellationToken)
         {
-            var url = $"{ServiceAddress}/role/{roleName}";
+            var url = $"{ServiceAddress}/role/role/{roleName}";
             return PostAsync(url, user);
         }
 
         public Task RemoveFromRoleAsync(User user, string roleName,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/delete/{roleName}";
+            var url = $"{ServiceAddress}/role/delete/{roleName}";
             return PostAsync(url, user);
         }
 
         public async Task<IList<string>> GetRolesAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/roles";
+            var url = $"{ServiceAddress}/role/roles";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<IList<string>>();
         }
@@ -43,7 +35,7 @@ namespace WebStore.Clients.Services.Users
         public async Task<bool> IsInRoleAsync(User user, string roleName,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/inrole/{roleName}";
+            var url = $"{ServiceAddress}/role/inrole/{roleName}";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<bool>();
         }
@@ -51,7 +43,7 @@ namespace WebStore.Clients.Services.Users
         public async Task<IList<User>> GetUsersInRoleAsync(string roleName,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/usersInRole/{roleName}";
+            var url = $"{ServiceAddress}/role/usersInRole/{roleName}";
             IList<User> result = await GetAsync<List<User>>(url);
             return result.ToList();
         }

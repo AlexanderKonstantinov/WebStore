@@ -3,25 +3,17 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using WebStore.Domain.Dto.User;
 using WebStore.Domain.Entities;
 
 namespace WebStore.Clients.Services.Users
 {
-    public class UserLoginClient : BaseUserStoreClient, IUserLoginStore<User>
+    public partial class UsersClient : IUserLoginStore<User>
     {
-        protected sealed override string ServiceAddress { get; set; }
-
-        public UserLoginClient(IConfiguration configuration) : base(configuration)
-        {
-            ServiceAddress = "api/users/login";
-        }
-
         public Task AddLoginAsync(User user, UserLoginInfo login,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/addLogin";
+            var url = $"{ServiceAddress}/login/addLogin";
             return PostAsync(url, new AddLoginDto()
             {
                 User = user,
@@ -33,14 +25,14 @@ namespace WebStore.Clients.Services.Users
             providerKey, CancellationToken cancellationToken)
         {
             var url =
-                $"{ServiceAddress}/removeLogin/{loginProvider}/{providerKey}";
+                $"{ServiceAddress}/login/removeLogin/{loginProvider}/{providerKey}";
             return PostAsync(url, user);
         }
 
         public async Task<IList<UserLoginInfo>> GetLoginsAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/getLogins";
+            var url = $"{ServiceAddress}/login/getLogins";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<List<UserLoginInfo>>();
         }
@@ -49,7 +41,7 @@ namespace WebStore.Clients.Services.Users
             providerKey, CancellationToken cancellationToken)
         {
             var url =
-                $"{ServiceAddress}/user/findbylogin/{loginProvider}/{providerKey}";
+                $"{ServiceAddress}/login/user/findbylogin/{loginProvider}/{providerKey}";
             return GetAsync<User>(url);
         }
     }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using WebStore.Clients;
 using WebStore.Clients.Services.Employees;
 using WebStore.Clients.Services.Orders;
@@ -15,6 +16,7 @@ using WebStore.Clients.Services.Users;
 using WebStore.Domain.Entities;
 using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
+using WebStore.Logger;
 using WebStore.Services;
 
 namespace WebStore
@@ -43,15 +45,10 @@ namespace WebStore
             services.AddTransient<IProductData, ProductsClient>();
             services.AddTransient<IOrdersData, OrdersClient>();
             
-
             
             // Настройка Identity
             services.AddIdentity<User, IdentityRole>()
                 .AddDefaultTokenProviders();
-
-            #region original
-
-            services.AddTransient<IUsersClient, UsersClient>();
 
             services.AddTransient<IUserStore<User>, UsersClient>();
             services.AddTransient<IUserRoleStore<User>, UsersClient>();
@@ -63,24 +60,6 @@ namespace WebStore
             services.AddTransient<IUserLoginStore<User>, UsersClient>();
             services.AddTransient<IUserLockoutStore<User>, UsersClient>();
             services.AddTransient<IRoleStore<IdentityRole>, RolesClient>();
-
-            #endregion
-
-
-            #region alternative
-
-            //services.AddSingleton<IUserStore<User>, BaseUserStoreClient>();
-            //services.AddTransient<IUserRoleStore<User>, UserRoleClient>();
-            //services.AddTransient<IUserClaimStore<User>, UserClaimClient>();
-            //services.AddSingleton<IUserPasswordStore<User>, UserPasswordClient>();
-            //services.AddTransient<IUserTwoFactorStore<User>, UserTwoFactorClient>();
-            //services.AddTransient<IUserEmailStore<User>, UserEmailClient>();
-            //services.AddTransient<IUserPhoneNumberStore<User>, UserPhoneNumberClient>();
-            //services.AddTransient<IUserLoginStore<User>, UserLoginClient>();
-            //services.AddTransient<IUserLockoutStore<User>, UserLockoutClient>();
-            //services.AddTransient<IRoleStore<IdentityRole>, RolesClient>();
-
-            #endregion
 
 
             services.Configure<IdentityOptions>(options =>
@@ -111,8 +90,10 @@ namespace WebStore
             services.AddAutoMapper();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddLog4Net("log4net.config");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

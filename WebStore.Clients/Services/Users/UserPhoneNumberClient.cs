@@ -2,32 +2,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using WebStore.Domain.Entities;
 
 namespace WebStore.Clients.Services.Users
 {
-    public class UserPhoneNumberClient : BaseUserStoreClient, IUserPhoneNumberStore<User>
+    public partial class UsersClient : IUserPhoneNumberStore<User>
     {
-        protected sealed override string ServiceAddress { get; set; }
-
-        public UserPhoneNumberClient(IConfiguration configuration) : base(configuration)
-        {
-            ServiceAddress = "api/users/phonenumber";
-        }
-
         public Task SetPhoneNumberAsync(User user, string phoneNumber,
             CancellationToken cancellationToken)
         {
             user.PhoneNumber = phoneNumber;
-            var url = $"{ServiceAddress}/setPhoneNumber/{phoneNumber}";
+            var url = $"{ServiceAddress}/phonenumber/setPhoneNumber/{phoneNumber}";
             return PostAsync(url, user);
         }
 
         public async Task<string> GetPhoneNumberAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/getPhoneNumber";
+            var url = $"{ServiceAddress}/phonenumber/getPhoneNumber";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<string>();
         }
@@ -35,7 +27,7 @@ namespace WebStore.Clients.Services.Users
         public async Task<bool> GetPhoneNumberConfirmedAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/getPhoneNumberConfirmed";
+            var url = $"{ServiceAddress}/phonenumber/getPhoneNumberConfirmed";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<bool>();
         }
@@ -44,7 +36,7 @@ namespace WebStore.Clients.Services.Users
             CancellationToken cancellationToken)
         {
             user.PhoneNumberConfirmed = confirmed;
-            var url = $"{ServiceAddress}/setPhoneNumberConfirmed/{confirmed}";
+            var url = $"{ServiceAddress}/phonenumber/setPhoneNumberConfirmed/{confirmed}";
             return PostAsync(url, user);
         }
     }

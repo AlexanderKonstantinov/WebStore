@@ -2,32 +2,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using WebStore.Domain.Entities;
 
 namespace WebStore.Clients.Services.Users
 {
-    public class UserEmailClient : BaseUserStoreClient, IUserEmailStore<User>
+    public partial class UsersClient : IUserEmailStore<User>
     {
-        protected sealed override string ServiceAddress { get; set; }
-
-        public UserEmailClient(IConfiguration configuration) : base(configuration)
-        {
-            ServiceAddress = "api/users/email";
-        }
-
         public Task SetEmailAsync(User user, string email, CancellationToken
             cancellationToken)
         {
             user.Email = email;
-            var url = $"{ServiceAddress}/setEmail/{email}";
+            var url = $"{ServiceAddress}/email/setEmail/{email}";
             return PostAsync(url, user);
         }
 
         public async Task<string> GetEmailAsync(User user, CancellationToken
             cancellationToken)
         {
-            var url = $"{ServiceAddress}/getEmail";
+            var url = $"{ServiceAddress}/email/getEmail";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<string>();
         }
@@ -35,7 +27,7 @@ namespace WebStore.Clients.Services.Users
         public async Task<bool> GetEmailConfirmedAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/getEmailConfirmed";
+            var url = $"{ServiceAddress}/email/getEmailConfirmed";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<bool>();
         }
@@ -44,21 +36,21 @@ namespace WebStore.Clients.Services.Users
             CancellationToken cancellationToken)
         {
             user.EmailConfirmed = confirmed;
-            var url = $"{ServiceAddress}/setEmailConfirmed/{confirmed}";
+            var url = $"{ServiceAddress}/email/setEmailConfirmed/{confirmed}";
             return PostAsync(url, user);
         }
 
         public Task<User> FindByEmailAsync(string normalizedEmail,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/user/findByEmail/{normalizedEmail}";
+            var url = $"{ServiceAddress}/email/user/findByEmail/{normalizedEmail}";
             return GetAsync<User>(url);
         }
 
         public async Task<string> GetNormalizedEmailAsync(User user,
             CancellationToken cancellationToken)
         {
-            var url = $"{ServiceAddress}/getNormalizedEmail";
+            var url = $"{ServiceAddress}/email/getNormalizedEmail";
             var result = await PostAsync(url, user);
             return await result.Content.ReadAsAsync<string>();
         }
@@ -67,7 +59,7 @@ namespace WebStore.Clients.Services.Users
             CancellationToken cancellationToken)
         {
             user.NormalizedEmail = normalizedEmail;
-            var url = $"{ServiceAddress}/setEmail/{normalizedEmail}";
+            var url = $"{ServiceAddress}/email/setEmail/{normalizedEmail}";
             return PostAsync(url, user);
         }
     }
