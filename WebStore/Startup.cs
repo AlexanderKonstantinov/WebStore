@@ -7,17 +7,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebStore.Clients;
 using WebStore.Clients.Services.Employees;
 using WebStore.Clients.Services.Orders;
 using WebStore.Clients.Services.Products;
 using WebStore.Clients.Services.Roles;
 using WebStore.Clients.Services.Users;
 using WebStore.Domain.Entities;
-using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 using WebStore.Logger;
 using WebStore.Services;
+using WebStore.Services.Middleware;
 
 namespace WebStore
 {
@@ -40,7 +39,6 @@ namespace WebStore
             services.AddTransient<ICartService, CookieCartService>();
 
             // Добавляем реализацию клиента
-            services.AddTransient<IValuesService, ValuesClient>();
             services.AddTransient<IEmployeesData, EmployeesClient>();
             services.AddTransient<IProductData, ProductsClient>();
             services.AddTransient<IOrdersData, OrdersClient>();
@@ -95,13 +93,17 @@ namespace WebStore
             loggerFactory.AddLog4Net("log4net.config");
 
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
+            else
+                app.UseExceptionHandler("/Home/Error");
 
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.UseStatusCodePagesWithRedirects("~/home/errorstatus/{0}");
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseMvc(routes =>
             {

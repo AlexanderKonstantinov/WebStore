@@ -23,3 +23,6 @@ D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Servic
 D:\Git\WebStore\WebStore.ServicesHosting\obj\Debug\netcoreapp2.1\WebStore.ServicesHosting.csproj.CopyComplete
 D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Clients.dll
 D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Clients.pdb
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\log4net.config
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Logger.dll
+D:\Git\WebStore\WebStore.ServicesHosting\bin\Debug\netcoreapp2.1\WebStore.Logger.pdb

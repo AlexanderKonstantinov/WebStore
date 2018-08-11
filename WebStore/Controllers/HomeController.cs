@@ -1,9 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using WebStore.Domain.Filters;
 using WebStore.Domain.Models.Product;
-using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
@@ -18,12 +17,9 @@ namespace WebStore.Controllers
 
         private readonly IProductData _productData;
 
-        private IValuesService _valuesService;
-
-        public HomeController(IProductData productData, IValuesService valuesService)
+        public HomeController(IProductData productData)
         {
             _productData = productData;
-            _valuesService = valuesService;
         }
 
         public IActionResult Index()
@@ -41,11 +37,21 @@ namespace WebStore.Controllers
             return View(model);
         }
 
+        public IActionResult ErrorStatus(string id)
+        {
+            if (id == "404")
+                return RedirectToAction("Page404");
+            return Content($"Статуcный код ошибки: {id}");
+        }
+
+        public IActionResult Error() => View();
+
+        public IActionResult Page404() => View();
+
+
         public IActionResult Blog() => View();
 
         public IActionResult BlogSingle() => View();
-
-        public IActionResult Page404() => View();
 
         public IActionResult Contact() => View();
     }

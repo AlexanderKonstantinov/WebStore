@@ -5026,7 +5026,8 @@
           "Newtonsoft.Json": "11.0.2",
           "WebStore.DAL": "1.0.0",
           "WebStore.Domain": "1.0.0",
-          "WebStore.Interfaces": "1.0.0"
+          "WebStore.Interfaces": "1.0.0",
+          "log4net": "2.0.8"
         },
         "compile": {
           "bin/placeholder/WebStore.Services.dll": {}
