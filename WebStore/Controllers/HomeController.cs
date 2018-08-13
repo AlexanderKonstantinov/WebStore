@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Filters;
 using WebStore.Domain.Models.Product;
+using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
@@ -13,26 +15,40 @@ namespace WebStore.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-        private const int IndexProductCount = 6;
+        //private const int IndexProductCount = 6;
 
-        private readonly IProductData _productData;
+        //private readonly IProductData _productData;
 
-        public HomeController(IProductData productData)
+        //public HomeController(IProductData productData)
+        //{
+        //    _productData = productData;
+        //}
+
+        //public IActionResult Index()
+        //{
+        //    var model = from p in _productData.GetProducts(new ProductFilter()).Take(IndexProductCount)
+        //                select new ProductViewModel
+        //                {
+        //                    Id = p.Id,
+        //                    ImageUrl = p.ImageUrl,
+        //                    Name = p.Name,
+        //                    Order = p.Order,
+        //                    Price = p.Price
+        //                };
+
+        //    return View(model);
+        //}
+
+        private readonly IValuesService _valuesService;
+
+        public HomeController(IValuesService valueService)
         {
-            _productData = productData;
+            _valuesService = valueService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var model = from p in _productData.GetProducts(new ProductFilter()).Take(IndexProductCount)
-                        select new ProductViewModel
-                        {
-                            Id = p.Id,
-                            ImageUrl = p.ImageUrl,
-                            Name = p.Name,
-                            Order = p.Order,
-                            Price = p.Price
-                        };
+            var model = await _valuesService.GetAsync();
 
             return View(model);
         }
@@ -54,5 +70,7 @@ namespace WebStore.Controllers
         public IActionResult BlogSingle() => View();
 
         public IActionResult Contact() => View();
+
+        public IActionResult Checkout() => View();
     }
 }

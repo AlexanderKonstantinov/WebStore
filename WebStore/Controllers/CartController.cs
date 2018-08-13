@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Dto.Order;
-using WebStore.Domain.Entities;
 using WebStore.Domain.Models.Cart;
 using WebStore.Domain.Models.Order;
-using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers

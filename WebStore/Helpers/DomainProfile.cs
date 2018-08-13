@@ -45,7 +45,10 @@ namespace WebStore.Helpers
 
             CreateMap<Section, SectionDto>();
 
-            CreateMap<Product, ProductDto>();
+            CreateMap<Product, ProductDto>()
+                .ForMember(nameof(ProductViewModel.Brand),
+                    opt => opt.MapFrom(p => p.Brand != null
+                        ? p.Brand.Name : String.Empty));
 
             CreateMap<Order, OrderDto>();
 

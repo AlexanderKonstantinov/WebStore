@@ -13,6 +13,7 @@ using WebStore.Domain.Entities;
 using WebStore.Interfaces.Services;
 using WebStore.Logger;
 using WebStore.Services;
+using WebStore.Services.Middleware;
 using WebStore.Services.Sql;
 
 namespace WebStore.ServicesHosting
@@ -61,6 +62,8 @@ namespace WebStore.ServicesHosting
             {
                 app.UseHsts();
             }
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseHttpsRedirection();
             app.UseMvc();

@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WebStore.Clients;
 using WebStore.Clients.Services.Employees;
 using WebStore.Clients.Services.Orders;
 using WebStore.Clients.Services.Products;
 using WebStore.Clients.Services.Roles;
 using WebStore.Clients.Services.Users;
 using WebStore.Domain.Entities;
+using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
 using WebStore.Logger;
 using WebStore.Services;
@@ -42,8 +44,9 @@ namespace WebStore
             services.AddTransient<IEmployeesData, EmployeesClient>();
             services.AddTransient<IProductData, ProductsClient>();
             services.AddTransient<IOrdersData, OrdersClient>();
-            
-            
+
+            services.AddTransient<IValuesService, ValuesClient>();
+
             // Настройка Identity
             services.AddIdentity<User, IdentityRole>()
                 .AddDefaultTokenProviders();

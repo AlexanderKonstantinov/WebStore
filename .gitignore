@@ -1,5 +1,6 @@
 *.vs
 /WebStore/obj
+/WebStore/Logs
 /WebStore/bower_components
 /visual studio 2017Templates
 /Eshopper
