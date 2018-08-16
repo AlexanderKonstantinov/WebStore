@@ -2,16 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebStore.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using WebStore.Domain.Entities;
-using WebStore.Domain.Models;
+using WebStore.Controllers;
 using WebStore.Interfaces.Clients;
-using WebStore.Interfaces.Services;
 using Assert = Xunit.Assert;
 
-namespace WebStore.Tests
+namespace WebStore.Tests.ModulTests
 {
     [TestClass]
     public class HomeControllerTests

@@ -30,19 +30,6 @@ namespace WebStore.Controllers
 
             var orderModels = _mapper.Map<IEnumerable<UserOrderViewModel>>(orders);
 
-            //var orderModels = new List<UserOrderViewModel>(orders.Count());
-
-            //foreach (var order in orders)
-            //{
-            //    orderModels.Add(new UserOrderViewModel()
-            //    {
-            //        Id = order.Id,
-            //        Name = order.Name,
-            //        Address = order.Address,
-            //        Phone = order.Phone,
-            //        TotalSum = order.OrderItems.Sum(o => o.Price * o.Quantity)
-            //    });
-            //}
             return View(orderModels);
         }
     }

@@ -49,6 +49,7 @@ namespace WebStore.Controllers
             _valuesService = valueService;
         }
 
+        [Route("index")]
         public async Task<IActionResult> Index()
         {
             var model = await _valuesService.GetAsync();

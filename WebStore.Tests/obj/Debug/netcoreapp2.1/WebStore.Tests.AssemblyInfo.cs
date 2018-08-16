@@ -11,6 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("WebStore.Clients, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Git\\WebStore\\WebStore.Clients", "WebStore.Clients.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("WebStore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Git\\WebStore\\WebStore", "WebStore.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("WebStore.Interfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Git\\WebStore\\WebStore.Interfaces", "WebStore.Interfaces.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("WebStore.Logger, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Git\\WebStore\\WebStore.Logger", "WebStore.Logger.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("WebStore.Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Git\\WebStore\\WebStore.Services", "WebStore.Services.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebStore.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

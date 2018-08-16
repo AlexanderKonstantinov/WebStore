@@ -4,7 +4,6 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using WebStore.Controllers;
 using WebStore.Domain.Dto.Product;
 using WebStore.Domain.Filters;
 using WebStore.Domain.Models.Cart;
@@ -13,7 +12,7 @@ using WebStore.Interfaces.Services;
 using WebStore.Services;
 using Assert = Xunit.Assert;
 
-namespace WebStore.Tests
+namespace WebStore.Tests.ModulTests
 {
     [TestClass]
     public class CartServiceTests

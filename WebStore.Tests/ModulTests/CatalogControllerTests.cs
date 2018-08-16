@@ -12,7 +12,7 @@ using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Services;
 using Assert = Xunit.Assert;
 
-namespace WebStore.Tests
+namespace WebStore.Tests.ModulTests
 {
     [TestClass]
     public class CatalogControllerTests
