@@ -11,11 +11,11 @@ namespace WebStore.Services.Sql
     /// Layer between EmployeeController and Database
     /// Responsible for getting, updating for controller and view data transfer to the database 
     /// </summary>
-    public class SqlEmployeesData : IEmployeesData
+    public class SqlEmployeesService : IEmployeesService
     {
         private readonly WebStoreContext _context;
 
-        public SqlEmployeesData(WebStoreContext context)
+        public SqlEmployeesService(WebStoreContext context)
         {
             _context = context;
         }

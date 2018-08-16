@@ -10,13 +10,11 @@ namespace WebStore.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly ICartService _cartService;
         private readonly IOrdersData _ordersData;
 
-        public CartController(ICartService cartService, IOrdersData ordersData, IMapper mapper)
+        public CartController(ICartService cartService, IOrdersData ordersData)
         {
-            _mapper = mapper;
             _cartService = cartService;
             _ordersData = ordersData;
         }

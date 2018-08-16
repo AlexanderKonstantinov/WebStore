@@ -2,7 +2,7 @@
 
 namespace WebStore.Domain.Dto.Product
 {
-    public class ProductDto : INamedEntity, IOrderedEntity
+    public class ProductDto : IOrderedEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,5 +11,6 @@ namespace WebStore.Domain.Dto.Product
         public decimal Price { get; set; }
         public BrandDto Brand { get; set; }
         public string Condition { get; set; }
+        public int Quantity { get; set; }
     }
 }

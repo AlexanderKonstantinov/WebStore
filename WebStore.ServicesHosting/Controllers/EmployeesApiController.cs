@@ -12,29 +12,29 @@ namespace WebStore.ServicesHosting.Controllers
     [Route("api/employees"),
     ApiController,
     Produces("application/json")]
-    public class EmployeesApiController : ControllerBase, IEmployeesData
+    public class EmployeesApiController : ControllerBase, IEmployeesService
     {
-        private readonly IEmployeesData _employeesData;
+        private readonly IEmployeesService _employeesService;
 
-        public EmployeesApiController(IEmployeesData employeesData)
+        public EmployeesApiController(IEmployeesService employeesService)
         {
-            _employeesData = employeesData;
+            _employeesService = employeesService;
         }
 
         [HttpGet, ActionName("Get")]
-        public IEnumerable<Employee> GetAll() => _employeesData.GetAll();
+        public IEnumerable<Employee> GetAll() => _employeesService.GetAll();
 
 
         [HttpGet("{id}"), ActionName("Get")]
-        public Employee GetById(int id) => _employeesData.GetById(id);
+        public Employee GetById(int id) => _employeesService.GetById(id);
 
         [HttpPost, ActionName("Post")]
-        public void AddNew([FromBody]Employee employee) => _employeesData.AddNew(employee);
+        public void AddNew([FromBody]Employee employee) => _employeesService.AddNew(employee);
 
         [HttpDelete("{id}")]
-        public void Delete(int id) => _employeesData.Delete(id);
+        public void Delete(int id) => _employeesService.Delete(id);
 
         [HttpPut("{id}"), ActionName("Put")]
-        public Employee Edit(int id, [FromBody]Employee newEmployee) => _employeesData.Edit(id, newEmployee);
+        public Employee Edit(int id, [FromBody]Employee newEmployee) => _employeesService.Edit(id, newEmployee);
     }
 }

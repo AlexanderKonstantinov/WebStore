@@ -43,7 +43,7 @@ namespace WebStore.Tests
         {
             // Arrange
             _productMock.Setup(p =>
-                p.GetProductById(It.IsAny<int>())).Returns(new ProductDto()
+                p.GetProductById(It.Is<int>(i => i == 1))).Returns(new ProductDto()
             {
                 Id = 1,
                 Name = "Test",
@@ -59,32 +59,22 @@ namespace WebStore.Tests
             });
 
             // Act
-            var result = _controller.ProductDetails(1);
+            var correctResult = _controller.ProductDetails(1);
+            var notFoundResult = _controller.ProductDetails(2);
 
             // Assert
-            var viewResult = Assert.IsType<ViewResult>(result);
+            var correctViewResult = Assert.IsType<ViewResult>(correctResult);
             var model = Assert.IsAssignableFrom<ProductViewModel>(
-                viewResult.ViewData.Model);
+                correctViewResult.ViewData.Model);
             Assert.Equal(1, model.Id);
             Assert.Equal("Test", model.Name);
             Assert.Equal(10, model.Price);
             Assert.Equal("TestBrand", model.Brand);
             Assert.Equal("new", model.Condition);
+
+           Assert.IsType<NotFoundResult>(notFoundResult);
         }
 
-        [TestMethod]
-        public void ProductDetails_Returns_NotFound()
-        {
-            // Arrange
-            _productMock.Setup(p =>
-                p.GetProductById(It.IsAny<int>())).Returns((ProductDto)null);
-
-            // Act
-            var result = _controller.ProductDetails(1);
-
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
-        }
         [TestMethod]
         public void Shop_Method_Returns_Correct_View()
         {

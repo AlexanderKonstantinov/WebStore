@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Filters;
+using WebStore.Domain.Models;
 using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Clients;
 using WebStore.Interfaces.Services;
@@ -69,7 +72,10 @@ namespace WebStore.Controllers
 
         public IActionResult BlogSingle() => View();
 
-        public IActionResult Contact() => View();
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
         public IActionResult Checkout() => View();
     }

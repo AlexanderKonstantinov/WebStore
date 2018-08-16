@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using WebStore.Domain.Entities;
+using WebStore.Domain.Models;
 using WebStore.Interfaces.Clients;
+using WebStore.Interfaces.Services;
 using Assert = Xunit.Assert;
 
 namespace WebStore.Tests
@@ -18,10 +21,11 @@ namespace WebStore.Tests
         [TestInitialize]
         public void SetupTest()
         {
-            var mockService = new Mock<IValuesService>();
-            mockService.Setup(c => c.GetAsync()).ReturnsAsync(new List<string> {
-                "1", "2" });
-            _controller = new HomeController(mockService.Object);
+            var mockValuesService = new Mock<IValuesService>();
+
+            mockValuesService.Setup(c => c.GetAsync()).ReturnsAsync(new List<string> {"1", "2" });
+            
+            _controller = new HomeController(mockValuesService.Object);
         }
 
         [TestMethod]
@@ -40,8 +44,8 @@ namespace WebStore.Tests
         [TestMethod]
         public void Contact_Returns_View()
         {
-            var result = _controller.Contact();
-            Assert.IsType<ViewResult>(result);
+            var viewResult = _controller.Contact();
+            Assert.IsType<ViewResult>(viewResult);
         }
 
         [TestMethod]

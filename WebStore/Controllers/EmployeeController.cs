@@ -15,12 +15,12 @@ namespace WebStore.Controllers
     public class EmployeeController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IEmployeesData _employeesData;
+        private readonly IEmployeesService _employeesService;
 
-        public EmployeeController(IEmployeesData employeesData, IMapper mapper)
+        public EmployeeController(IEmployeesService employeesService, IMapper mapper)
         {
             _mapper = mapper;
-            _employeesData = employeesData;
+            _employeesService = employeesService;
         }
 
 
@@ -31,7 +31,7 @@ namespace WebStore.Controllers
         [Route("employees")]
         public IActionResult EmployeeList()
         {
-            var employees = _mapper.Map<IEnumerable<EmployeeViewModel>>(_employeesData.GetAll());
+            var employees = _mapper.Map<IEnumerable<EmployeeViewModel>>(_employeesService.GetAll());
 
             return View(employees);
         } 
@@ -43,7 +43,7 @@ namespace WebStore.Controllers
         [Route("employees/{id}")]
         public IActionResult EmployeeDetails(int id)
         {
-            var employeeModel = _mapper.Map<EmployeeViewModel>(_employeesData.GetById(id));
+            var employeeModel = _mapper.Map<EmployeeViewModel>(_employeesService.GetById(id));
 
             return View(employeeModel);
         }
@@ -61,7 +61,7 @@ namespace WebStore.Controllers
 
             if (id.HasValue)
             {
-                var employee = _employeesData.GetById(id.Value);
+                var employee = _employeesService.GetById(id.Value);
 
                 if (employee is null)
                     return NotFound();
@@ -88,20 +88,20 @@ namespace WebStore.Controllers
             {
                 if (employeeModel.Id > 0)
                 {
-                    var employee = _employeesData.GetById(employeeModel.Id);
+                    var employee = _employeesService.GetById(employeeModel.Id);
 
                     if (employee is null)
                         return NotFound();
 
                     var  employeeEdit = _mapper.Map<Employee>(employeeModel);
 
-                    _employeesData.Edit(employeeEdit.Id, employeeEdit);
+                    _employeesService.Edit(employeeEdit.Id, employeeEdit);
                 }
                 else
                 {
                     var employeeNew = _mapper.Map<EmployeeViewModel, Employee>(employeeModel);
 
-                    _employeesData.AddNew(employeeNew);
+                    _employeesService.AddNew(employeeNew);
                 }
                 return RedirectToAction(nameof(EmployeeList));
             }
@@ -118,7 +118,7 @@ namespace WebStore.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Delete(int id)
         {
-            _employeesData.Delete(id);
+            _employeesService.Delete(id);
             return RedirectToAction(nameof(EmployeeList));
         }
     }

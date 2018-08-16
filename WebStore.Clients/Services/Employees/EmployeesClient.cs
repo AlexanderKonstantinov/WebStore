@@ -9,7 +9,7 @@ using WebStore.Interfaces.Services;
 
 namespace WebStore.Clients.Services.Employees
 {
-    public class EmployeesClient : BaseClient, IEmployeesData
+    public class EmployeesClient : BaseClient, IEmployeesService
     {
         protected sealed override string ServiceAddress { get; set; }
 

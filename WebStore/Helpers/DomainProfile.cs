@@ -14,6 +14,7 @@ namespace WebStore.Helpers
     {
         public DomainProfile()
         {
+            // <inputType, outputType>
             CreateMap<Employee, EmployeeViewModel>()
                 .ForMember(nameof(EmployeeViewModel.Gender),
                     opt => opt.MapFrom(e => e.IsMan 
@@ -29,7 +30,10 @@ namespace WebStore.Helpers
                         ? p.Brand.Name : String.Empty));
             
 
-            CreateMap<ProductDto, ProductViewModel>();
+            CreateMap<ProductDto, ProductViewModel>()
+                .ForMember(nameof(ProductDto.Brand),
+                    opt => opt.MapFrom(p => p.Brand != null
+                        ? p.Brand.Name : String.Empty));
 
             CreateMap<BrandDto, BrandViewModel>()
                 .ForMember(nameof(BrandViewModel.ProductsCount),
@@ -45,10 +49,7 @@ namespace WebStore.Helpers
 
             CreateMap<Section, SectionDto>();
 
-            CreateMap<Product, ProductDto>()
-                .ForMember(nameof(ProductViewModel.Brand),
-                    opt => opt.MapFrom(p => p.Brand != null
-                        ? p.Brand.Name : String.Empty));
+            CreateMap<Product, ProductDto>();
 
             CreateMap<Order, OrderDto>();
 

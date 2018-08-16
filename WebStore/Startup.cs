@@ -38,10 +38,11 @@ namespace WebStore
             
             // Настройка корзины
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<ICartService, CookieCartService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<ICartStore, CookiesCartStore>();
 
             // Добавляем реализацию клиента
-            services.AddTransient<IEmployeesData, EmployeesClient>();
+            services.AddTransient<IEmployeesService, EmployeesClient>();
             services.AddTransient<IProductData, ProductsClient>();
             services.AddTransient<IOrdersData, OrdersClient>();
 

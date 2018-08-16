@@ -41,12 +41,12 @@ namespace WebStore.ServicesHosting
                 .AddEntityFrameworkStores<WebStoreContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<IEmployeesData, SqlEmployeesData>();
+            services.AddTransient<IEmployeesService, SqlEmployeesService>();
             services.AddTransient<IProductData, SqlProductData>();
             services.AddTransient<IOrdersData, SqlOrdersData>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<ICartService, CookieCartService>();
+            services.AddTransient<ICartService, CartService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
