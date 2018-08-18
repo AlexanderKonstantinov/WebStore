@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebStore.Controllers;
 using WebStore.Domain.Dto.Order;
-using WebStore.Domain.Models.Cart;
 using WebStore.Domain.Models.Order;
-using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Services;
 using Assert = Xunit.Assert;
 
@@ -54,38 +50,13 @@ namespace WebStore.Tests.ModulTests
         [TestMethod]
         public void ProductList_Returns_View_With_Correct_Item()
         {
+            // Arrange
             // create user
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
+                new Claim(ClaimTypes.Name, "User1"),
                 new Claim(ClaimTypes.NameIdentifier, "1"),
             }));
-
-            // Arrange
-            _mockOrdersService.Setup(c =>
-                    c.CreateOrder(It.IsAny<CreateOrderModel>(), It.IsAny<string>()))
-                .Returns(new OrderDto()
-                {
-                    Id = 1,
-                    Name = "Виктор Коробейкин",
-                    Phone = "79842137623",
-                    Address = "г. Сызрань, ул. Ленина, 67",
-                    Date = DateTime.Now,
-                    OrderItems = new List<OrderItemDto>
-                    {
-                        new OrderItemDto()
-                        {
-                            Id = 3,
-                            Quantity = 2,
-                            Price = 1234
-                        },
-                        new OrderItemDto()
-                        {
-                            Id = 1,
-                            Quantity = 1,
-                            Price = 1234
-                        }
-                    }
-                });
 
             _controller.ControllerContext = new ControllerContext
             {
@@ -95,6 +66,35 @@ namespace WebStore.Tests.ModulTests
                 }
             };
 
+            // create data
+            _mockOrdersService.Setup(c => c.GetUserOrders(It.IsAny<string>()))
+                .Returns( new List<OrderDto>
+                {
+                    new OrderDto()
+                    {
+                        Id = 1,
+                        Name = "Виктор Коробейкин",
+                        Phone = "79842137623",
+                        Address = "г. Сызрань, ул. Ленина, 67",
+                        Date = DateTime.Now,
+                        OrderItems = new List<OrderItemDto>
+                        {
+                            new OrderItemDto()
+                            {
+                                Id = 3,
+                                Quantity = 2,
+                                Price = 1234
+                            },
+                            new OrderItemDto()
+                            {
+                                Id = 1,
+                                Quantity = 1,
+                                Price = 1234
+                            }
+                        }
+                    }
+                });
+            
             // Act
             var correctResult = _controller.Orders();
 
@@ -105,10 +105,6 @@ namespace WebStore.Tests.ModulTests
             Assert.Equal(1, ordersModel[0].Id);
             Assert.Equal("79842137623", ordersModel[0].Phone);
             Assert.Equal("Виктор Коробейкин", ordersModel[0].Name);
-
-            //var orderItemsModel = ordersModel.OrdersItem
-            //List<UserOrderViewModel>
-            //Assert.Null(ordersModel);
         }
     }
 }
