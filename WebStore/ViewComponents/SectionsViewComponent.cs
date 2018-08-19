@@ -18,17 +18,27 @@ namespace WebStore.ViewComponents
             _productData = productData;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string sectionId)
         {
-            var sections = GetSections();
-            return View(sections);
+            int.TryParse(sectionId, out var sectionIdInt);
+
+            var sections = GetSections(sectionIdInt, out var parentSectionId);
+
+            return View(new SectionCompleteViewModel
+            {
+                Sections = sections,
+                CurrentSectionId = sectionIdInt,
+                CurrentParentSectionId = parentSectionId
+            });
         }
 
-        private List<SectionViewModel> GetSections()
+        private List<SectionViewModel> GetSections(int? sectionId, out int? parentSectionId)
         {
-            var categories = _productData.GetSections();
+            parentSectionId = null;
 
-            var parentCategories = categories.Where(p => !p.ParentId.HasValue).ToList();
+            var allSections = _productData.GetSections();
+
+            var parentCategories = allSections.Where(p => !p.ParentId.HasValue).ToList();
 
             var parentSections = new List<SectionViewModel>();
             foreach (var parentCategory in parentCategories)
@@ -43,10 +53,13 @@ namespace WebStore.ViewComponents
             }
             foreach (var sectionViewModel in parentSections)
             {
-                var childCategories = categories.Where(c => c.ParentId.Equals(sectionViewModel.Id));
+                var childCategories = allSections.Where(c => c.ParentId.Equals(sectionViewModel.Id));
                 foreach (var childCategory in childCategories)
                 {
-                    sectionViewModel.ChildSections.Add(new SectionViewModel()
+                    if (childCategory.Id == sectionId)
+                        parentSectionId = sectionViewModel.Id;
+
+                    sectionViewModel.ChildSections.Add(new SectionViewModel
                     {
                         Id = childCategory.Id,
                         Name = childCategory.Name,

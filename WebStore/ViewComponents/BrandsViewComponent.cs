@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -18,10 +19,17 @@ namespace WebStore.ViewComponents
             _productData = productData;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string brandId)
         {
-            var model = GetBrands();
-            return View(model);
+            Int32.TryParse(brandId, out var brandIdInt);
+
+            var brands = GetBrands();
+
+            return View(new BrandCompleteViewModel
+            {
+                Brands = brands,
+                CurrentBrandId = brandIdInt
+            });
         }
 
         private IEnumerable<BrandViewModel> GetBrands()
