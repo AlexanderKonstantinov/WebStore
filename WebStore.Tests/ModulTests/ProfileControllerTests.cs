@@ -54,8 +54,7 @@ namespace WebStore.Tests.ModulTests
             // create user
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Name, "User1"),
-                new Claim(ClaimTypes.NameIdentifier, "1"),
+                new Claim(ClaimTypes.Name, "User1")
             }));
 
             _controller.ControllerContext = new ControllerContext
@@ -67,7 +66,7 @@ namespace WebStore.Tests.ModulTests
             };
 
             // create data
-            _mockOrdersService.Setup(c => c.GetUserOrders(It.IsAny<string>()))
+            _mockOrdersService.Setup(c => c.GetUserOrders(user.Identity.Name))
                 .Returns( new List<OrderDto>
                 {
                     new OrderDto()

@@ -40,11 +40,22 @@
                 <div class="col-sm-6">
                     <div class="shop-menu pull-left">
                         <ul class="nav navbar-nav">
-                            <li><a asp-controller="Employee"
-                                   asp-action="EmployeeList"><i class="fa fa-user"></i> Список сотрудников</a></li>
+                            <li>
+                                <a asp-controller="Employee"
+                                   asp-action="EmployeeList"
+                                   is-active-route><i class="fa fa-user"></i>Список сотрудников</a>
+                            </li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                            <li><a asp-controller="Cart"
-                                   asp-action="Details"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+                            <li>
+                                <a asp-controller="Cart"
+                                   asp-action="Checkout"
+                                   is-active-route><i class="fa fa-crosshairs"></i> Checkout</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Cart"
+                                   asp-action="Details"
+                                   is-active-route><i class="fa fa-shopping-cart"></i>Корзина</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -80,32 +91,49 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a asp-controller="Home"
-                                   asp-action="Index" asp class="active">Home</a></li>
+                                   asp-action="Index" 
+                                   is-active-route>Home</a></li>
                             <li class="dropdown">
                                 <a asp-controller="Catalog" 
-                                   asp-action="Shop">Shop<i class="fa fa-angle-down"></i></a>
+                                   asp-action="Shop"
+                                   is-active-route>Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a asp-controller="Catalog" 
-                                           asp-action="Shop">Products</a></li>
-                                    <li><a asp-controller="Catalog" 
-                                           asp-action="ProductDetails">Product Details</a></li>
-                                    <li><a asp-controller="Cart"
-                                           asp-action="Details">Корзина</a></li>
-                                    <li><a asp-controller="Account" 
-                                           asp-action="Login">Login</a></li>
+                                    <li>
+                                        <a asp-controller="Cart"
+                                           asp-action="Checkout"
+                                           is-active-route>Оформление заказа</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Cart"
+                                           asp-action="Details"
+                                           is-active-route>Корзина</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Account"
+                                           asp-action="Login"
+                                           is-active-route>Вход</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Account"
+                                           asp-action="Register"
+                                           is-active-route>Регистрация</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a asp-controller="Home"
-                                           asp-action="Blog">Blog List</a></li>
+                                           asp-action="Blog"
+                                           is-active-route>Blog List</a></li>
                                     <li><a asp-controller="Home"
-                                           asp-action="BlogSingle">Blog Single</a></li>
+                                           asp-action="BlogSingle"
+                                           >Blog Single</a></li>
                                 </ul>
                             </li>
                             <li><a asp-controller="Home"
-                                   asp-action="Contact">Contact</a></li>
+                                   asp-action="Contact"
+                                   is-active-route>Contact</a></li>
                         </ul>
                     </div>
                 </div>
