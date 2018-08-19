@@ -29,6 +29,10 @@ namespace WebStore.Domain.Dto.Product
             ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public string Condition { get; set; }
 
+        [Display(Name = "DisplaySection",
+            ResourceType = typeof(Resources.ResourcesEntities.Resource))]
+        public SectionDto Section { get; set; }
+
         [Display(Name = "DisplayQuantity",
             ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public int Quantity { get; set; }

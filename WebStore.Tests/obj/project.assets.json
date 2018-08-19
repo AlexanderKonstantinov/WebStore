@@ -3576,6 +3576,21 @@
           }
         }
       },
+      "SimpleMvcSitemap/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.3",
+          "NETStandard.Library": "1.6.0",
+          "System.Linq.Queryable": "4.0.1",
+          "System.Xml.XmlSerializer": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.6/SimpleMvcSitemap.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/SimpleMvcSitemap.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_green/1.1.7": {
         "type": "package",
         "dependencies": {
@@ -5661,7 +5676,7 @@
           "System.Xml.XmlDocument": "4.0.1"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
@@ -5820,6 +5835,7 @@
           "Microsoft.AspNetCore.All": "2.0.5",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2",
+          "SimpleMvcSitemap": "3.1.0",
           "WebStore.Clients": "1.0.0",
           "WebStore.Domain": "1.0.0",
           "WebStore.Interfaces": "1.0.0",
@@ -8038,7 +8054,7 @@
       ]
     },
     "Microsoft.Extensions.PlatformAbstractions/1.1.0": {
-      "sha512": "UMlN++q5qqzQ2HH+uOrKxN5fmBXMQDhrYkSaPJxhmyzfJaFPirrVr1raim/Ocq1psAZoB9+7JSAf0GDAX35wUg==",
+      "sha512": "H6ZsQzxYw/6k2DfEQRXdC+vQ6obd6Uba3uGJrnJ2vG4PRXjQZ7seB13JdCfE72abp8E6Fk3gGgDzfJiLZi5ZpQ==",
       "type": "package",
       "path": "microsoft.extensions.platformabstractions/1.1.0",
       "files": [
@@ -9821,6 +9837,19 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "SimpleMvcSitemap/3.1.0": {
+      "sha512": "zsc2hgvzsAN84F/Hql57iuRrKYuFZNXzYvoRNa9tMS32gRN97EM4moktTJVwU4WVUOHwIICxSruTVVXLHIF5Zw==",
+      "type": "package",
+      "path": "simplemvcsitemap/3.1.0",
+      "files": [
+        "lib/net45/SimpleMvcSitemap.dll",
+        "lib/net45/SimpleMvcSitemap.xml",
+        "lib/netstandard1.6/SimpleMvcSitemap.dll",
+        "lib/netstandard1.6/SimpleMvcSitemap.xml",
+        "simplemvcsitemap.3.1.0.nupkg.sha512",
+        "simplemvcsitemap.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_green/1.1.7": {

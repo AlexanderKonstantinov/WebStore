@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
 using WebStore.Domain.Dto.Product;
+using WebStore.Domain.Entities;
 using WebStore.Domain.Filters;
 using WebStore.Interfaces.Services;
 
@@ -71,6 +72,20 @@ namespace WebStore.Services.Sql
                 .FirstOrDefault(p => p.Id == id));
 
             return product;
+        }
+
+        public BrandDto GetBrandById(int id)
+        {
+            var brand = _context.Brands.FirstOrDefault(b => b.Id == id);
+
+            return _mapper.Map<BrandDto>(brand);
+        }
+
+        public SectionDto GetSectionById(int id)
+        {
+            var section = _context.Sections.FirstOrDefault(s => s.Id == id);
+
+            return _mapper.Map<SectionDto>(section);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using WebStore.Domain.Dto.Product;
+using WebStore.Domain.Entities;
 using WebStore.Domain.Filters;
 
 namespace WebStore.Interfaces.Services
@@ -41,5 +42,19 @@ namespace WebStore.Interfaces.Services
         /// <param name="id">Product identifier</param>
         /// <returns>required product or null if product with such Id does not exist</returns>
         ProductDto GetProductById(int id);
+
+        /// <summary>
+        /// Get brand by Id
+        /// </summary>
+        /// <param name="id">Brand entity</param>
+        /// <returns>required brand or null if brand with such Id does not exist</returns>
+        BrandDto GetBrandById(int id);
+
+        /// <summary>
+        /// Get section by Id
+        /// </summary>
+        /// <param name="id">Section entity</param>
+        /// <returns>required section or null if section with such Id does not exist</returns>
+        SectionDto GetSectionById(int id);
     }
 }

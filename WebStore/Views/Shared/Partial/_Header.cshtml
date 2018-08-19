@@ -96,13 +96,9 @@
                             <li class="dropdown">
                                 <a asp-controller="Catalog" 
                                    asp-action="Shop"
-                                   is-active-route>Shop<i class="fa fa-angle-down"></i></a>
+                                   is-active-route
+                                   ignore-action>Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li>
-                                        <a asp-controller="Cart"
-                                           asp-action="Checkout"
-                                           is-active-route>Оформление заказа</a>
-                                    </li>
                                     <li>
                                         <a asp-controller="Cart"
                                            asp-action="Details"
