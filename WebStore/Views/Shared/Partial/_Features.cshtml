@@ -35,11 +35,9 @@
                             </a>
                         }
 
-                        <a asp-controller="Cart"
-                           asp-action="AddToCart"
-                           asp-route-id="@item.Id"
-                           asp-route-returnUrl="@Context.Request.Path"
-                           class="btn btn-default add-to-cart">
+                        <a href="#"
+                           data-id="@item.Id"
+                           class="btn btn-default add-to-cart callAddToCart">
                             <i class="fa fa-shopping-cart"></i>Добавить в корзину
                         </a>
                     </div>

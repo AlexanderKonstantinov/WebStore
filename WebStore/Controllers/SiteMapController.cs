@@ -7,11 +7,11 @@ using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {
-    public class SiteMapController : Controller
+    public class SitemapController : Controller
     {
         private readonly IProductData _productData;
 
-        public SiteMapController(IProductData productData)
+        public SitemapController(IProductData productData)
         {
             _productData = productData;
         }
