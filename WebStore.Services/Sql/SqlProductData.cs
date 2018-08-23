@@ -32,7 +32,7 @@ namespace WebStore.Services.Sql
             return brands;
         }
 
-        public IEnumerable<ProductDto> GetProducts(ProductFilter filter)
+        public PagedProductDto GetProducts(ProductFilter filter)
         {
             var query = _context.Products
                 .Include("Brand")
@@ -40,8 +40,8 @@ namespace WebStore.Services.Sql
                 .AsQueryable();
 
             if (filter.BrandId.HasValue)
-                query = query.Where(p => p.BrandId.HasValue
-                && p.BrandId.Value.Equals(filter.BrandId.Value));
+                query = query.Where(p => p.BrandId.HasValue &&
+                                         p.BrandId.Value.Equals(filter.BrandId.Value));
 
             if (filter.SectionId.HasValue)
                 query = query.Where(p => p.SectionId.Equals(filter.SectionId));
@@ -49,9 +49,27 @@ namespace WebStore.Services.Sql
             if (filter.Ids != null && filter.Ids.Count > 0)
                 query = query.Where(p => filter.Ids.Contains(p.Id));
 
+            var model = new PagedProductDto
+            {
+                TotalCount = query.Count()
+            };
+
+            if (filter.PageSize.HasValue)
+            {
+                model.Products = _mapper.Map<IEnumerable<ProductDto>>(query
+                    .OrderBy(c => c.Order)
+                    .Skip((filter.Page - 1) * filter.PageSize.Value)
+                    .Take(filter.PageSize.Value));
+            }
+            else
+            {
+                model.Products = _mapper.Map<IEnumerable<ProductDto>>(query
+                    .OrderBy(c => c.Order));
+            }
+
             var products = _mapper.Map<IEnumerable<ProductDto>>(query);
 
-            return products;
+            return model;
         }
 
         public IEnumerable<SectionDto> GetSections()

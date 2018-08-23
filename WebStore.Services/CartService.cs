@@ -73,7 +73,7 @@ namespace WebStore.Services
                 _productData.GetProducts(new ProductFilter
                 {
                     Ids = _cartStore.Cart.Items.Select(i => i.ProductId).ToList()
-                }));
+                }).Products);
             
             var cartViewModel = new CartViewModel
             {

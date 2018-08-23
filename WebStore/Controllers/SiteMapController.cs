@@ -51,7 +51,7 @@ namespace WebStore.Controllers
                 })));
             }
 
-            var products = _productData.GetProducts(new ProductFilter());
+            var products = _productData.GetProducts(new ProductFilter()).Products;
             foreach (var productDto in products)
             {
                 nodes.Add(new SitemapNode(Url.Action("ProductDetails",

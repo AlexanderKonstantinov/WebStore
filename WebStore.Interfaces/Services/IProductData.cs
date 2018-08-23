@@ -23,11 +23,11 @@ namespace WebStore.Interfaces.Services
         IEnumerable<BrandDto> GetBrands();
 
         /// <summary>
-        /// Get products
+        /// Get product list with pagination
         /// </summary>
         /// <param name="filter">Product filter</param>
         /// <returns></returns>
-        IEnumerable<ProductDto> GetProducts(ProductFilter filter);
+        PagedProductDto GetProducts(ProductFilter filter);
 
         /// <summary>
         /// Get product count by brand Id

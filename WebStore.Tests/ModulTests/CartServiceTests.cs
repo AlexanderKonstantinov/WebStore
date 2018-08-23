@@ -214,20 +214,24 @@ namespace WebStore.Tests.ModulTests
                     new CartItem(){ProductId = 1, Quantity = 4}
                 }
             };
-            var products = new List<ProductDto>
+            var model = new PagedProductDto
             {
-                new ProductDto
+                Products = new List<ProductDto>
                 {
-                    Id = 1,
-                    ImageUrl = "",
-                    Name = "Test",
-                    Order = 0,
-                    Price = 1.11m,
-                }
+                    new ProductDto
+                    {
+                        Id = 1,
+                        ImageUrl = "",
+                        Name = "Test",
+                        Order = 0,
+                        Price = 1.11m,
+                    }
+                }, 
+                TotalCount = 1
             };
 
             _productMock.Setup(c =>
-                c.GetProducts(It.IsAny<ProductFilter>())).Returns(products);
+                c.GetProducts(It.IsAny<ProductFilter>())).Returns(model);
             _cartStore.Setup(c => c.Cart).Returns(cart);
 
             var result = _cartService.TransformCart();

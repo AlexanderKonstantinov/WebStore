@@ -18,7 +18,17 @@ namespace WebStore.Domain.Filters
         /// </summary>
         public int? BrandId { get; set; }
 
+        /// <summary>
+        /// Product quantity for query
+        /// </summary>
+        public int? PageSize { get; set; } 
+
         public IList<int> Ids { get; set; }
+
+        /// <summary>
+        /// Current page
+        /// </summary>
+        public int Page { get; set; }
     }
 
 }

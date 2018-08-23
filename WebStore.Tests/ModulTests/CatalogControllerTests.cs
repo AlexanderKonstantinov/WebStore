@@ -23,20 +23,20 @@ namespace WebStore.Tests.ModulTests
 
         private Mock<IProductData> _productMock;
 
-        [TestInitialize]
-        public void SetupTest()
-        {
-            _productMock = new Mock<IProductData>();
+        //[TestInitialize]
+        //public void SetupTest()
+        //{
+        //    _productMock = new Mock<IProductData>();
 
-            _mapper = new Mapper(new MapperConfiguration(cfg =>
-                cfg.CreateMap<ProductDto, ProductViewModel>()
-                    .ForMember(nameof(ProductViewModel.Brand),
-                        opt => opt.MapFrom(p => p.Brand != null
-                            ? p.Brand.Name
-                            : String.Empty))));
+        //    _mapper = new Mapper(new MapperConfiguration(cfg =>
+        //        cfg.CreateMap<ProductDto, ProductViewModel>()
+        //            .ForMember(nameof(ProductViewModel.Brand),
+        //                opt => opt.MapFrom(p => p.Brand != null
+        //                    ? p.Brand.Name
+        //                    : String.Empty))));
 
-            _controller = new CatalogController(_productMock.Object, _mapper);
-        }
+        //    _controller = new CatalogController(_productMock.Object, _mapper);
+        //}
 
         [TestMethod]
         public void ProductDetails_Returns_View_With_Correct_Item()
@@ -80,36 +80,41 @@ namespace WebStore.Tests.ModulTests
         {
             // Arrange
             _productMock.Setup(p =>
-                p.GetProducts(It.IsAny<ProductFilter>())).Returns(new List<ProductDto>()
+                p.GetProducts(It.IsAny<ProductFilter>())).Returns(new PagedProductDto
             {
-                new ProductDto()
+                Products = new List<ProductDto>
                 {
-                    Id = 1,
-                    Name = "Test",
-                    ImageUrl = "TestImage.jpg",
-                    Order = 0,
-                    Price = 10,
-                    Condition = "new",
-                    Brand = new BrandDto()
+                    new ProductDto()
                     {
                         Id = 1,
-                        Name = "TestBrand"
+                        Name = "Test",
+                        ImageUrl = "TestImage.jpg",
+                        Order = 0,
+                        Price = 10,
+                        Condition = "new",
+                        Brand = new BrandDto()
+                        {
+                            Id = 1,
+                            Name = "TestBrand"
+                        }
+                    },
+                    new ProductDto()
+                    {
+                        Id = 2,
+                        Name = "Test2",
+                        ImageUrl = "TestImage2.jpg",
+                        Order = 1,
+                        Price = 22,
+                        Condition = "new",
+                        Brand = new BrandDto()
+                        {
+                            Id = 1,
+                            Name = "TestBrand"
+                        }
                     }
+
                 },
-                new ProductDto()
-                {
-                    Id = 2,
-                    Name = "Test2",
-                    ImageUrl = "TestImage2.jpg",
-                    Order = 1,
-                    Price = 22,
-                    Condition = "new",
-                    Brand = new BrandDto()
-                    {
-                        Id = 1,
-                        Name = "TestBrand"
-                    }
-                }
+                TotalCount = 2
             });
 
             // Act

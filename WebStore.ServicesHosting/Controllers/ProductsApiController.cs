@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Dto.Product;
-using WebStore.Domain.Entities;
 using WebStore.Domain.Filters;
 using WebStore.Interfaces.Services;
 
@@ -29,7 +28,8 @@ namespace WebStore.ServicesHosting.Controllers
 
         //api/products POST
         [HttpPost, ActionName("Post")]
-        public IEnumerable<ProductDto> GetProducts([FromBody]ProductFilter filter) => _productData.GetProducts(filter);
+        public PagedProductDto GetProducts([FromBody]ProductFilter filter) 
+            => _productData.GetProducts(filter);
 
         //api/products/count/id GET
         [HttpGet("count/{id}"), ActionName("Get")]

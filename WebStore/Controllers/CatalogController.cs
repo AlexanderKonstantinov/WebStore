@@ -5,6 +5,8 @@ using AutoMapper;
 using WebStore.Domain.Filters;
 using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Services;
+using Microsoft.Extensions.Configuration;
+using WebStore.Domain.Models;
 
 namespace WebStore.Controllers
 {
@@ -12,28 +14,39 @@ namespace WebStore.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IProductData _productData;
+        private readonly IConfiguration _configuration;
 
-        public CatalogController(IProductData productData, IMapper mapper)
+        public CatalogController(IProductData productData, IConfiguration configuration, IMapper mapper)
         {
             _productData = productData;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
-        public IActionResult Shop(int? sectionId, int? brandId)
+        public IActionResult Shop(int? sectionId, int? brandId, int page = 1)
         {
-            var products = _productData.GetProducts(new ProductFilter
+            var pageSize = int.Parse(_configuration["PageSize"]);
+
+            var pagedProducts = _productData.GetProducts(new ProductFilter
             {
                 BrandId = brandId,
-                SectionId = sectionId
+                SectionId = sectionId,
+                Page = page,
+                PageSize = pageSize
             });
 
             var model = new CatalogViewModel()
             {
                 BrandId = brandId,
                 SectionId = sectionId,
-                Products = _mapper.Map<IEnumerable<ProductViewModel>>(products)
-                    .OrderBy(p => p.Order)
-                    .ToList()
+                Products = _mapper.Map<IEnumerable<ProductViewModel>>(pagedProducts.Products)
+                    .ToList(),
+                PageViewModel = new PageViewModel
+                {
+                    PageSize = pageSize,
+                    PageNumber = page,
+                    TotalItems = pagedProducts.TotalCount
+                }
             };
 
             return View(model);
