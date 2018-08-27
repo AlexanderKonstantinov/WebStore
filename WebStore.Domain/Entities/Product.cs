@@ -57,5 +57,10 @@ namespace WebStore.Domain.Entities
         [Display(Name = "DisplayCondition",
             ResourceType = typeof(Resources.ResourcesEntities.Resource))]
         public string Condition { get; set; }
+
+        /// <summary>
+        /// Delete or not product 
+        /// </summary>
+        public bool IsDelete { get; set; }
     }
 }

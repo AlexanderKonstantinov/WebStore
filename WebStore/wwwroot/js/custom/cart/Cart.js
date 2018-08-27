@@ -78,18 +78,16 @@
         // Дестроим его через 0.5 секунды
         setTimeout(function() {
                 button.tooltip('destroy');
-            },
-            500);
+            }, 500);
     },
 
     removeFromCart: function(event) {
+        var button = $(this);
+
+        // Отменяем дефолтное действие
+        event.preventDefault();
 
         if (confirm("Вы действительно хотите удалить товар из корзины?")) {
-            var button = $(this);
-
-            // Отменяем дефолтное действие
-            event.preventDefault();
-
             // Получение идентификатора из атрибута
             var id = button.data('id');
             $.get(Cart._properties.removeFromCartLink + '/' + id).done(function() {
@@ -135,7 +133,7 @@
         }).fail(function() { console.log('addToCart error'); });
     },
 
-    decrementItem: function() {
+    decrementItem: function(event) {
         var button = $(this);
 
         // Строка товара

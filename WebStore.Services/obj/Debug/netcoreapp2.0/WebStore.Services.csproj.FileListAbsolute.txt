@@ -14,3 +14,5 @@ D:\Git\WebStore\WebStore.Services\obj\Debug\netcoreapp2.0\WebStore.Services.Asse
 D:\Git\WebStore\WebStore.Services\obj\Debug\netcoreapp2.0\WebStore.Services.csproj.CopyComplete
 D:\Git\WebStore\WebStore.Services\obj\Debug\netcoreapp2.0\WebStore.Services.dll
 D:\Git\WebStore\WebStore.Services\obj\Debug\netcoreapp2.0\WebStore.Services.pdb
+D:\Git\WebStore\WebStore.Services\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+D:\Git\WebStore\WebStore.Services\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.xml

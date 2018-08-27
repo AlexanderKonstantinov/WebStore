@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.Domain.Dto;
 using WebStore.Domain.Dto.Product;
 using WebStore.Domain.Filters;
 using WebStore.Interfaces.Services;
@@ -48,5 +49,27 @@ namespace WebStore.ServicesHosting.Controllers
         [HttpGet("sections/{id}"), ActionName("Get")]
         public SectionDto GetSectionById(int id)
             => _productData.GetSectionById(id);
+
+        [HttpPost("create")]
+        public SaveResult CreateProduct([FromBody]ProductDto productDto)
+        {
+            var result = _productData.CreateProduct(productDto);
+            return result;
+        }
+
+
+        [HttpPut]
+        public SaveResult UpdateProduct([FromBody]ProductDto productDto)
+        {
+            var result = _productData.UpdateProduct(productDto);
+            return result;
+        }
+
+        [HttpDelete("{productId}")]
+        public SaveResult DeleteProduct(int productId)
+        {
+            var result = _productData.DeleteProduct(productId);
+            return result;
+        }
     }
 }

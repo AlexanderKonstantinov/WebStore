@@ -10,3 +10,5 @@ D:\Git\WebStore\WebStore.DAL\bin\Debug\netstandard2.0\WebStore.Domain.pdb
 D:\Git\WebStore\WebStore.DAL\obj\Debug\netstandard2.0\WebStore.DAL.csproj.CopyComplete
 D:\Git\WebStore\WebStore.DAL\obj\Debug\netstandard2.0\WebStore.DAL.dll
 D:\Git\WebStore\WebStore.DAL\obj\Debug\netstandard2.0\WebStore.DAL.pdb
+D:\Git\WebStore\WebStore.DAL\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+D:\Git\WebStore\WebStore.DAL\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.xml

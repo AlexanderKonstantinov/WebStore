@@ -2,6 +2,7 @@
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using WebStore.Clients.Base;
+using WebStore.Domain.Dto;
 using WebStore.Domain.Dto.Product;
 using WebStore.Domain.Filters;
 using WebStore.Interfaces.Services;
@@ -64,6 +65,30 @@ namespace WebStore.Clients.Services.Products
         {
             var url = $"{ServiceAddress}/sections/{id}";
             var result = Get<SectionDto>(url);
+            return result;
+        }
+
+        public SaveResult CreateProduct(ProductDto productDto)
+        {
+            var url = $"{ServiceAddress}/create";
+            var response = Post(url, productDto);
+            var result = response.Content.ReadAsAsync<SaveResult>().Result;
+            return result;
+        }
+
+        public SaveResult UpdateProduct(ProductDto productDto)
+        {
+            var url = $"{ServiceAddress}";
+            var response = Put(url, productDto);
+            var result = response.Content.ReadAsAsync<SaveResult>().Result;
+            return result;
+        }
+
+        public SaveResult DeleteProduct(int productId)
+        {
+            var url = $"{ServiceAddress}/{productId}";
+            var response = DeleteAsync(url).Result;
+            var result = response.Content.ReadAsAsync<SaveResult>().Result;
             return result;
         }
     }

@@ -1,59 +1,70 @@
 ﻿
-@model IEnumerable<WebStore.Domain.Dto.Product.ProductDto>
+@model WebStore.Domain.Dto.Product.PagedProductDto
 
 @{
     ViewData["Title"] = "Список продуктов";
 }
 
 <p>
-    @*<a asp-action="Create">Create New</a>*@
+    <a asp-action="Edit" class="btn btn-success">Добавить</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Section)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Price)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Products)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Order)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageUrl)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @*@Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |
-                    @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
-                    @Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */})*@
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <a asp-action="Edit" 
+                   asp-route-Id="@item.Id"
+                   title="Редактировать">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Section.Name)
+            </td>
+            <td>
+                <img src="~/images/shop/@item.ImageUrl" width="50px"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Delete"
+                   asp-route-Id="@item.Id"
+                   title="Удалить">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
+            </td>
+            @*@Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |*@
+        </tr>
         }
     </tbody>
 </table>

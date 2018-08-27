@@ -12,3 +12,5 @@ D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.Assemb
 D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.csproj.CopyComplete
 D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.dll
 D:\Git\WebStore\WebStore.Clients\obj\Debug\netcoreapp2.0\WebStore.Clients.pdb
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+D:\Git\WebStore\WebStore.Clients\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.xml

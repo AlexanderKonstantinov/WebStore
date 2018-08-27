@@ -31,9 +31,16 @@ namespace WebStore.Helpers
             
 
             CreateMap<ProductDto, ProductViewModel>()
-                .ForMember(nameof(ProductDto.Brand),
+                .ForMember(nameof(ProductViewModel.Brand),
                     opt => opt.MapFrom(p => p.Brand != null
-                        ? p.Brand.Name : String.Empty));
+                        ? p.Brand.Name : String.Empty))
+                .ForMember(nameof(ProductViewModel.BrandId),
+                    opt => opt.MapFrom(p => p.Brand != null
+                        ? p.Brand.Id : default(int?)))
+                .ForMember(nameof(ProductViewModel.Section),
+                    opt => opt.MapFrom(p => p.Section))
+                .ForMember(nameof(ProductViewModel.SectionId),
+                    opt => opt.MapFrom(p => p.Section.Id));
 
             CreateMap<BrandDto, BrandViewModel>()
                 .ForMember(nameof(BrandViewModel.ProductsCount),
@@ -54,6 +61,12 @@ namespace WebStore.Helpers
             CreateMap<Order, OrderDto>();
 
             CreateMap<CreateOrderModel, Order>();
+
+            CreateMap<ProductDto, Product>()
+                .ForMember(nameof(Product.BrandId),
+                    opt => opt.MapFrom(p => p.Brand == null ? default(int) : p.Brand.Id))
+                .ForMember(nameof(Product.SectionId),
+                    opt => opt.MapFrom(p => p.Section.Id));
         }
     }
 }

@@ -10,3 +10,5 @@ D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\WebStore.Domain.pdb
 D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.csproj.CopyComplete
 D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.dll
 D:\Git\WebStore\WebStore.Interfaces\obj\Debug\netcoreapp2.0\WebStore.Interfaces.pdb
+D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+D:\Git\WebStore\WebStore.Interfaces\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.xml

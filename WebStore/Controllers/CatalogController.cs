@@ -63,5 +63,31 @@ namespace WebStore.Controllers
 
             return View(model);
         }
+
+        public IActionResult GetFilteredItems(int? sectionId, int? brandId, int
+            page = 1)
+        {
+            var productsModel = GetProducts(sectionId, 
+                brandId,
+                page, 
+                out var totalCount);
+
+            return PartialView("Partial/_Features", productsModel);
+        }
+
+        private IEnumerable<ProductViewModel> GetProducts(int? sectionId, int?
+            brandId, int page, out int totalCount)
+        {
+            var products = _productData.GetProducts(new ProductFilter
+            {
+                BrandId = brandId,
+                SectionId = sectionId,
+                Page = page,
+                PageSize = int.Parse(_configuration["PageSize"])
+            });
+            totalCount = products.TotalCount;
+
+            return _mapper.Map<List<ProductViewModel>>(products.Products);
+        }
     }
 }

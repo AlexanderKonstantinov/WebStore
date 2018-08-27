@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
+using WebStore.Domain.Dto;
 using WebStore.Domain.Dto.Product;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Filters;
@@ -37,6 +39,7 @@ namespace WebStore.Services.Sql
             var query = _context.Products
                 .Include("Brand")
                 .Include("Section")
+                .Where(p => !p.IsDelete)
                 .AsQueryable();
 
             if (filter.BrandId.HasValue)
@@ -66,9 +69,7 @@ namespace WebStore.Services.Sql
                 model.Products = _mapper.Map<IEnumerable<ProductDto>>(query
                     .OrderBy(c => c.Order));
             }
-
-            var products = _mapper.Map<IEnumerable<ProductDto>>(query);
-
+            
             return model;
         }
 
@@ -87,7 +88,7 @@ namespace WebStore.Services.Sql
             var product = _mapper.Map<ProductDto>(_context.Products
                 .Include("Brand")
                 .Include("Section")
-                .FirstOrDefault(p => p.Id == id));
+                .FirstOrDefault(p => p.Id == id && !p.IsDelete));
 
             return product;
         }
@@ -104,6 +105,129 @@ namespace WebStore.Services.Sql
             var section = _context.Sections.FirstOrDefault(s => s.Id == id);
 
             return _mapper.Map<SectionDto>(section);
+        }
+
+        public SaveResult CreateProduct(ProductDto productDto)
+        {
+            try
+            {
+                var product = _mapper.Map<Product>(productDto);
+
+                _context.Products.Add(product);
+                _context.SaveChanges();
+                return new SaveResult
+                {
+                    IsSuccess = true
+                };
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return new SaveResult
+                {
+                    IsSuccess = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
+            }
+            catch (DbUpdateException ex)
+            {
+                return new SaveResult
+                {
+                    IsSuccess = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
+            }
+            catch (Exception e)
+            {
+                return new SaveResult
+                {
+                    IsSuccess = false,
+                    Errors = new List<string>()
+                    {
+                        e.Message
+                    }
+                };
+            }
+        }
+
+        public SaveResult UpdateProduct(ProductDto productDto)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == productDto.Id);
+
+            if (product == null)
+            {
+                return new SaveResult()
+                {
+                    IsSuccess = false,
+                    Errors = new List<string>() { "Entity not exist" }
+                };
+            }
+
+            product.BrandId = productDto.Brand.Id;
+            product.SectionId = productDto.Section.Id;
+            product.ImageUrl = productDto.ImageUrl;
+            product.Order = productDto.Order;
+            product.Price = productDto.Price;
+            product.Name = productDto.Name;
+
+            try
+            {
+                _context.SaveChanges();
+                return new SaveResult
+                {
+                    IsSuccess = true
+                };
+            }
+            catch (Exception e)
+            {
+                return new SaveResult
+                {
+                    IsSuccess = false,
+                    Errors = new List<string>()
+                    {
+                        e.Message
+                    }
+                };
+            }
+
+        }
+
+        public SaveResult DeleteProduct(int productId)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == productId);
+            if (product == null)
+            {
+                return new SaveResult()
+                {
+                    IsSuccess = false,
+                    Errors = new List<string>() { "Entity not exist" }
+                };
+            }
+            try
+            {
+                product.IsDelete = true;
+                _context.SaveChanges();
+                return new SaveResult()
+                {
+                    IsSuccess = true
+                };
+            }
+            catch (Exception e)
+            {
+                return new SaveResult
+                {
+                    IsSuccess = false,
+                    Errors = new List<string>()
+                    {
+                        e.Message
+                    }
+                };
+            }
         }
     }
 }
