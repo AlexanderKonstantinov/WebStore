@@ -68,7 +68,9 @@ namespace WebStore.Helpers
                 .ForMember(nameof(Product.Brand),
                     opt => opt.MapFrom(p => default(Brand)))
                 .ForMember(nameof(Product.SectionId),
-                    opt => opt.MapFrom(p => p.Section.Id));
+                    opt => opt.MapFrom(p => p.Section.Id))
+                .ForMember(nameof(Product.Section),
+                opt => opt.MapFrom(p => default(Section)));
         }
     }
 }

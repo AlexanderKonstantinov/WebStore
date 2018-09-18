@@ -96,18 +96,8 @@ namespace WebStore.Areas.Admin.Controllers
                     Name = model.Name,
                     Order = model.Order,
                     Price = model.Price,
-                    Brand = model.BrandId.HasValue
-                        ? new BrandDto()
-                        {
-                            Id = model.BrandId.Value,
-                            Name = brand?.Name
-                        }
-                        : null,
-                    Section = new SectionDto()
-                    {
-                        Id = model.SectionId,
-                        Name = section.Name
-                    }
+                    Brand = brand,
+                    Section = section
                 };
                 if (model.Id > 0)
                 {

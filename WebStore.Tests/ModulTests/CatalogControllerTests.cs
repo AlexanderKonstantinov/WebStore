@@ -12,7 +12,6 @@ using WebStore.Domain.Filters;
 using WebStore.Domain.Models.Product;
 using WebStore.Interfaces.Services;
 using Assert = Xunit.Assert;
-using IConfigurationProvider = Microsoft.Extensions.Configuration.IConfigurationProvider;
 
 namespace WebStore.Tests.ModulTests
 {
@@ -27,9 +26,18 @@ namespace WebStore.Tests.ModulTests
 
         private Mock<IConfiguration> _configMock;
 
+        private IConfigurationRoot config;
+
         [TestInitialize]
         public void SetupTest()
         {
+            config = new ConfigurationBuilder()
+                .SetBasePath(System.AppContext.BaseDirectory)
+                .AddJsonFile("configurationDictionary.json",
+                    optional: true,
+                    reloadOnChange: true)
+                .Build();
+
             _productMock = new Mock<IProductData>();
 
             _configMock = new Mock<IConfiguration>();
@@ -41,7 +49,7 @@ namespace WebStore.Tests.ModulTests
                             ? p.Brand.Name
                             : String.Empty))));
 
-            _controller = new CatalogController(_productMock.Object, _configMock.Object, _mapper);
+            _controller = new CatalogController(_productMock.Object, config, _mapper);
         }
 
         [TestMethod]
@@ -81,67 +89,69 @@ namespace WebStore.Tests.ModulTests
            Assert.IsType<NotFoundResult>(notFoundResult);
         }
 
-        //[TestMethod]
-        //public void Shop_Method_Returns_Correct_View()
-        //{
-        //    // Arrange
-        //    _productMock.Setup(p =>
-        //        p.GetProducts(It.IsAny<ProductFilter>())).Returns(new PagedProductDto
-        //    {
-        //        Products = new List<ProductDto>
-        //        {
-        //            new ProductDto()
-        //            {
-        //                Id = 1,
-        //                Name = "Test",
-        //                ImageUrl = "TestImage.jpg",
-        //                Order = 0,
-        //                Price = 10,
-        //                Condition = "new",
-        //                Brand = new BrandDto()
-        //                {
-        //                    Id = 1,
-        //                    Name = "TestBrand"
-        //                }
-        //            },
-        //            new ProductDto()
-        //            {
-        //                Id = 2,
-        //                Name = "Test2",
-        //                ImageUrl = "TestImage2.jpg",
-        //                Order = 1,
-        //                Price = 22,
-        //                Condition = "new",
-        //                Brand = new BrandDto()
-        //                {
-        //                    Id = 1,
-        //                    Name = "TestBrand"
-        //                }
-        //            }
+        [TestMethod]
+        public void Shop_Method_Returns_Correct_View()
+        {
+            // Arrange
+            _productMock.Setup(p =>
+                p.GetProducts(It.IsAny<ProductFilter>())).Returns(new PagedProductDto
+                {
+                    Products = new List<ProductDto>
+                {
+                    new ProductDto()
+                    {
+                        Id = 1,
+                        Name = "Test",
+                        ImageUrl = "TestImage.jpg",
+                        Order = 0,
+                        Price = 10,
+                        Condition = "new",
+                        Brand = new BrandDto()
+                        {
+                            Id = 1,
+                            Name = "TestBrand"
+                        }
+                    },
+                    new ProductDto()
+                    {
+                        Id = 2,
+                        Name = "Test2",
+                        ImageUrl = "TestImage2.jpg",
+                        Order = 1,
+                        Price = 22,
+                        Condition = "new",
+                        Brand = new BrandDto()
+                        {
+                            Id = 1,
+                            Name = "TestBrand"
+                        }
+                    }
 
-        //        },
-        //        TotalCount = 2
-        //    });
+                },
+                    TotalCount = 2
+                });
 
-        //    _configMock.Setup(p => p.GetSection("PageSize")).Returns(
-        //        new ConfigurationSection(new ConfigurationRoot(new List<IConfigurationProvider>()), "PageSize")
-        //        {
-        //            Value = "PageSize, PageSize, 3"
-        //        });
 
-        //    // Act
-        //    var result = _controller.Shop(1, 5);
 
-        //    // Assert
-        //    var viewResult = Assert.IsType<ViewResult>(result);
-        //    var model = Assert.IsAssignableFrom<CatalogViewModel>(
-        //        viewResult.ViewData.Model);
-        //    Assert.Equal(2, model.Products.Count());
-        //    Assert.Equal(5, model.BrandId);
-        //    Assert.Equal(1, model.SectionId);
-        //    Assert.Equal("TestImage2.jpg",
-        //        model.Products.ToList()[1].ImageUrl);
-        //}
+            //_configMock.Setup(p => p.GetSection("PageSize")).Returns(
+            //    new ConfigurationSection(new ConfigurationRoot(), "PageSize")
+            //    {
+            //        Value = "PageSize, PageSize, 3"
+            //    });
+
+            // Act
+            var result = _controller.Shop(1, 5);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<CatalogViewModel>(
+                viewResult.ViewData.Model);
+            Assert.Equal(2, model.Products.Count());
+            Assert.Equal(5, model.BrandId);
+            Assert.Equal(1, model.SectionId);
+            Assert.Equal("TestImage2.jpg",
+                model.Products.ToList()[1].ImageUrl);
+        }
 
     }
 }

@@ -1567,7 +1567,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "2.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0"
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.0.2.0"
         },
         "runtime": {
           "WebStore.Domain.dll": {}
@@ -1579,6 +1580,14 @@
         },
         "runtime": {
           "WebStore.Interfaces.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.ViewFeatures.Reference/2.0.2.0": {
+        "runtime": {
+          "Microsoft.AspNetCore.Mvc.ViewFeatures.dll": {
+            "assemblyVersion": "2.0.2.0",
+            "fileVersion": "2.0.2.17355"
+          }
         }
       }
     }
@@ -2511,6 +2520,11 @@
     },
     "WebStore.Interfaces/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.AspNetCore.Mvc.ViewFeatures.Reference/2.0.2.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
